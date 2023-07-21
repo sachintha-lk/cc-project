@@ -27,21 +27,22 @@ Node JS, NPM, PHP, Composer, Laravel
     ```npm
     npm run build
     ```
+3.  Create the .env file by copying .env.example
 
-3.  Create a database and configure the .env file.
+5.  Create a database and configure the .env file.
     For this either use a Sqlite database or a MySQL database.
     Follow instructions in configuring the env file: https://laravel.com/docs/10.x/database
-4.  Run the migrations.
+6.  Run the migrations.
     ```bash
     php artisan migrate
     ```
-5.  Run the seeder.
+7.  Run the seeder.
 
     ```bash
     php artisan db:seed
     ```
 
-6.  Run the dev server.
+8.  Run the dev server.
 
     ```bash
     npm run dev
