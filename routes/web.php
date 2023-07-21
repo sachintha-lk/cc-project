@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
 });
 
 Route::middleware([
@@ -22,11 +22,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        // TODO if admin return admin view, if student return student view, if teacher return teacher view
-
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get(
+        '/dashboard',
+        [App\Http\Controllers\DashboardHomeController::class, 'index']
+    )->name('dashboard');
 
 
     // Admin Only routes
