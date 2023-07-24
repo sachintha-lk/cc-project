@@ -127,4 +127,22 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Teacher updated successfully.');
         }
     }
+
+    function activate($id)
+    {
+        $user = User::findOrFail($id);
+        $user->status = true;
+        $user->save();
+
+        return redirect()->back()->with('success', 'User activated successfully.');
+    }
+
+    function deactivate($id)
+    {
+        $user = User::findOrFail($id);
+        $user->status = false;
+        $user->save();
+
+        return redirect()->back()->with('success', 'User deactivated successfully.');
+    }
 }

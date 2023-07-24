@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::middleware([
+    'checkIfAccountIsActive',
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
@@ -49,6 +50,10 @@ Route::middleware([
         // Editing user
         Route::get('/manage/users/{user_id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('edit-user');
         Route::put('/manage/users/{user_id}/edit', [App\Http\Controllers\UserController::class, 'update'])->name('update-user');
+
+        // Activate user
+        Route::put('/manage/users/{user_id}/activate', [App\Http\Controllers\UserController::class, 'activate'])->name('activate-user');
+        Route::put('/manage/users/{user_id}/deactivate', [App\Http\Controllers\UserController::class, 'deactivate'])->name('deactivate-user');
     });
 
     // Teacher Only routes
@@ -58,6 +63,10 @@ Route::middleware([
             // say hello world to teacher
             return 'Hello teacher';
         })->name('teacher');
+    });
+
+    // Admin and Teacher only routes 
+    Route::middleware('validateRole:admin,teacher')->group(function () {
     });
 
     // Student Only routes
