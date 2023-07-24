@@ -35,6 +35,20 @@ Route::middleware([
             // say hello world to admin
             return 'Hello admin';
         })->name('admin');
+
+        Route::get('/manage/users', [App\Http\Controllers\UserController::class, 'index'])->name('manage-users');
+
+        // Adding user
+        Route::get('/manage/users/add-student', [App\Http\Controllers\UserController::class, 'showAddStudentForm'])->name('add-student');
+        Route::get('/manage/users/add-teacher', [App\Http\Controllers\UserController::class, 'showAddTeacherForm'])->name('add-teacher');
+        Route::post('/manage/users/store', [App\Http\Controllers\UserController::class, 'store'])->name('store-user');
+
+        // Viewing user to manage
+        Route::get('/manage/users/{user_id}', [App\Http\Controllers\UserController::class, 'view'])->name('view-user');
+
+        // Editing user
+        Route::get('/manage/users/{user_id}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('edit-user');
+        Route::put('/manage/users/{user_id}/edit', [App\Http\Controllers\UserController::class, 'update'])->name('update-user');
     });
 
     // Teacher Only routes

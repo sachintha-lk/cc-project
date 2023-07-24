@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
 
         $userroles = [
             [
@@ -50,6 +50,43 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@educatelanka.lk',
             'password' => Hash::make('adminpassword'),
             'role_id' => 1,
+            'status' => true,
+        ]);
+
+        // Create teacher user
+        \App\Models\User::create([
+            'name' => 'Teacher1',
+            'email' => 'teacher1@school1.com',
+            'password' => Hash::make('teacherpassword'),
+            'role_id' => 2,
+            'status' => true,
+        ]);
+
+        // Create student user
+        \App\Models\User::create([
+            'name' => 'Student1',
+            'email' => 'student1@school1.com',
+            'password' => Hash::make('studentpassword'),
+            'role_id' => 3,
+            'status' => true,
+        ]);
+
+        // Create student user
+        \App\Models\User::create([
+            'name' => 'Student2',
+            'email' => 'student2@school1.com',
+            'password' => Hash::make('studentpassword'),
+            'role_id' => 3,
+            'status' => true,
+        ]);
+
+        // Create student user
+        \App\Models\User::create([
+            'name' => 'Student3',
+            'email' => 'student3@school1.com',
+            'password' => Hash::make('studentpassword'),
+            'role_id' => 3,
+            'status' => true,
         ]);
     }
 }
