@@ -282,6 +282,7 @@
                  </ul>
               </div>
            </div>
+           
            {{-- <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
               <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">Acquisition Overview</h3>
               <div class="block w-full overflow-x-auto">
