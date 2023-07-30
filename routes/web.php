@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\GradeClassDetails;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,3 +79,9 @@ Route::middleware([
         })->name('student');
     });
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
+    return view('grade.index');
+})->name('grade');
+
+Route::get('/grade/details/{gradeId}', GradeClassDetails::class)->name('grade.details');
