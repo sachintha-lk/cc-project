@@ -13,14 +13,14 @@
         </div>
 
      </div>
-    <div class="mt-3 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         
         @foreach($grades as $grade)
-        <div class="bg-amber-500 shadow rounded-lg grade-card">
+        <div class="bg-amber-500  shadow rounded-lg grade-card h-24">
             <!-- Links container -->
             <div class="links-container">
                 {{-- view --}}
-                <a href="{{ route('grade.details', ['gradeId' => $grade->id]) }}">
+                <a href="{{ route('class', ['gradeId' => $grade->id]) }}">
                     <div class="w-4 mr-2 transform hover:text-amber-100 hover:scale-110">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

@@ -3,20 +3,20 @@
 namespace App\Models;
 
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Grade extends Model
+class GradeClasses extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'class_name',
+        'grade_id',
     ];
 
-    public function gradeclass()
+    public function grade()
     {
-        return $this->hasMany(\App\Models\GradeClass::class);
+        return $this->belongsTo(\App\Models\Grade::class);
     }
 }

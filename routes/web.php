@@ -84,4 +84,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () 
     return view('grade.index');
 })->name('grade');
 
-Route::get('/grade/details/{gradeId}', GradeClassDetails::class)->name('grade.details');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('grade/class/{gradeId}', function ($gradeId) {
+    return view('grade.class', compact('gradeId'));
+})->name('class');
+                                                                                                                                                                                                              
