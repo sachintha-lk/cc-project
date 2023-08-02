@@ -1,4 +1,4 @@
 
 <x-sidebar>
-    <livewire:gradeclass :gradeId="$gradeId" />
+    <livewire:grade-class :gradeId="$gradeId" />
 </x-sidebar>
