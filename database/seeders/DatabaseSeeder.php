@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
 
         // Create teacher user
         \App\Models\User::create([
+            'teacher_id' => 'T001',
             'name' => 'Teacher1',
             'email' => 'teacher1@school1.com',
             'password' => Hash::make('teacherpassword'),
@@ -64,6 +65,7 @@ class DatabaseSeeder extends Seeder
 
         // Create student user
         \App\Models\User::create([
+            'student_id' => 'ST001',
             'name' => 'Student1',
             'email' => 'student1@school1.com',
             'password' => Hash::make('studentpassword'),
@@ -73,6 +75,7 @@ class DatabaseSeeder extends Seeder
 
         // Create student user
         \App\Models\User::create([
+            'student_id' => 'ST002',
             'name' => 'Student2',
             'email' => 'student2@school1.com',
             'password' => Hash::make('studentpassword'),
@@ -82,6 +85,7 @@ class DatabaseSeeder extends Seeder
 
         // Create student user
         \App\Models\User::create([
+            'student_id' => 'ST003',
             'name' => 'Student3',
             'email' => 'student3@school1.com',
             'password' => Hash::make('studentpassword'),

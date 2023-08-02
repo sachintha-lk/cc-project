@@ -27,6 +27,8 @@
                             <h2 class="font-bold text-3xl"> {{ $user->name }}</h2>
                         
                             <h3 class="font-semibold text-2xl"> {{ $user->role_id == 2? 'Teacher' : 'Student' }}</h3>
+                            <h3 class="font-semibold text-2xl"> {{ $user->role_id == 2? $user->teacher_id : $user->student_id }}</h3>
+
                             <div class="font-medium">{{ $user->email }}</div>
                             <div class="mt-2 flex">
                                 <a href="{{ route('edit-user', ['user_id' => $user->id]) }}" class="flex gap-1 hover:text-yellow-600 ">

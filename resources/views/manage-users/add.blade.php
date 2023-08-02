@@ -30,6 +30,21 @@
            
            <input type="hidden" name="userType" value="{{ $userType }}">
 
+           @if ($userType == 'student')
+            <div class="m-2">
+                    <label for="student_id" class="block text-sm font-medium text-gray-700">Student ID</label>
+                    <input type="text" id="student_id" name="student_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                @error('student_id') <span class="text-red-500">{{ $message }}</span>@enderror
+            </div>
+
+            @elseif ($userType == 'teacher')
+                <div class="m-2">
+                        <label for="teacher_id" class="block text-sm font-medium text-gray-700">Teacher ID</label>
+                        <input type="text" id="teacher_id" name="teacher_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    @error('teacher_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                </div>
+            @endif
+
             <div class="m-2">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" id="name" name="name" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">

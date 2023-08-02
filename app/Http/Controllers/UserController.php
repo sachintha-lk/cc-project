@@ -17,10 +17,20 @@ class UserController extends Controller
         $studentSearch = '';
         if (request()->has('student_search')) {
             $studentSearch = request()->get('student_search');
-            $studentsQuery = User::where('role_id', 3)->where('name', 'like', "%$studentSearch%");
+            $studentsQuery = User::where('role_id', 3)
+                ->where(function ($query) use ($studentSearch) {
+                    $query->where('name', 'like', "%$studentSearch%")
+                        ->orWhere('student_id', 'like', "%$studentSearch%")
+                        ->orWhere('email', 'like', "%$studentSearch%");
+                });
         } else if (request()->has('teacher_search')) {
             $teacherSearch = request()->get('teacher_search');
-            $teachersQuery = User::where('role_id', 2)->where('name', 'like', "%$teacherSearch%");
+            $teachersQuery = User::where('role_id', 2)
+                ->where(function ($query) use ($teacherSearch) {
+                    $query->where('name', 'like', "%$teacherSearch%")
+                        ->orWhere('teacher_id', 'like', "%$teacherSearch%")
+                        ->orWhere('email', 'like', "%$teacherSearch%");
+                });
         }
         // dd($teachersQuery);
         $teachers = $teachersQuery->paginate(10);
@@ -52,6 +62,8 @@ class UserController extends Controller
         }
 
         $request->validate([
+            'student_id' => 'required_if:userType,student|nullable|string|unique:users',
+            'teacher_id' => 'required_if:userType,teacher|nullable|string|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8|max:255',
@@ -63,8 +75,10 @@ class UserController extends Controller
 
         if ($request->userType == 'student') {
             $user->role_id = 3;
+            $user->student_id = $request->student_id;
         } else if ($request->userType == 'teacher') {
             $user->role_id = 2;
+            $user->teacher_id = $request->teacher_id;
         } else {
             return redirect()->route('manage-users')->with('errormsg', 'Invalid user type.');
         }
@@ -107,11 +121,21 @@ class UserController extends Controller
         }
 
         $request->validate([
+            'student_id' => 'required_if:userType,student|nullable|string|unique:users,student_id,' . $id,
+            'teacher_id' => 'required_if:userType,teacher|nullable|string|unique:users,teacher_id,' . $id,
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'nullable|string|confirmed|min:8|max:255',
 
         ]);
+
+        if ($request->userType == 'student') {
+            $user->student_id = $request->student_id;
+        } else if ($request->uuserType == 'teacher') {
+            $user->teacher_id = $request->teacher_id;
+        } else {
+            return redirect()->route('manage-users')->with('errormsg', 'Invalid user type.');
+        }
 
         $user->name = $request->name;
 

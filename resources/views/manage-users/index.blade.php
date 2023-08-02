@@ -70,7 +70,7 @@
                                 @foreach ($students as $student)
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-3 text-center">
-                                        {{ $student->id }}
+                                        {{ $student->student_id }}
                                     </td>
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex items-center  ">
@@ -152,7 +152,23 @@
                             <div class="flex ml-5">
                                 <div class="relative flex w-full flex-nowrap items-stretch">
                                     <input type="text" placeholder="Search" name="teacher_search" class="block w-full py-2.5 rounded-l focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400" value={{$teacherSearch}}>
-                               
+
+                                  
+                                    {{-- @if($teacherSearch != '')
+
+                                    <div class="flex -mr-px">
+                                        <span class="inline-flex items-center px-3 rounded-r border border-l-0 border-gray-400 bg-gray-50 text-gray-500 text-sm">
+                                            <a href="{{ route('manage-users') }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10.707 10l3.532-3.532a1 1 0 10-1.414-1.414L9.293 8.586a2.5 2.5 0 11-3.535 3.535L5 10.05l-.707.707a2.5 2.5 0 11-3.535-3.535L5.05 6l.707-.707a2.5 2.5 0 013.535 3.535L8.586 11.9l-.707.707a2.5 2.5 0 103.535 3.535l.707-.707.707-.707a2.5 2.5 0 013.535-3.535L14.95 9.95l.707-.707a2.5 2.5 0 10-3.535-3.535L10.05 5l-.707.707a2.5 2.5 0 000 3.535l3.532 3.532a1 1 0 001.414-1.414L10.707 10z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
+                                    @endif
+                                --}}
 
                                 
                                     <!--Search button-->
@@ -193,7 +209,7 @@
                                 @foreach ($teachers as $teacher)
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-3 text-center">
-                                        {{ $teacher->id }}
+                                        {{ $teacher->teacher_id }}
                                     </td>
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex items-center  ">

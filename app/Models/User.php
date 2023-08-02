@@ -24,6 +24,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'student_id',
+        'teacher_id',
         'name',
         'email',
         'password',
@@ -65,5 +67,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    
 }
