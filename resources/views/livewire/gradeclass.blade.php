@@ -34,9 +34,9 @@
                  {{ __('Add Classes') }}
              </x-button>
            </div>
-  
+
         </div>
-       
+
         <div class="block w-full overflow-x-auto mt-2">
            <table class="items-center w-full bg-transparent border-collapse">
               <thead>
@@ -63,9 +63,11 @@
                           </x-danger-button>
                        </div>
                        <div class="mt-5 ml-2">
-                        <x-danger-button  class=" bg-amber-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
-                            {{ __('View') }}
-                        </x-danger-button>
+                           <a href={{route('view-class', [$class->id])}}>
+                               <x-danger-button class=" bg-amber-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                   {{ __('View') }}
+                               </x-danger-button>
+                           </a>
                      </div>
                     </td>
                  </tr>
@@ -101,21 +103,21 @@
             <x-slot name="title">
                 {{ isset($this->gclass->id) ?'Update classes' : 'Add classes' }}
             </x-slot>
-      
+
             <x-slot name="content">
                <div class="col-span-6 sm:col-span-4">
                   <x-label for="name" value="{{ __('Class Name') }}" />
                   <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="gclass.class_name" />
                   <x-input-error for="gclass.class_name" class="mt-2" />
                </div>
-              
+
             </x-slot>
-      
+
             <x-slot name="footer">
                 <x-secondary-button wire:click="$set('confirmingClassAdd', false)" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
-      
+
                 <x-danger-button class="ml-3" wire:click="saveclass()" wire:loading.attr="disabled">
                     {{ __('Save') }}
                 </x-danger-button>

@@ -55,6 +55,12 @@ Route::middleware([
         // Activate user
         Route::put('/manage/users/{user_id}/activate', [App\Http\Controllers\UserController::class, 'activate'])->name('activate-user');
         Route::put('/manage/users/{user_id}/deactivate', [App\Http\Controllers\UserController::class, 'deactivate'])->name('deactivate-user');
+
+        // View Class in Manage
+        Route::get('/class/{class_id}', function() {
+            return view('grade.view-class');
+        })->name('view-class');
+
     });
 
     // Teacher Only routes
@@ -66,7 +72,7 @@ Route::middleware([
         })->name('teacher');
     });
 
-    // Admin and Teacher only routes 
+    // Admin and Teacher only routes
     Route::middleware('validateRole:admin,teacher')->group(function () {
     });
 
@@ -88,4 +94,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () 
 Route::middleware(['auth:sanctum', 'verified'])->get('grade/class/{gradeId}', function ($gradeId) {
     return view('grade.class', compact('gradeId'));
 })->name('class');
-                                                                                                                                                                                                              

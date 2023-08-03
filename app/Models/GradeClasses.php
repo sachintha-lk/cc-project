@@ -19,4 +19,9 @@ class GradeClasses extends Model
     {
         return $this->belongsTo(\App\Models\Grade::class);
     }
+
+    public function students()
+    {
+        return $this->hasMany(\App\Models\User::class, 'class_id', 'id');
+    }
 }

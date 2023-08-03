@@ -12,13 +12,23 @@ Node JS, NPM, PHP, Composer, Laravel
 
 1.  Clone the github repository.
 
+    ```bash
+        git clone https://github.com/sachintha-lk/cc-project/
+    ```
+
 2.  Install the dependencies.
 
-    ```composer
+    Move in to the folder
+
+    ```bash
+    cd cc-project
+    ```
+
+    ```bash
     composer install
     ```
 
-    ```npm
+    ```bash
     npm install
     ```
 
@@ -27,22 +37,30 @@ Node JS, NPM, PHP, Composer, Laravel
     ```npm
     npm run build
     ```
+
 3.  Create the .env file by copying .env.example
 
-5.  Create a database and configure the .env file.
+    Generate an app encryption key
+
+    ```bash
+    php artisan key:generate
+    ```
+
+4.  Create a database and configure the .env file.
     For this either use a Sqlite database or a MySQL database.
     Follow instructions in configuring the env file: https://laravel.com/docs/10.x/database
-6.  Run the migrations.
+
+5.  Run the migrations.
     ```bash
     php artisan migrate
     ```
-7.  Run the seeder.
+6.  Run the seeder.
 
     ```bash
     php artisan db:seed
     ```
 
-8.  Run the dev server.
+7.  Run the dev server.
 
     ```bash
     npm run dev
