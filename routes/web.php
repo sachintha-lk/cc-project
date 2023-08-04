@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\GradeClassDetails;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +56,13 @@ Route::middleware([
         Route::put('/manage/users/{user_id}/deactivate', [App\Http\Controllers\UserController::class, 'deactivate'])->name('deactivate-user');
 
         // View Class in Manage
-        Route::get('/class/{class_id}', function() {
-            return view('grade.view-class');
+        Route::get('/class/{class_id}', function ($class_id) {
+            return view('grade.view-class', compact('class_id'));
         })->name('view-class');
+
+        // Add students to the class
+        Route::get('/class/{class_id}/add-students', \App\Http\Livewire\AddStudentsToClass::class)
+            ->name('add-students-to-class');
 
     });
 
