@@ -1,33 +1,33 @@
-<x-app-layout>
+<x-sidebar>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        
+
             <a href="{{ route('manage-users') }}"  class="mx-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left inline" viewBox="0 0 16 16"> 
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/> 
-           
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left inline" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+
                 </svg>
             </a>
-           
-          
+
+
             @if($userType == 'student')
                 {{ __('Add A New Student') }}
             @elseif($userType == 'teacher')
                 {{ __('Add A New Teacher') }}
             @endif
-       
+
         </h2>
     </x-slot>
 
     <div class="py-12" x-data="{ showConfirmation: false }">
 
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-         
-           
+
+
             <form method="POST" action="{{ route('store-user') }}" id="userForm" x-on:submit.prevent="showConfirmation = true">
             @csrf
-           
-           
+
+
            <input type="hidden" name="userType" value="{{ $userType }}">
 
            @if ($userType == 'student')
@@ -77,8 +77,8 @@
                 </button>
             </div>
             </form>
-        
-            
+
+
 
         <!-- Confirmation Modal -->
         <div x-show="showConfirmation" class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
@@ -99,8 +99,8 @@
             </div>
         </div>
 
-                 
+
         </div>
         </div>
     </div>
-</x-app-layout>
+</x-sidebar>

@@ -1,35 +1,37 @@
-<x-app-layout>
+<x-sidebar>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        
+
             <a href="{{ route('manage-users') }}"  class="mx-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left inline" viewBox="0 0 16 16"> 
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/> 
-           
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left inline" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+
                 </svg>
             </a>
-           
-          
+
+
             @if($userType == 'student')
                 {{ __('Edit Student') }}
             @elseif($userType == 'teacher')
                 {{ __('Edit Teacher') }}
             @endif
-       
+
         </h2>
     </x-slot>
 
     <div class="py-12"  x-data="{ showConfirmation: false }" >
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-         
-           
-            <form method="post" action="{{ route('update-user', ['user_id' => $user->id]) }}" id="userForm" x-on:submit.prevent="showConfirmation = true">  
+        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+{{--            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">--}}
+
+
+
+            <form method="post" action="{{ route('update-user', ['user_id' => $user->id]) }}" id="userForm" x-on:submit.prevent="showConfirmation = true">
             @csrf
-            @method('PUT')         
+            @method('PUT')
             <input type="hidden" name="userType" value="{{ $userType }}">
 
-            
+
            @if ($userType == 'student')
            <div class="m-2">
                    <label for="student_id" class="block text-sm font-medium text-gray-700">Student ID</label>
@@ -57,8 +59,8 @@
                 <input type="text" id="email" name="email" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" value="{{ $user->email}}">
                 @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
             </div>
-            
-           
+
+
 
             <div class="m-2">
                 <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-yellow-700 border border-transparent rounded-md hover:bg-yellow-600 focus:outline-none">
@@ -70,7 +72,7 @@
                     @endif
                 </button>
             </div>
-            </form>   
+            </form>
         </div>
 
         <!-- Confirmation Modal -->
@@ -96,4 +98,4 @@
 
         </div>
     </div>
-</x-app-layout>
+</x-sidebar>

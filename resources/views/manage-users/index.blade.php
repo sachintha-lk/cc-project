@@ -7,28 +7,28 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        
+
             @if (session()->has('message'))
             <div class="bg-green-500 text-white p-4 rounded-lg mb-6">
                 {{ session('message') }}
             </div>
             @endif
-          
+
             @if (session()->has('errormsg'))
             <div class="bg-red-500 text-white p-4 rounded-lg mb-6 ">
                 {{ session('errormsg') }}
             </div>
             @endif
             <div>
-            
+
                 <div class="flex justify-between mb-5">
                     <div class="flex  ">
                     <h3 class="font-semibold text-2xl">Students</h3>
                     <form action="{{ route('manage-users') }}" method="GET">
-                  
+
                     <div class="flex ml-5">
                         <input type="text" placeholder="Search" name="student_search" class="block w-full py-2.5 rounded-l focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400" value={{ $studentSearch }}>
-                    
+
                         <button class="relative z-[2] flex items-center rounded-r bg-yellow-800 px-5 py-2 text-xs font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                             type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -43,17 +43,17 @@
                         </button>
                     </div>
                     </form>
-                    
-                           
+
+
                     </div>
-                    
-                       
+
+
                         <a href="{{ route('add-student')}}" class="bg-yellow-800 border border-transparent  hover:bg-yellow-600 focus:bg-yellow-700  text-white font-bold py-2 px-4 rounded">Add New Student</a>
-                            
-                   
+
+
                 </div>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                  
+
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -61,6 +61,7 @@
                                     <th class="py-3 px-6 text-left">Name</th>
                                     <th class="py-3 px-6 text-left">Email</th>
                                     <th class="py-3 px-6 text-center">Grade</th>
+                                    <th class="py-3 px-6 text-center">Class</th>
                                     <th class="py-3 px-6 text-center">Status</th>
                                     <th class="py-3 px-6 text-center">Actions</th>
                                 </tr>
@@ -75,7 +76,7 @@
                                     <td class="py-3 px-6 text-left">
                                         <div class="flex items-center  ">
                                             <div class="mr-2">
-                                                {{-- <img class="w-6 h-6 rounded-full" src={{ $student->profile_photo_url }}/> --}} 
+                                                {{-- <img class="w-6 h-6 rounded-full" src={{ $student->profile_photo_url }}/> --}}
                                                 {{-- TODO fix image --}}
                                             </div>
                                             <span class="">{{ $student->name }}</span>
@@ -85,13 +86,18 @@
                                         {{ $student->email }}
                                     </td>
                                     <td class="py-3 px-3 text-center">
-                                        1
+                                        {{ $student->class ? $student->class->grade->name : 'No Grade'}}
+
+                                    </td>
+                                    <td class="py-3 px-3 text-center">
+                                        {{ $student->class ? $student->class->class_name : 'No Class'}}
+
                                     </td>
                                     <td class="py-3 px-6 text-center">
                                         @if ($student->status == 1)
                                         <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs font-semibold">Active</span>
-                                     
-    
+
+
                                         @elseif ($student->status == 0)
                                         <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs font-semibold">Inactive</span>
                                         @endif
@@ -126,7 +132,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                @else 
+                                @else
                                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                                     <td class="py-3 px-3 text-center">
                                         No data found
@@ -138,22 +144,22 @@
                         <div class="p-5">
                             {{ $students->links() }}
                           </div>
-                  
+
                 </div>
             </div>
-           
-           
+
+
             <div class="mt-5">
                 <div class="flex justify-between mb-5">
                     <div class=" flex">
                         <h3 class="font-semibold text-2xl">Teachers</h3>
                         <form action="{{ route('manage-users') }}" method="GET">
-                        
+
                             <div class="flex ml-5">
                                 <div class="relative flex w-full flex-nowrap items-stretch">
                                     <input type="text" placeholder="Search" name="teacher_search" class="block w-full py-2.5 rounded-l focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400" value={{$teacherSearch}}>
 
-                                  
+
                                     {{-- @if($teacherSearch != '')
 
                                     <div class="flex -mr-px">
@@ -170,7 +176,7 @@
                                     @endif
                                 --}}
 
-                                
+
                                     <!--Search button-->
                                 <button class="relative z-[2] flex items-center rounded-r bg-yellow-800 px-5 py-2 text-xs font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                                     type="submit">
@@ -185,21 +191,21 @@
                                     </svg>
                                 </button>
                                 </div>
-                             
+
                             </div>
                             </form>
                     </div>
                     <a href="{{ route('add-teacher')}}" class="bg-yellow-800 border border-transparent  hover:bg-yellow-600 focus:bg-yellow-700  text-white font-bold py-2 px-4 rounded">Add New Teacher</a>
                  </div>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                  
+
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-3 text-center">Id</th>
                                     <th class="py-3 px-6 text-left">Name</th>
                                     <th class="py-3 px-6 text-left">Email</th>
-                                   
+
                                     <th class="py-3 px-6 text-center">Status</th>
                                     <th class="py-3 px-6 text-center">Actions</th>
                                 </tr>
@@ -223,11 +229,11 @@
                                     <td class="py-3 px-3 text-left">
                                         {{ $teacher->email }}
                                     </td>
-                                   
+
                                     <td class="py-3 px-6 text-center">
                                         @if ($teacher->status == 1)
                                         <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs font-semibold">Active</span>
-                                        
+
                                         @elseif ($teacher->status == 0)
                                         <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs font-semibold">Inactive</span>
                                         @endif
@@ -273,9 +279,9 @@
                         <div class="p-5">
                             {{ $teachers->links() }}
                           </div>
-                  
+
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
 </x-sidebar>

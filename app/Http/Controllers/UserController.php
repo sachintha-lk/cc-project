@@ -11,18 +11,21 @@ class UserController extends Controller
     public function index()
     {
         $teachersQuery = User::where('role_id', 2);
-        $studentsQuery = User::where('role_id', 3);
+        $studentsQuery = User::with(['class.grade', 'class'])
+                        ->where('role_id', 3);
         // for the search term to be displayed, we send it back to the view, default is blank
         $teacherSearch = '';
         $studentSearch = '';
         if (request()->has('student_search')) {
             $studentSearch = request()->get('student_search');
-            $studentsQuery = User::where('role_id', 3)
+            $studentsQuery = User::with(['class.grade', 'class'])
+                ->where('role_id', 3)
                 ->where(function ($query) use ($studentSearch) {
                     $query->where('name', 'like', "%$studentSearch%")
                         ->orWhere('student_id', 'like', "%$studentSearch%")
                         ->orWhere('email', 'like', "%$studentSearch%");
                 });
+
         } else if (request()->has('teacher_search')) {
             $teacherSearch = request()->get('teacher_search');
             $teachersQuery = User::where('role_id', 2)
@@ -34,6 +37,7 @@ class UserController extends Controller
         }
         // dd($teachersQuery);
         $teachers = $teachersQuery->paginate(10);
+
         $students = $studentsQuery->paginate(10);
 
         return view('manage-users.index', compact('teachers', 'students', 'studentSearch', 'teacherSearch'));

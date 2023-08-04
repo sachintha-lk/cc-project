@@ -47,6 +47,11 @@
                  </tr>
               </thead>
               <tbody class="divide-y divide-gray-100">
+                @if ($classes->count() == 0)
+                    <tr class="text-gray-500">
+                        <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">No results found</td>
+                    </tr>
+                @else
                  @foreach($classes as $class)
                  <tr class="text-gray-500">
                     <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">{{ $class->id }}</td>
@@ -72,6 +77,7 @@
                     </td>
                  </tr>
                  @endforeach
+                @endif
               </tbody>
            </table>
         </div>
