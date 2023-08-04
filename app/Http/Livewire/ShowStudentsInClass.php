@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\GradeClasses;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -27,7 +28,10 @@ class ShowStudentsInClass extends Component
     {
         // TODO change this to get students in class
 
+        $class = GradeClasses::all();
+
         $students = User::where('role_id', 3)
+            ->where('class_id', $this->class_id)
             ->when($this->q, function ($query) {
                 return $query->where(function ($query) {
                     $query->where('name', 'like', '%' . $this->q . '%')
@@ -39,11 +43,11 @@ class ShowStudentsInClass extends Component
         return view('livewire.show-students-in-class', ['students'=>$students]);
     }
 
-//    public function removeStudent($student_id)
-//    {
-//        $student = User::find($student_id);
-//        $student->class_id = null;
-//        $student->save();
-//        $this->students = User::where('role_id', 3)->get();
-//    }
+    public function removeStudent($student_id)
+    {
+        $student = User::find($student_id);
+        $student->class_id = null;
+        $student->save();
+        $this->students = User::where('role_id', 3)->paginate(10);
+    }
 }

@@ -61,8 +61,9 @@ Route::middleware([
         })->name('view-class');
 
         // Add students to the class
-        Route::get('/class/{class_id}/add-students', \App\Http\Livewire\AddStudentsToClass::class)
-            ->name('add-students-to-class');
+        Route::get('/class/{class_id}/add-students', function ($class_id) {
+            return view('grade.classes.add-students-to-class', compact('class_id'));
+        })->name('add-students-to-class');
 
     });
 
