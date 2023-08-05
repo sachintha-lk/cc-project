@@ -43,7 +43,7 @@ class GradeClass extends Component
                $query->where('class_name','like','%'.$this->q.'%');
            });
         })
-        ->paginate(2); 
+        ->paginate(5); 
         return view('livewire.gradeclass', compact('grade'),['classes'=>$classes]);
     }
 
