@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
+use App\Actions\Jetstream\DeleteUser;
 
 class UserController extends Controller
 {
@@ -77,6 +78,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
 
+
         if ($request->userType == 'student') {
             $user->role_id = 3;
             $user->student_id = $request->student_id;
@@ -93,9 +95,9 @@ class UserController extends Controller
         $user->save();
 
         if ($request->userType == 'student') {
-            return redirect('/manage/users')->with('successmsg', 'Student added successfully.');
+            return redirect()->route('manage-users')->with('message', 'Student added successfully.');
         } else {
-            return redirect('/manage/users')->with('successmsg', 'Teacher added successfully.');
+            return redirect()->route('manage-users')->with('message', 'Teacher added successfully.');
         }
     }
 
@@ -135,7 +137,7 @@ class UserController extends Controller
 
         if ($request->userType == 'student') {
             $user->student_id = $request->student_id;
-        } else if ($request->uuserType == 'teacher') {
+        } else if ($request->userType == 'teacher') {
             $user->teacher_id = $request->teacher_id;
         } else {
             return redirect()->route('manage-users')->with('errormsg', 'Invalid user type.');
@@ -150,9 +152,9 @@ class UserController extends Controller
 
         // go back with message
         if ($request->userType == 'student') {
-            return redirect()->back()->with('success', 'Student updated successfully.');
-        } else {
-            return redirect()->back()->with('success', 'Teacher updated successfully.');
+            return redirect()->route('manage-users')->with('message', 'Student updated successfully.');
+        } else if ($request->userType == 'teacher') {
+            return redirect()->route('manage-users')->with('message', 'Teacher updated successfully.');
         }
     }
 
@@ -173,4 +175,19 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'User deactivated successfully.');
     }
+
+    // Deletes user using the Jetstream
+     public function destroy($id)
+     {
+         $user = User::findOrFail($id);
+         $deleteUser = new DeleteUser();
+         $deleteUser->delete($user);
+         return redirect()->back()->with('success', 'User deleted successfully.');
+     }
+
+
+
+
+
+
 }
