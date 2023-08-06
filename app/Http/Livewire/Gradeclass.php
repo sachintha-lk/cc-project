@@ -51,16 +51,17 @@ class GradeClass extends Component
         $this->resetPage();
     }
 
-    public function confirmClassDeletion(GradeClasses $classes){
+    public function confirmClassDeletion($id){
        
-          $classes->delete();
-        //   $this->confirmingClassDeletion = $id;
+        //   $classes->delete();
+           $this->confirmingClassDeletion = $id;
 
     }
-    // public function deleteClass(GradeClasses $classes){
-    //     $classes->delete();
-    //     $this->confirmingClassDeletion = false;
-    // }
+    public function deleteClass(GradeClasses $classes){
+        $classes->delete();
+        $this->confirmingClassDeletion = false;
+        session()->flash('message','Class Deleted Successfully');
+    }
 
     public function  confirmClassAdd(){
         
