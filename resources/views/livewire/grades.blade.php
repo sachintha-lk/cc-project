@@ -5,6 +5,23 @@
         </h2>
     </x-slot>
 
+
+    @if (session()->has('message'))
+        <div x-data="{ show: true }" x-show="show" class="bg-green-500 text-white p-4 rounded-lg mb-6 m-4 flex justify-between  ">
+            <span class="block">{{ session('message') }}</span>
+            <button @click="show = false" class="ml-4 text-xl font-medium text-white cursor-pointer">&times;</button>
+        </div>
+    @endif
+
+    @if (session()->has('errormsg'))
+        <div x-data="{ show: true }" x-show="show" class="bg-red-500 text-white p-4 rounded-lg mb-6 flex m-4 justify-between">
+            <span class="block">{{ session('errormsg') }}</span>
+            <button @click="show = false" class="ml-4 text-xl font-medium text-white cursor-pointer">&times;</button>
+        </div>
+    @endif
+
+
+
     <div class="mt-8 text-2xl flex justify-between">
         <div class="mr-2 ml-1">
            <x-button wire:click="confirmGradeAdd">
@@ -14,8 +31,11 @@
 
      </div>
     <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-        
-        @foreach($grades as $grade)
+
+
+
+
+    @foreach($grades as $grade)
         <div class="bg-amber-500  shadow rounded-lg grade-card h-24">
             <!-- Links container -->
             <div class="links-container">
@@ -29,7 +49,7 @@
                     </div>
                 </a>
                 {{-- edit --}}
-                
+
                 <button class="w-4 mr-2 transform hover:text-amber-100 hover:scale-110"  wire:click="confirmGradeUpdate({{ $grade->id }})" wire:loading.attr="disabled">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -41,19 +61,19 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                 </button>
-                
-                
+
+
             </div>
 
             <!-- Content of the card -->
             <div class="p-4 sm:p-6 xl:p-8">
-               
+
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                       
+
                         <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ $grade->name }}</span>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -85,7 +105,7 @@
         <x-slot name="title">
             {{ isset($this->grade->id) ?'Update Grade' : 'Add Grade' }}
         </x-slot>
-  
+
         <x-slot name="content">
            <div class="col-span-6 sm:col-span-4">
               <x-label for="name" value="{{ __('Grade Name') }}" />
@@ -93,12 +113,12 @@
               <x-input-error for="grade.name" class="mt-2" />
            </div>
         </x-slot>
-  
+
         <x-slot name="footer">
             <x-secondary-button wire:click="$set('confirmGradeAdd', false)" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-secondary-button>
-  
+
             <x-danger-button class="ml-3" wire:click="saveGrade()" wire:loading.attr="disabled">
                 {{ __('Save') }}
             </x-danger-button>
@@ -123,5 +143,5 @@
         flex-direction: column;
     }
 
-    
+
 </style>

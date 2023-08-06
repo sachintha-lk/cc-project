@@ -15,9 +15,9 @@ class Grades extends Component
 
     protected $rules = [
         'grade.name'=>'required|string|min:4',
-     
+
     ];
-    
+
     public function render()
     {
         return view('livewire.grades',['grades'=>Grade::all()]); // Pass the grades data to the view
@@ -32,13 +32,15 @@ class Grades extends Component
     {
        $grade->delete();
         $this->confirmGradeDeletion = false;
+        session()->flash('message','Grade Deleted Successfully');
+
     }
-    
+
     public function confirmGradeAdd()
     {
         $this-> confirmGradeAdd = true;
         $this->reset(['grade']);
-       
+
     }
     public function confirmGradeUpdate(grade $grade)
     {
@@ -46,8 +48,8 @@ class Grades extends Component
         $this->confirmGradeAdd = true;
     }
 
-    
-   
+
+
     public function saveGrade()
     {
         $this->validate();
@@ -60,15 +62,15 @@ class Grades extends Component
         {
             Grade::create([
                 'name'=>$this->grade['name'],
-            ]);	
+            ]);
             session()->flash('message','Grade Added Successfully');
         }
-        
+
         $this->confirmGradeAdd = false;
     }
 
-   
-  
+
+
 
 
 }
