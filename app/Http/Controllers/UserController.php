@@ -13,7 +13,7 @@ class UserController extends Controller
     {
         $teachersQuery = User::where('role_id', 2);
         $studentsQuery = User::with(['class.grade', 'class'])
-                        ->where('role_id', 3);
+            ->where('role_id', 3);
         // for the search term to be displayed, we send it back to the view, default is blank
         $teacherSearch = '';
         $studentSearch = '';
@@ -26,7 +26,6 @@ class UserController extends Controller
                         ->orWhere('student_id', 'like', "%$studentSearch%")
                         ->orWhere('email', 'like', "%$studentSearch%");
                 });
-
         } else if (request()->has('teacher_search')) {
             $teacherSearch = request()->get('teacher_search');
             $teachersQuery = User::where('role_id', 2)
@@ -155,6 +154,8 @@ class UserController extends Controller
             return redirect()->route('manage-users')->with('message', 'Student updated successfully.');
         } else if ($request->userType == 'teacher') {
             return redirect()->route('manage-users')->with('message', 'Teacher updated successfully.');
+        } else {
+            return redirect()->route('manage-users')->with('errormsg', 'Invalid user type.');
         }
     }
 
@@ -177,17 +178,11 @@ class UserController extends Controller
     }
 
     // Deletes user using the Jetstream
-     public function destroy($id)
-     {
-         $user = User::findOrFail($id);
-         $deleteUser = new DeleteUser();
-         $deleteUser->delete($user);
-         return redirect()->route('manage-users')->with('message', 'User deleted successfully.');
-     }
-
-
-
-
-
-
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $deleteUser = new DeleteUser();
+        $deleteUser->delete($user);
+        return redirect()->route('manage-users')->with('message', 'User deleted successfully.');
+    }
 }

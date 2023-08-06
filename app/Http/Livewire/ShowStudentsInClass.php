@@ -13,6 +13,9 @@ class ShowStudentsInClass extends Component
     use WithPagination;
     public $class_id;
 
+    public $showConfirmDeleteModal = false;
+
+
     public $q;
 
     protected $queryString = [
@@ -22,7 +25,6 @@ class ShowStudentsInClass extends Component
     public function mount($class_id)
     {
         $this->class_id = $class_id;
-
     }
     public function render()
     {
@@ -36,11 +38,11 @@ class ShowStudentsInClass extends Component
                 return $query->where(function ($query) {
                     $query->where('name', 'like', '%' . $this->q . '%')
                         ->orWhere('email', 'like', '%' . $this->q . '%')
-                        ->orWhere('student_id', 'like', '%' . $this->q . '%' );
+                        ->orWhere('student_id', 'like', '%' . $this->q . '%');
                 });
             })->paginate(10);
 
-        return view('livewire.show-students-in-class', ['students'=>$students]);
+        return view('livewire.show-students-in-class', ['students' => $students]);
     }
 
     public function removeStudent($student_id)
@@ -48,6 +50,8 @@ class ShowStudentsInClass extends Component
         $student = User::find($student_id);
         $student->class_id = null;
         $student->save();
-        $this->students = User::where('role_id', 3)->paginate(10);
+
+        // call render to refresh the page
+        $this->render();
     }
 }

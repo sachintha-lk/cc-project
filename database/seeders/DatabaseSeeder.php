@@ -93,6 +93,17 @@ class DatabaseSeeder extends Seeder
             'status' => true,
         ]);
 
+        // Create student user
+        \App\Models\User::create([
+            'student_id' => 'ST004',
+            'name' => 'Student4',
+            'email' => 'student4@school1.com',
+            'password' => Hash::make('studentpassword'),
+            'role_id' => 3,
+            'status' => true,
+        ]);
+
+
 
         $grades = [
             [
@@ -158,13 +169,13 @@ class DatabaseSeeder extends Seeder
         $class = [
             [
                 'id' => 1,
-                'class_name' => 'Class A',
+                'class_name' => '1 A',
                 'grade_id' => 1,
 
             ],
             [
                 'id' => 2,
-                'class_name' => 'Grade B',
+                'class_name' => '1 B',
                 'grade_id' => 1,
 
             ],

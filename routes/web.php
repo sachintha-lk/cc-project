@@ -58,6 +58,17 @@ Route::middleware([
         // Delete user
         Route::delete('/manage/users/{user_id}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('delete-user');
 
+        // View Grades in Manage
+        Route::get('/grade/index', function () {
+            return view('grade.index');
+        })->name('grade');
+
+        // Show classes of a grade
+        Route::get('/grade/class/{gradeId}', function ($gradeId) {
+            return view('grade.class', compact('gradeId'));
+        })->name('class');
+
+
         // View Class in Manage
         Route::get('/class/{class_id}', function ($class_id) {
             return view('grade.view-class', compact('class_id'));
@@ -67,7 +78,6 @@ Route::middleware([
         Route::get('/class/{class_id}/add-students', function ($class_id) {
             return view('grade.classes.add-students-to-class', compact('class_id'));
         })->name('add-students-to-class');
-
     });
 
     // Teacher Only routes
@@ -92,12 +102,12 @@ Route::middleware([
         })->name('student');
     });
 });
+//
+//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
+//    return view('grade.index');
+//})->name('grade');
+//
 
-Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
-    return view('grade.index');
-})->name('grade');
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('grade/class/{gradeId}', function ($gradeId) {
-    return view('grade.class', compact('gradeId'));
-})->name('class');
+//Route::middleware(['auth:sanctum', 'verified'])->get('grade/class/{gradeId}', function ($gradeId) {
+//    return view('grade.class', compact('gradeId'));
+//})->name('class');
