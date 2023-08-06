@@ -55,6 +55,9 @@ Route::middleware([
         Route::put('/manage/users/{user_id}/activate', [App\Http\Controllers\UserController::class, 'activate'])->name('activate-user');
         Route::put('/manage/users/{user_id}/deactivate', [App\Http\Controllers\UserController::class, 'deactivate'])->name('deactivate-user');
 
+        // Delete user
+        Route::delete('/manage/users/{user_id}/delete', [App\Http\Controllers\UserController::class, 'destroy'])->name('delete-user');
+
         // View Class in Manage
         Route::get('/class/{class_id}', function ($class_id) {
             return view('grade.view-class', compact('class_id'));

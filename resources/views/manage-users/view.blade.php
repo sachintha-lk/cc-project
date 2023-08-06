@@ -1,7 +1,7 @@
 <x-sidebar>
 
 
-    <div class="py-12">
+    <div class="py-12" x-data="{ showDeleteConfirmation : false }" x-init="showDeleteConfirmation = false" >
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if (session()->has('message'))
@@ -73,6 +73,22 @@
                                     </form>
                                     </div>
                                 @endif
+                                <div class="ml-10">
+                                    <form action="{{ route('delete-user', ['user_id' => $user->id]) }}" id="deleteUserForm" method="POST" x-on:submit.prevent=" showDeleteConfirmation = true">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="flex gap-1 text-red-600 hover:text-red-500 ">
+                                            <span class="font-semibold ">Delete</span>
+                                            <div class="w-4 mr-2 mt-1 transform text-red-600 hover:text-red-500 hover:scale-110">
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M5.293 4.293a1 1 0 011.414 0L10 8.586l3.293-3.293a1 1 0 111.414 1.414L11.414 10l3.293 3.293a1 1 0 01-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414-1.414L8.586 10 5.293 6.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+
                             </div>
                     </div>
 
@@ -112,6 +128,25 @@
 
 
 
+                <div x-show="showDeleteConfirmation" x-cloak class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
+                    <div class="fixed inset-0 transition-opacity -z-10" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 max-w-md mx-auto">
+                        <h2 class="text-xl font-semibold">Confirm User Deletion</h2>
+                        <p>Are you sure you want to delete this user. This action cannot be undone</p>
+                        <div class="mt-4 flex justify-end space-x-4">
+                            <button @click="showDeleteConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
+                                Cancel
+                            </button>
+                            <button @click="document.querySelector('#deleteUserForm').submit();" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none">
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
         </div>
+    </div>
     </div>
 </x-sidebar>

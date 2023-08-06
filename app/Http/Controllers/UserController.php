@@ -164,7 +164,7 @@ class UserController extends Controller
         $user->status = true;
         $user->save();
 
-        return redirect()->back()->with('success', 'User activated successfully.');
+        return redirect()->back()->with('message', 'User activated successfully.');
     }
 
     function deactivate($id)
@@ -173,7 +173,7 @@ class UserController extends Controller
         $user->status = false;
         $user->save();
 
-        return redirect()->back()->with('success', 'User deactivated successfully.');
+        return redirect()->back()->with('message', 'User deactivated successfully.');
     }
 
     // Deletes user using the Jetstream
@@ -182,7 +182,7 @@ class UserController extends Controller
          $user = User::findOrFail($id);
          $deleteUser = new DeleteUser();
          $deleteUser->delete($user);
-         return redirect()->back()->with('success', 'User deleted successfully.');
+         return redirect()->route('manage-users')->with('message', 'User deleted successfully.');
      }
 
 

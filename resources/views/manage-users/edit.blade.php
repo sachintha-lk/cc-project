@@ -76,7 +76,7 @@
         </div>
 
         <!-- Confirmation Modal -->
-        <div x-show="showConfirmation" class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
+        <div x-show="showConfirmation" x-cloak class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
             <div class="fixed inset-0 transition-opacity -z-10" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
@@ -97,5 +97,4 @@
 
 
         </div>
-    </div>
 </x-sidebar>
