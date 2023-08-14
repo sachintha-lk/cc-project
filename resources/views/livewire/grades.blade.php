@@ -11,6 +11,11 @@
             <span class="block">{{ session('message') }}</span>
             <button @click="show = false" class="ml-4 text-xl font-medium text-white cursor-pointer">&times;</button>
         </div>
+        <script>
+            setTimeout(function() {
+               document.querySelector('[x-data="{ show: true }"]').remove();
+            },1500); // 5000 milliseconds = 5 seconds
+         </script>
     @endif
 
     @if (session()->has('errormsg'))
@@ -18,6 +23,11 @@
             <span class="block">{{ session('errormsg') }}</span>
             <button @click="show = false" class="ml-4 text-xl font-medium text-white cursor-pointer">&times;</button>
         </div>
+        <script>
+            setTimeout(function() {
+               document.querySelector('[x-data="{ show: true }"]').remove();
+            },1500); // 5000 milliseconds = 5 seconds
+         </script>
     @endif
 
 
