@@ -1,7 +1,7 @@
 <x-sidebar>
 
 
-    <div class="py-12" x-data="{ showDeleteConfirmation : false }" x-init="showDeleteConfirmation = false" >
+    <div class="py-12" x-data="{ showDeleteConfirmation : false , showActivateConfirmation : false, showDeactivateConfirmation : false }" x-init="showDeleteConfirmation = false, showActivateConfirmation = false, showDeactivateConfirmation = false" >
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if (session()->has('message'))
@@ -42,10 +42,10 @@
                                 </a>
                                 @if ($user->status == 1)
                                 <div>
-                                    <form action="{{ route('deactivate-user', ['user_id' => $user->id]) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="flex gap-1 text-red-600 hover:text-red-500 ">
+{{--                                    <form action="{{ route('deactivate-user', ['user_id' => $user->id]) }}" method="POST" id="deactivateUserForm" x-on:submit.prevent="showDeactivateConfirmation = true" >--}}
+{{--                                        @csrf--}}
+{{--                                        @method('PUT')--}}
+                                        <button type="submit" class="flex gap-1 text-red-600 hover:text-red-500" x-on:click="showDeactivateConfirmation = true" >
                                             <span class="font-semibold ">Deactivate</span>
                                             <div class="w-4 mr-2 mt-1 transform text-red-600 hover:text-red-500 hover:scale-110">
 
@@ -54,14 +54,14 @@
                                                 </svg>
                                             </div>
                                         </button>
-                                    </form>
+{{--                                    </form>--}}
                                     </div>
                                 @elseif ($user->status == 0)
                                 <div>
-                                    <form action="{{ route('activate-user', ['user_id' => $user->id]) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="flex gap-1 text-green-600 hover:text-green-500 ">
+{{--                                    <form action="{{ route('activate-user', ['user_id' => $user->id]) }}" id="activateUserForm" method="POST" x-on:submit.prevent="showActivateConfirmation = true"  >--}}
+{{--                                        @csrf--}}
+{{--                                        @method('PUT')--}}
+                                        <button type="submit" class="flex gap-1 text-green-600 hover:text-green-500" x-on:click="showActivateConfirmation = true">
                                             <span class="font-semibold ">Activate</span>
                                             <div class="w-4 mr-2 mt-1 transform text-green-600 hover:text-green-500 hover:scale-110">
 
@@ -70,14 +70,12 @@
                                                 </svg>
                                             </div>
                                         </button>
-                                    </form>
+{{--                                    </form>--}}
                                     </div>
                                 @endif
                                 <div class="ml-10">
-                                    <form action="{{ route('delete-user', ['user_id' => $user->id]) }}" id="deleteUserForm" method="POST" x-on:submit.prevent=" showDeleteConfirmation = true">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="flex gap-1 text-red-600 hover:text-red-500 ">
+
+                                        <button type="submit" class="flex gap-1 text-red-600 hover:text-red-500" x-on:click="showDeleteConfirmation = true">
                                             <span class="font-semibold ">Delete</span>
                                             <div class="w-4 mr-2 mt-1 transform text-red-600 hover:text-red-500 hover:scale-110">
 
@@ -86,7 +84,8 @@
                                                 </svg>
                                             </div>
                                         </button>
-                                    </form>
+
+
                                 </div>
 
                             </div>
@@ -118,12 +117,6 @@
                         <span class="text-red-700 font-semibold">Inactive</span>
                         @endif
                   </div>
-
-
-
-
-
-
             </div>
 
 
@@ -133,20 +126,68 @@
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
                     <div class="bg-white rounded-lg p-4 max-w-md mx-auto">
+                        <form action="{{ route('delete-user', ['user_id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
                         <h2 class="text-xl font-semibold">Confirm User Deletion</h2>
-                        <p>Are you sure you want to delete this user. This action cannot be undone</p>
+                        <p>Are you sure you want to delete this user? This action cannot be undone</p>
                         <div class="mt-4 flex justify-end space-x-4">
-                            <button @click="showDeleteConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
+                            <button type="reset" x-on:click="showDeleteConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
                                 Cancel
                             </button>
-                            <button @click="document.querySelector('#deleteUserForm').submit();" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none">
-                                Confirm
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none">
+                                Delete User
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div x-show="showDeactivateConfirmation" x-cloak class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
+                    <div class="fixed inset-0 transition-opacity -z-10" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 max-w-md mx-auto">
+                        <form action="{{ route('deactivate-user', ['user_id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                        <h2 class="text-xl font-semibold">Confirm User Deactivation</h2>
+                        <p>Are you sure you want to deactivate this user?</p>
+                        <div class="mt-4 flex justify-end space-x-4">
+                            <button type="reset" @click="showDeactivateConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
+                                Cancel
+                            </button>
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none">
+                                Deactivate User
                             </button>
                         </div>
                     </div>
                 </div>
 
-        </div>
+                <div x-show="showActivateConfirmation" x-cloak class="fixed inset-0 overflow-y-auto z-50 flex items-center justify-center">
+                    <div class="fixed inset-0 transition-opacity -z-10" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 max-w-md mx-auto">
+                        <form action="{{ route('activate-user', ['user_id' => $user->id]) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                        <h2 class="text-xl font-semibold">Confirm User Activation</h2>
+                        <p>Are you sure you want to activate this user?</p>
+                        <div class="mt-4 flex justify-end space-x-4">
+                            <button type="reset" @click="showActivateConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
+                                Cancel
+                            </button>
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none">
+                                Activate User
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+
+
+            </div>
     </div>
     </div>
+</div>
 </x-sidebar>
