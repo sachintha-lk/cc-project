@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserAccountStatusHistory;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use App\Actions\Jetstream\DeleteUser;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -104,7 +107,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('manage-users.view', compact('user'));
+        $userAccountStatusHistory = UserAccountStatusHistory::where('user_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('manage-users.view', compact('user'), compact('userAccountStatusHistory'));
     }
 
     public function edit($id)
@@ -159,20 +166,57 @@ class UserController extends Controller
         }
     }
 
-    function activate($id)
+    function activate( Request $request, $id)
     {
+        // Check if there is a reason
+        try {
+            $this->validate(request(), [
+                'reason' => 'required|string|max:255'
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->with('errormsg', 'Reason is required.');
+        }
+
+        $reason = $request->reason;
+
+
         $user = User::findOrFail($id);
         $user->status = true;
         $user->save();
 
+        // record the change reason
+        UserAccountStatusHistory::create([
+            'user_id' => $user->id,
+            'status' => true,
+            'reason' => $reason,
+            'changed_by' => auth()->user()->id
+        ]);
+
         return redirect()->back()->with('message', 'User activated successfully.');
     }
 
-    function deactivate($id)
+    function deactivate(Request $request, $id)
     {
+        try {
+            $this->validate(request(), [
+                'reason' => 'required|string|max:255'
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->with('errormsg', 'Reason is required.');
+        }
+        $reason = $request->reason;
+
         $user = User::findOrFail($id);
         $user->status = false;
         $user->save();
+
+        // record the change reason
+        UserAccountStatusHistory::create([
+            'user_id' => $user->id,
+            'status' => false,
+            'reason' => $reason,
+            'changed_by' => auth()->user()->id
+        ]);
 
         return redirect()->back()->with('message', 'User deactivated successfully.');
     }

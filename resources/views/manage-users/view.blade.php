@@ -1,7 +1,7 @@
 <x-sidebar>
 
 
-    <div class="py-12" x-data="{ showDeleteConfirmation : false , showActivateConfirmation : false, showDeactivateConfirmation : false }" x-init="showDeleteConfirmation = false, showActivateConfirmation = false, showDeactivateConfirmation = false" >
+    <div class="py-12" x-data="{ showDeleteConfirmation : false , showActivateConfirmation : false, showDeactivateConfirmation : false }" x-init="showDeleteConfirmation = false; showActivateConfirmation = false; showDeactivateConfirmation = false" >
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if (session()->has('message'))
@@ -114,9 +114,41 @@
                         @if($user->status == 1)
                             <span class="text-green-800 font-semibold">Active</span>
                         @else
-                        <span class="text-red-700 font-semibold">Inactive</span>
+                        <span class="text-red-700 font-semibold">Inactive ( Reason: {{ $userAccountStatusHistory->first()->reason }} )</span>
                         @endif
                   </div>
+                    @if (count($userAccountStatusHistory) != 0)
+                        <h3 class="text-xl text-gray-500 mt-2">Account Status Change History</h3>
+                    <table class="min-w-max w-full table-auto scroll-auto">
+                        <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-3 text-center">Date Updated</th>
+                            <th class="py-3 px-3 text-center">Status Changed to</th>
+                            <th class="py-3 px-3 text-center">Reason</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-medium">
+                            @foreach($userAccountStatusHistory as $update)
+                                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-3 text-center">
+                                        {{ $update->updated_at }}
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        {{$update->status == 1 ? 'Activated' : 'Deactivated' }}
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        {{$update->reason }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div class="p-5">
+                        {{ $userAccountStatusHistory->links() }}
+                    </div>
+                        @endif
+
+                    </div>
             </div>
 
 
@@ -153,6 +185,10 @@
                             @method('PUT')
                         <h2 class="text-xl font-semibold">Confirm User Deactivation</h2>
                         <p>Are you sure you want to deactivate this user?</p>
+                        <div class="mt-3"></div>
+                        <label for="reason" class="block text-sm font-medium text-gray-700">Reason for deactivation</label>
+                        <input type="text" id="reason" name="reason" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                        @error('reason') <span class="text-red-500">{{ $message }}</span>@enderror
                         <div class="mt-4 flex justify-end space-x-4">
                             <button type="reset" @click="showDeactivateConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
                                 Cancel
@@ -161,6 +197,7 @@
                                 Deactivate User
                             </button>
                         </div>
+                        </form>
                     </div>
                 </div>
 
@@ -173,21 +210,26 @@
                             @csrf
                             @method('PUT')
                         <h2 class="text-xl font-semibold">Confirm User Activation</h2>
-                        <p>Are you sure you want to activate this user?</p>
-                        <div class="mt-4 flex justify-end space-x-4">
-                            <button type="reset" @click="showActivateConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
-                                Cancel
-                            </button>
-                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none">
-                                Activate User
-                            </button>
-                        </div>
+                            <span>Are you sure you want to activate this user?</span>
+                            <div class="mt-3"></div>
+                            <label for="reason" class="block text-sm font-medium text-gray-700">Reason for activation</label>
+                            <input type="text" id="reason" name="reason" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                            @error('reason') <span class="text-red-500">{{ $message }}</span>@enderror
+                            <div class="mt-4 flex justify-end space-x-4">
+                                <button type="reset" @click="showActivateConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none">
+                                    Activate User
+                                </button>
+                            </div>
                         </form>
                     </div>
+
 
 
             </div>
     </div>
     </div>
-</div>
+
 </x-sidebar>
