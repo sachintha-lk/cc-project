@@ -68,7 +68,13 @@ Route::middleware([
             return view('grade.class', compact('gradeId'));
         })->name('class');
 
+        
 
+        //show modules of a class
+        Route::get('/grade/class/{gradeId}/module/{moduleId}', function ($gradeId, $moduleId) {
+            return view('grade.module', compact('gradeId', 'moduleId'));
+        })->name('module');
+        
         // View Class in Manage
         Route::get('/class/{class_id}', function ($class_id) {
             return view('grade.view-class', compact('class_id'));
