@@ -104,6 +104,8 @@ class AddStudentsToClass extends Component
 
         // clear the selected students
         $this->clearSelectedStudents();
+
+        session()->flash('message', 'Students added to class successfully.');
     }
 
 }
