@@ -156,7 +156,7 @@
          </x-dialog-modal>
          <x-dialog-modal wire:model="ConfirmingModuleAddition" >
             <x-slot name="title">
-                {{ __('Add Module') }}
+                {{isset($this->module->id) ? 'Update Module' : 'Add Module'}}
             </x-slot>
 
             <x-slot name="content">

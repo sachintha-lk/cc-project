@@ -76,6 +76,7 @@ class Modules extends Component
     {
         $module->delete();
         $this->ConfirmingModuleDeletion = false;
+        session()->flash('message','Module Deleted Successfully');
     }
 
     public function confirmModuleAddition()
@@ -84,17 +85,30 @@ class Modules extends Component
        $this->ConfirmingModuleAddition = true;
     } 
 
+    public function confirmModuleUpdate(Module $module){
+
+        $this->module = $module;
+        $this->ConfirmingModuleAddition = true;
+    }
+
    public function SaveModule(){
     $this->validate();
     // dd($this->module['Module_name']);
-  
-    Module::create([
-        'Module_name' => $this->module['Module_name'],
-        'Module_code' => $this->module['Module_code'],
-        'teacher_id' => $this->module['teacher_id'],
-        'iscommon' => $this->module['iscommon'] ?? 0 ,
-        'class_id' => $this->classId,
-    ]);
+
+    if(isset($this->module->id)){
+        $this->module->save();
+        session()->flash('message', 'Module Updated Successfully');
+    }else{
+
+        Module::create([
+            'Module_name' => $this->module['Module_name'],
+            'Module_code' => $this->module['Module_code'],
+            'teacher_id' => $this->module['teacher_id'],
+            'iscommon' => $this->module['iscommon'] ?? 0 ,
+            'class_id' => $this->classId,
+        ]);
+        session()->flash('message', 'Module Added Successfully');
+    }
     $this->ConfirmingModuleAddition = false;
    }
    
