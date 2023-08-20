@@ -74,4 +74,8 @@ class User extends Authenticatable
         return $this->belongsTo(GradeClasses::class);
     }
 
+    public function module(){
+        return $this->hasMany(\App\Models\Module::class);
+    }
+
 }

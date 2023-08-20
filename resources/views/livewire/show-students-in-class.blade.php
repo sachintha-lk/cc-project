@@ -1,6 +1,5 @@
 
     <div>
-
         @if (session()->has('message'))
             <div class="bg-green-500 text-white p-4 rounded-lg mb-6">
                 {{ session('message') }}
@@ -15,22 +14,16 @@
 
         <div>
             <div class="flex justify-between">
-
                 <div class="flex ml-5">
-
                     <h2 class="font-bold text-xl p-4 ml-10 text-gray-800 leading-tight">
                         Students in Class
                     </h2>
-
                     <div class="ml-5">
                         <label>
                             <input wire:model="q" type="search"  placeholder="Search" name="student_search" class="block w-full py-2.5 rounded focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400" required>
                         </label>
                     </div>
-
                 </div>
-
-
                 <div class="mr-10">
                     <a href="{{route('add-students-to-class', [ $class_id ])}}">
                         <x-button>
