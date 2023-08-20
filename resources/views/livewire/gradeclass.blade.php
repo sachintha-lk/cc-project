@@ -22,9 +22,8 @@
     <h2 class="font-bold text-xl p-4 ml-10 text-gray-800 leading-tight">
         {{ $grade->name }}
     </h2>
-
-
-
+   
+   
     <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
         <div class="max-w-2xl mx-auto">
            <form class="flex items-center">
@@ -82,15 +81,15 @@
                           </x-danger-button>
                        </div>
                        <div class="mt-5">
-                          <x-danger-button wire:click="confirmClassUpdate({{$class->id}})" wire:loading.attr="disabled" class=" bg-amber-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                          <x-secondary-button wire:click="confirmClassUpdate({{$class->id}})" wire:loading.attr="disabled" class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
                               {{ __('Update') }}
-                          </x-danger-button>
+                          </x-secondary-button>
                        </div>
                        <div class="mt-5 ml-2">
                            <a href={{route('view-class', [$class->id])}}>
-                               <x-danger-button class=" bg-amber-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                               <x-secondary-button class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
                                    {{ __('View') }}
-                               </x-danger-button>
+                               </x-secondary-button>
                            </a>
                      </div>
                     </td>

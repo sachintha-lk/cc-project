@@ -3,6 +3,10 @@
         {{ $class->class_name }}
     </h2>
     <div class="block w-full overflow-x-auto mt-2 p-4 bg-white">
-        <livewire:show-students-in-class :class_id="$class->id"/>
+        <livewire:show-students-in-class :class_id="$class->id" />
+        
+    </div>
+    <div  class="block w-full overflow-x-auto mt-2 p-4 bg-white">
+        <livewire:modules :classId="$class->id" />
     </div>
 </div>
