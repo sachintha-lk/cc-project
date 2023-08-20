@@ -11,6 +11,7 @@ class ShowStudentsInClass extends Component
 {
 
     use WithPagination;
+
     public $class_id;
 
     public $showConfirmDeleteModal = false;
@@ -26,6 +27,7 @@ class ShowStudentsInClass extends Component
     {
         $this->class_id = $class_id;
     }
+
     public function render()
     {
         // TODO change this to get students in class

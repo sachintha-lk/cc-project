@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 class AddStudentsToClass extends Component
 {
     use withPagination;
+
     public $q;
 
     public $class_id;
@@ -26,9 +27,9 @@ class AddStudentsToClass extends Component
         $this->class = GradeClasses::find($class_id);
 
 
-
         $this->selectedStudentsTempCollection = new Collection();
     }
+
     public function render()
     {
         $selectedStudents = $this->selectedStudentsTempCollection;
@@ -41,7 +42,7 @@ class AddStudentsToClass extends Component
                 return $query->where(function ($query) {
                     $query->where('name', 'like', '%' . $this->q . '%')
                         ->orWhere('email', 'like', '%' . $this->q . '%')
-                        ->orWhere('student_id', 'like', '%' . $this->q . '%' );
+                        ->orWhere('student_id', 'like', '%' . $this->q . '%');
                 });
             })
             ->whereNotIn('id', $selectedStudentIds)
@@ -81,6 +82,7 @@ class AddStudentsToClass extends Component
             return $student['id'] == $id;
         });
     }
+
     public function clearSelectedStudents()
     {
         $this->selectedStudentsTempCollection = new Collection();

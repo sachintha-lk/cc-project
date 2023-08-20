@@ -166,7 +166,7 @@ class UserController extends Controller
         }
     }
 
-    function activate( Request $request, $id)
+    function activate(Request $request, $id)
     {
         // Check if there is a reason
         try {
