@@ -162,12 +162,13 @@
             <x-slot name="content">
                 <div class="col-span-6 sm:col-span-4">
                    <x-label for="name" value="{{ __('Module Name') }}" />
-                   <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="module.Module_name" />
+                   <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="module.Module_name" placeholder="Enter the module name :Science" />
                    <x-input-error for="module.Module_name" class="mt-2" />
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">
                    <x-label for="name" value="{{ __('Module code') }}" />
-                   <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="module.Module_code" />
+                   <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="module.Module_code" placeholder="Enter the module code :S103" />
+                   The first letter is the subject, and the first  two digit is the grade and the last digit is the module number
                    <x-input-error for="module.Module_code" class="mt-2" />
                 </div>
                 <div class="col-span-6 sm:col-span-4 mt-4">

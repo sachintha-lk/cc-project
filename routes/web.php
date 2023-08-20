@@ -70,10 +70,10 @@ Route::middleware([
 
         
 
-        //show modules of a class
-        Route::get('/grade/class/{gradeId}/module/{moduleId}', function ($gradeId, $moduleId) {
-            return view('grade.module', compact('gradeId', 'moduleId'));
-        })->name('module');
+        // //show modules of a class
+        // Route::get('/grade/class/{gradeId}/module/{moduleId}', function ($gradeId, $moduleId) {
+        //     return view('grade.module', compact('gradeId', 'moduleId'));
+        // })->name('module');
         
         // View Class in Manage
         Route::get('/class/{class_id}', function ($class_id) {

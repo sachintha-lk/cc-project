@@ -12,9 +12,14 @@ class Module extends Model
     protected $fillable = ['Module_name', 'Module_code','iscommon', 'class_id','teacher_id'];
 
 
-    public function grade()
+    // public function grade()
+    // {
+    //     return $this->belongsTo(\App\Models\Grade::class);
+    // }
+
+    public function gradeclass()
     {
-        return $this->belongsTo(\App\Models\Grade::class);
+        return $this->belongsTo(\App\Models\GradeClasses::class, 'class_id', 'id');
     }
 
     public function teacher(){
@@ -23,5 +28,16 @@ class Module extends Model
 
     public function scopeActive($query){
         return $query->where('iscommon', 1);
+    }
+
+    public function setModuleNameAttribute($value)
+    {
+        $this->attributes['Module_name'] = ucfirst(strtolower($value));
+        
+    }
+
+    public function setModuleCodeAttribute($value)
+    {
+        $this->attributes['Module_code'] = strtoupper($value);
     }
 }

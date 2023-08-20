@@ -26,7 +26,7 @@ class Modules extends Component
 
     protected $rules = [
         'module.Module_name' => 'required|string|min:4',
-        'module.Module_code' => 'required|string|max:6',
+        'module.Module_code' => 'required|string|max:6|unique:modules,Module_code',
         'module.teacher_id' => 'required',
         'module.iscommon' => 'required',
     ];
