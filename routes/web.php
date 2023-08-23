@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', [App\Http\Controllers\DevTestController::class, 'index']);
+
 Route::get('/', function () {
     return redirect('/dashboard');
 });
@@ -96,6 +98,20 @@ Route::middleware([
 
     // Admin and Teacher only routes
     Route::middleware('validateRole:admin,teacher')->group(function () {
+
+        // create a new quiz
+        Route::get('module/{moduleId}/quiz/create', function ($moduleId) {
+            return view('quiz.create-form', compact('moduleId'));
+        })->name('create-quiz');
+
+        Route::get('module/{moduleId}/quiz/{quizId}/edit', function ($moduleId, $quizId) {
+            return view('quiz.create-form', compact('moduleId', 'quizId'));
+        })->name('edit-quiz');
+
+        // View quiz in manage view
+        Route::get('module/{moduleId}/quiz/{quizSlug}/manage', function ($moduleId, $quizSlug) {
+            return view('quiz.manage-quiz-view', compact('quizSlug'));
+        })->name('manage-quiz-view');
     });
 
     // Student Only routes
