@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class ManageQuizView extends Component
 {
+    protected $listeners = ['openAddQuestionModal' => 'openAddQuestionModal'];
     public $quizSlug;
 
     public $quiz;
@@ -47,5 +48,24 @@ class ManageQuizView extends Component
     private function unpublishQuiz()
     {
         $this->quiz->is_published = false;
+    }
+
+    public function openAddQuestionModal()
+    {
+        $this->dispatchBrowserEvent('openAddQuestionModal');
+        
+
+        $this->confirmQuestionAdd = true;
+
+    }
+
+    public function refreshQuestions()
+    {
+        // Implement logic to refresh the quiz's questions
+    }
+
+    public function confirmQuestionAdd()
+    {
+        $this->confirmQuestionAdd = true;
     }
 }

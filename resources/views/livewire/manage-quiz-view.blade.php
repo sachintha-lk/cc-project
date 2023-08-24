@@ -1,6 +1,6 @@
 <div class="ml-10">
     <x-slot name="header">
-        {{ __('Quiz ID') }}
+        {{ __($quiz->name) }}
     </x-slot>
 
 
@@ -51,7 +51,7 @@
     <div class="flex justify-between mt-3 ">
         <h3 class="text-2xl leading-none font-bold text-gray-600 mb-10">Questions</h3>
         <div class="mr-20">
-            <x-button wire:click="confirmQuestionAdd">
+            <x-button wire:click="$emit('openAddQuestionModal')">
                 {{ __('Add Question') }}
             </x-button>
         </div>
@@ -82,6 +82,8 @@
             </x-danger-button>
         </div>
     </div>
+
+    <livewire:add-question :quizId="$quiz->id" wire:poll.750ms="refreshQuestions"/>
     {{--    // table to show questions--}}
     {{--    <div class="block w-full overflow-x-auto mt-2">--}}
     {{--        <table class="items-center w-full bg-transparent border-collapse">--}}
@@ -129,60 +131,7 @@
     {{--        </table>--}}
     {{--    </div>--}}
     {{--    // modal to add questions--}}
-    {{--    <x-dialog-modal wire:model="confirmQuestionAdd">--}}
-    {{--        <x-slot name="title">--}}
-    {{--            {{ isset($this->question->id) ?'Update Question' : 'Add Question' }}--}}
-    {{--        </x-slot>--}}
-    {{--        <x-slot name="content">--}}
-    {{--            <div class="col-span-6 sm:col-span-4">--}}
-    {{--                <x-label for="question" value="{{ __('Question') }}" />--}}
-    {{--                <x-input id="question" type="text" class="mt-1 block w-full" wire:model.defer="question.question" />--}}
-    {{--                <x-input-error for="question.question" class="mt-2" />--}}
-    {{--            </div>--}}
-    {{--            <div class="col-span-6 sm:col-span-4">--}}
-    {{--                <x-label for="question_type" value="{{ __('Question Type') }}" />--}}
-    {{--                <select id="question_type" name="question_type" wire:model.defer="question.question_type"--}}
-    {{--                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
-    {{--                    <option value="single">Single</option>--}}
-    {{--                    <option value="multiple">Multiple</option>--}}
-    {{--                </select>--}}
-    {{--                <x-input-error for="question.question_type" class="mt-2" />--}}
-    {{--            </div>--}}
-    {{--            <div class="col-span-6 sm:col-span-4">--}}
-    {{--                <x-label for="marks" value="{{ __('Marks') }}" />--}}
-    {{--                <x-input id="marks" type="number" class="mt-1 block w-full" wire:model.defer="question.marks" />--}}
-    {{--                <x-input-error for="question.marks" class="mt-2" />--}}
-    {{--            </div>--}}
-    {{--            <div class="col-span-6 sm:col-span-4">--}}
-    {{--                <x-label for="negative_marks" value="{{ __('Negative Marks') }}" />--}}
-    {{--                <x-input id="negative_marks" type="number" class="mt-1 block w-full" wire:model.defer="question.negative_marks" />--}}
-    {{--                <x-input-error for="question.negative_marks" class="mt-2" />--}}
-    {{--            </div>--}}
-    {{--            <div class="col-span-6 sm:col-span-4">--}}
-    {{--                <x-label for="media_url" value="{{ __('Media URL') }}" />--}}
-    {{--                <x-input id="media_url" type="text" class="mt-1 block w-full" wire:model.defer="--}}
-    {{--                question.media_url" />--}}
-    {{--                <x-input-error for="question.media_url" class="mt-2" />--}}
-    {{--            </div>--}}
-    {{--            <div class="col-span-6 sm:col-span-4">--}}
-    {{--                <x-label for="media_type" value="{{ __('Media Type') }}" />--}}
-    {{--                <select id="media_type" name="media_type" wire:model.defer="question.media_type"--}}
-    {{--                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
-    {{--                    <option value="image">Image</option>--}}
-    {{--                    <option value="video">Video</option>--}}
-    {{--                </select>--}}
-    {{--                <x-input-error for="question.media_type" class="mt-2" />--}}
-    {{--            </div>--}}
-    {{--        </x-slot>--}}
-    {{--        <x-slot name="footer">--}}
-    {{--            <x-secondary-button wire:click="$set('confirmQuestionAdd', false)" wire:loading.attr="disabled">--}}
-    {{--                {{ __('Cancel') }}--}}
-    {{--            </x-secondary-button>--}}
-    {{--            <x-danger-button class="ml-3" wire:click="saveQuestion()" wire:loading.attr="disabled">--}}
-    {{--                {{ __('Save') }}--}}
-    {{--            </x-danger-button>--}}
-    {{--        </x-slot>--}}
-    {{--    </x-dialog-modal>--}}
+
     {{--    // modal to update questions--}}
     {{--    <x-dialog-modal wire:model="confirmQuestionUpdate">--}}
     {{--        <x-slot name="title">--}}

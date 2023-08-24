@@ -11,5 +11,6 @@ class DevTestController extends Controller
         $quiz = Quiz::where('slug', 'charles-sanchez')->first();
         dd($quiz);
 
+
     }
 }
