@@ -28,7 +28,6 @@ class Modules extends Component
         'module.Module_name' => 'required|string|min:4',
         'module.Module_code' => 'required|string|max:6|unique:modules,Module_code',
         'module.teacher_id' => 'required',
-        'module.iscommon' => 'required',
     ];
     public function mount($classId)
     {
