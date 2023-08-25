@@ -18,6 +18,9 @@ class AddQuestion extends Component
     public $quiz_question;
 //    public $questionType;
 
+    public $question_name;
+    public $marks;
+
     public $option_a;
     public $option_b;
     public $option_c;
@@ -26,16 +29,16 @@ class AddQuestion extends Component
     public $correct_answer;
 
     public $numberOfQuestions;
-    
+
     protected $rules = [
-        'question.name' => 'required|string|min:5|max:255',
-        'question.question_type_id' => 'required|integer|exists:question_types,id',
-        'quiz_question.quiz_id' => 'required|integer|exists:quizzes,id',
-        'quiz_question.marks' => 'nullable|integer|min:0',
-        'question.is_active' => 'boolean',
-        'quiz_question.negative_marks' => 'nullable|integer|min:0',
-        'quiz_question.order' => 'nullable|integer|min:0',
-//        'is_optional' => 'nullable|boolean|default:false',
+        'question_name' => 'required|string|min:5|max:255',
+        'marks' => 'required|integer|min:0',
+        'option_a' => 'required|string|min:1|max:255',
+        'option_b' => 'required|string|min:1|max:255',
+        'option_c' => 'required|string|min:1|max:255',
+        'option_d' => 'required|string|min:1|max:255',
+        // correct answer must be one of the options
+        'correct_answer' => 'required|in:a,b,c,d',
     ];
 
     public function mount($quizId)
@@ -55,13 +58,11 @@ class AddQuestion extends Component
     public function saveQuestion()
     {
 
-//        dd($this->quiz_question);
-
         $this->validate();
 
         $createdQuestion = Question::create([
-            'name' => 'What is an algorithm?',
-            'question_type_id' => 1,
+            'name' => $this->question_name,
+            'question_type_id' => 1,  // multiple choice single answer
             'is_active' => true,
 //            'media_url' => 'url',
 //            'media_type' => 'image'
@@ -79,7 +80,7 @@ class AddQuestion extends Component
         $question_option_a = QuestionOption::create([
             'question_id' => $createdQuestion->id,
             'name' => $this->option_a,
-            'is_correct' => $this->correct_answer == 'a' ? true : false,
+            'is_correct' => $this->correct_answer == 'a',
 //            'media_type' => 'image',
 //            'media_url' => 'media url'
         ]);
@@ -87,7 +88,7 @@ class AddQuestion extends Component
         $question_option_b = QuestionOption::create([
             'question_id' => $createdQuestion->id,
             'name' => $this->option_b,
-            'is_correct' => $this->correct_answer == 'b' ? true : false,
+            'is_correct' => $this->correct_answer == 'b',
 //            'media_type' => 'image',
 //            'media_url' => 'media url'
         ]);
@@ -95,7 +96,7 @@ class AddQuestion extends Component
         $question_option_c = QuestionOption::create([
             'question_id' => $createdQuestion->id,
             'name' => $this->option_c,
-            'is_correct' => $this->correct_answer == 'c' ? true : false,
+            'is_correct' => $this->correct_answer == 'c',
 //            'media_type' => 'image',
 //            'media_url' => 'media url'
         ]);
@@ -103,7 +104,7 @@ class AddQuestion extends Component
         $question_option_d = QuestionOption::create([
             'question_id' => $createdQuestion->id,
             'name' => $this->option_d,
-            'is_correct' => $this->correct_answer == 'd' ? true : false,
+            'is_correct' => $this->correct_answer == 'd',
 //            'media_type' => 'image',
 //            'media_url' => 'media url'
         ]);
@@ -119,12 +120,15 @@ class AddQuestion extends Component
 
     public function cancelQuestionAdd()
     {
+        // dispatch event to tell that modal closes
+        $this->emit('closeAddQuestionModal');
         $this->confirmQuestionAdd = false;
+
     }
 
     public function openAddQuestionModal()
     {
-
+        
         $this->confirmQuestionAdd = true;
 
     }

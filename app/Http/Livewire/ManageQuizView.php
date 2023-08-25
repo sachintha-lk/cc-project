@@ -2,22 +2,46 @@
 
 namespace App\Http\Livewire;
 
+use Harishdurga\LaravelQuiz\Models\Question;
 use Harishdurga\LaravelQuiz\Models\Quiz;
+use Harishdurga\LaravelQuiz\Models\QuizQuestion;
 use Livewire\Component;
 
 class ManageQuizView extends Component
 {
-    protected $listeners = ['openAddQuestionModal' => 'openAddQuestionModal'];
+    protected $listeners = ['openAddQuestionModal' => 'openAddQuestionModal', 'refreshQuestions' => 'refreshQuestions'];
     public $quizSlug;
 
     public $quiz;
+    protected $questions;
+
+    public $questionsWithHighlightedOptions = [];
 
     public function mount($quizSlug)
     {
         $this->quizSlug = $quizSlug;
 
         $this->quiz = Quiz::where('slug', $this->quizSlug)->first();
+//
+//        $this->quiz->load(['questions.question.options']);
 //        $this->quiz = Quiz::where('slug', 'charles-sanchez')->first();
+//        $questionsWithHighlightedOptions = [];
+
+//        foreach ($this->quiz->questions as $question) {
+//            $questionData = [
+//                'question' => $question->name,
+//                'options' => [],
+//            ];
+//
+//            foreach ($question->options as $option) {
+//                $highlight = $option->is_correct ? '[CORRECT] ' : '';
+//                $questionData['options'][] = "{$highlight}{$option->name}";
+//            }
+//
+//
+//
+//            $questionsWithHighlightedOptions[] = $questionData;
+
 
     }
 
@@ -25,7 +49,33 @@ class ManageQuizView extends Component
     public function render()
     {
 
-        return view('livewire.manage-quiz-view', ['quiz' => $this->quiz]);
+        $quiz = Quiz::where('slug', $this->quizSlug)->with(['questions.question.options', 'questions.answers'])->firstOrFail();
+
+        $formattedQuestions = [];
+
+        foreach ($quiz->questions as $quizQuestion) {
+            $formattedQuestion = [
+                'id' => $quizQuestion->id,
+                'question' => $quizQuestion->question->name,
+                'marks' => $quizQuestion->marks,
+                'options' => [],
+                'answers' => $quizQuestion->answers,
+            ];
+
+            foreach ($quizQuestion->question->options as $option) {
+                $formattedOption = [
+                    'id' => $option->id,
+                    'name' => $option->name,
+                    'is_correct' => $option->is_correct,
+                ];
+
+                $formattedQuestion['options'][] = $formattedOption;
+            }
+
+            $formattedQuestions[] = $formattedQuestion;
+        }
+
+        return view('livewire.manage-quiz-view', ['quiz' => $quiz, 'formattedQuestions' => $formattedQuestions]);
     }
 
     public function confirmQuizPublish()
@@ -53,7 +103,7 @@ class ManageQuizView extends Component
     public function openAddQuestionModal()
     {
         $this->dispatchBrowserEvent('openAddQuestionModal');
-        
+
 
         $this->confirmQuestionAdd = true;
 
@@ -61,7 +111,8 @@ class ManageQuizView extends Component
 
     public function refreshQuestions()
     {
-        // Implement logic to refresh the quiz's questions
+        $this->render();
+
     }
 
     public function confirmQuestionAdd()

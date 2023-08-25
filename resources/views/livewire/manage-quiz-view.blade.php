@@ -48,13 +48,31 @@
     @endif
 
 
-    <div class="flex justify-between mt-3 ">
+    <div class="flex justify-between mt-5 ">
         <h3 class="text-2xl leading-none font-bold text-gray-600 mb-10">Questions</h3>
+
         <div class="mr-20">
             <x-button wire:click="$emit('openAddQuestionModal')">
                 {{ __('Add Question') }}
             </x-button>
         </div>
+    </div>
+    <div class="mt-1">
+        @foreach ($formattedQuestions as $formattedQuestion)
+            <div class="mt-2">
+                <h4 class="font-semibold text-xl text-gray-800 leading-tight">{{ $formattedQuestion['question'] }}</h4>
+                <p class="font-medium text-sm text-gray-700">Marks: {{ $formattedQuestion['marks'] }}</p>
+                <ul>
+                    @foreach ($formattedQuestion['options'] as $formattedOption)
+                        <li class="ml-2 {{ $formattedOption['is_correct'] ? 'list-disc text-green-700 font-bold' : '' }}">
+                            {{ $formattedOption['name'] }}
+                        </li>
+
+                    @endforeach
+                </ul>
+                {{--            <div>Answers: {{ implode(', ', $formattedQuestion['answers']) }}</div>--}}
+            </div>
+        @endforeach
     </div>
     <div class="mt-8 text-2xl flex justify-between w-1/2">
 
@@ -84,52 +102,10 @@
     </div>
 
     <livewire:add-question :quizId="$quiz->id" wire:poll.750ms="refreshQuestions"/>
-    {{--    // table to show questions--}}
-    {{--    <div class="block w-full overflow-x-auto mt-2">--}}
-    {{--        <table class="items-center w-full bg-transparent border-collapse">--}}
-    {{--            <thead>--}}
-    {{--            <tr>--}}
-    {{--                <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Question Id</th>--}}
-    {{--                <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Question</th>--}}
-    {{--                <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px"></th>--}}
-    {{--            </tr>--}}
-    {{--            </thead>--}}
-    {{--            <tbody class="divide-y divide-gray-100">--}}
-    {{--            @if ($questions->count() == 0)--}}
-    {{--                <tr class="text-gray-500">--}}
-    {{--                    <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">No results found</td>--}}
-    {{--                </tr>--}}
-    {{--            @else--}}
-    {{--                @foreach($questions as $question)--}}
-    {{--                    <tr class="text-gray-500">--}}
-    {{--                        <td class="border-t-0 px-4 align-middle text-sm font--}}
-    {{--                        -normal whitespace-nowrap p-4 text-left">{{ $question->id }}</td>--}}
-    {{--                        <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">{{ $question->question }}</td>--}}
-    {{--                        <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 flex">--}}
-    {{--                            <div class=" mr-2 mt-5">--}}
-    {{--                                <x-danger-button wire:click="confirmQuestionDeletion({{$question->id}})" wire:loading.attr="disabled">--}}
-    {{--                                    {{ __('Delete') }}--}}
-    {{--                                </x-danger-button>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="mt-5">--}}
-    {{--                                <x-secondary-button wire:click="confirmQuestionUpdate({{$question->id}})" wire:loading.attr="disabled" class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">--}}
-    {{--                                    {{ __('Update') }}--}}
-    {{--                                </x-secondary-button>--}}
-    {{--                            </div>--}}
-    {{--                            <div class="mt-5 ml-2">--}}
-    {{--                                <a href={{route('view-question', [$question->id])}}>--}}
-    {{--                                    <x-secondary-button class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">--}}
-    {{--                                        {{ __('View') }}--}}
-    {{--                                    </x-secondary-button>--}}
-    {{--                                </a>--}}
-    {{--                            </div>--}}
-    {{--                        </td>--}}
-    {{--                    </tr>--}}
-    {{--                @endforeach--}}
-    {{--            @endif--}}
-    {{--            </tbody>--}}
-    {{--        </table>--}}
-    {{--    </div>--}}
+
+    {{--    // show questions--}}
+
+
     {{--    // modal to add questions--}}
 
     {{--    // modal to update questions--}}

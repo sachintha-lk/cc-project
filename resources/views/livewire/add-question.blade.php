@@ -30,16 +30,16 @@
             @endif
             <div class="w-1/2 ">
                 <div class="m-2">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Question</label>
-                    <input type="text" id="name" name="name" wire:model.defer="question.name"
+                    <label for="question_name" class="block text-sm font-medium text-gray-700">Question</label>
+                    <input type="text" id="question_name" name="question_name" wire:model.defer="question_name"
                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                    <x-input-error for="quiz.name" class="mt-2"/>
+                    <x-input-error for="question_name" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="marks" class="block text-sm font-medium text-gray-700">Marks</label>
-                    <input type="number" id="marks" name="marks" wire:model.defer="quiz_question.marks"
+                    <input type="number" id="marks" name="marks" min="0" wire:model.defer="marks"
                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                    <x-input-error for="quiz.name" class="mt-2"/>
+                    <x-input-error for="marks" class="mt-2"/>
                 </div>
 
                 <div class="m-2">
@@ -70,6 +70,7 @@
                     <label for="correct_answer" class="block text-sm font-medium text-gray-700">Correct Answer</label>
                     <select id="correct_answer" name="correct_answer" wire:model.defer="correct_answer"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                        <option value="" disabled>Select Correct Answer</option>
                         <option value="a">A</option>
                         <option value="b">B</option>
                         <option value="c">C</option>
