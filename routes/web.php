@@ -128,6 +128,9 @@ Route::middleware([
 
         // Attempt a quiz
         Route::get('module/{moduleId}/quiz/{quizSlug}/attempt', [App\Http\Controllers\StudentQuizController::class, 'attempt'])->name('attempt-quiz');
+
+        // Submit a quiz
+        Route::post('module/{moduleId}/quiz/{quizSlug}/submit', [App\Http\Controllers\StudentQuizController::class, 'submit'])->name('submit-quiz');
     });
 });
 //

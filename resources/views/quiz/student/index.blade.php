@@ -33,7 +33,12 @@
 
 
                 </div>
-                @if ($quiz->valid_from > now())
+                @if(isset($quizAttempt->score))
+                    <div
+                        class="flex justify-center mt-3 bg-gradient-to-r from-green-200 to-green-200 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
+                        You have already attempted this quiz on and scored {{$quizAttempt->score->score}} marks
+                    </div>
+                @elseif ($quiz->valid_from > now())
                     <div
                         class="flex justify-center mt-3 bg-gradient-to-r from-yellow-200 to-yellow-200 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
                         Quiz Has Not Started Yet

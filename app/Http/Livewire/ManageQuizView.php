@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\StudentQuizScore;
 use Harishdurga\LaravelQuiz\Models\Question;
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Harishdurga\LaravelQuiz\Models\QuizQuestion;
@@ -15,6 +16,7 @@ class ManageQuizView extends Component
     public $quiz;
     protected $questions;
 
+    public $confirmQuizDeletion;
     public $questionsWithHighlightedOptions = [];
 
     public function mount($quizSlug)
@@ -74,7 +76,13 @@ class ManageQuizView extends Component
 
             $formattedQuestions[] = $formattedQuestion;
         }
-        return view('livewire.manage-quiz-view', ['quiz' => $quiz, 'formattedQuestions' => $formattedQuestions]);
+
+        // get quiz attempt scores
+        $quizAttempts = StudentQuizScore::where('quiz_id', $quiz->id)
+            ->with(['student', 'quizAttempt'])
+            ->paginate(10);
+
+        return view('livewire.manage-quiz-view', ['quiz' => $quiz, 'formattedQuestions' => $formattedQuestions, 'quizAttempts' => $quizAttempts]);
     }
 
     public function confirmQuizPublish()
@@ -121,5 +129,16 @@ class ManageQuizView extends Component
     public function confirmQuestionAdd()
     {
         $this->confirmQuestionAdd = true;
+    }
+
+    public function confirmQuizDeletion()
+    {
+        $this->confirmQuizDeletion = true;
+    }
+
+    public function deleteQuiz()
+    {
+        $this->quiz->delete();
+        return redirect()->route('teacher');
     }
 }

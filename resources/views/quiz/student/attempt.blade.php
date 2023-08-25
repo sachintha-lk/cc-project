@@ -1,10 +1,10 @@
 <x-app-layout>
-    <div class="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-700">
+    <div class="bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">
         <div>
             <div class="text-center px-4 pt-1 pb-0 mb-0 text-lg font-normal text-gray-800">Quiz Attempt</div>
-            <h2 class="text-center px-4 pt-0 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $moduleCode }}
-                : {{ $moduleName }}</h2>
-            <h3 class=" text-center p-4 pt-1 text-3xl font-bold text-gray-800 mb-1">{{ $quizName }}</h3>
+            <h2 class="text-center px-4 pt-0 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $module->Module_name }}
+                : {{ $module->Module_code }}</h2>
+            <h3 class=" text-center p-4 pt-1 text-3xl font-bold text-gray-800 mb-1">{{ $quiz->name }}</h3>
         </div>
         <div>
 
@@ -12,9 +12,11 @@
 
     </div>
 
-    <form id="quiz-form" action="{{route('test')}}">
+    <form id="quiz-form" action="{{route('submit-quiz',
+    ['quizSlug' => $quiz->slug, 'moduleId' => $module->id])}}"
+          method="POST">
+        @csrf
         <div class="mx-4 mt-3 pb-4 text-center ">
-
             @foreach($formattedQuestions as $question)
                 <div class="mt-8">
                     <div class="p-4 pt-1 pb-0 text-2xl font-bold text-gray-800 mb-1">
@@ -24,7 +26,6 @@
 
                     <div class="grid grid-cols-1 mx-auto w-fit">
                         {{-- @dump($question['options']) --}}
-
                         @foreach($question['options'] as $option)
                             <div class="">
                                 <div class="text-left">
@@ -37,8 +38,6 @@
                             </div>
                         @endforeach
                     </div>
-
-
                     {{--                <div class="text-left p-4 pt-1 text-2xl font-bold text-gray-800 mb-1">{{ $question['answer'] }}</div>--}}
                 </div>
             @endforeach

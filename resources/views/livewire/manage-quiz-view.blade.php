@@ -1,14 +1,45 @@
-<div class="ml-10">
+<div class="mx-3 px-4">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Manage Quiz') }}
         </h2>
     </x-slot>
+    <div class="bg-white m-3 mx-1 rounded overflow-hidden shadow-lg">
+        <div class="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-700">
+            {{--            <h2 class="px-4 pt-2 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $module->Module_code }}--}}
+            {{--                : {{ $module->Module_name }}</h2>--}}
+            <h3 class="p-4 pt-1 text-2xl font-bold text-gray-800 mb-1">{{ $quiz->name }}</h3>
+        </div>
+        <div class="p-3">
+            <div class="text-sm font-normal text-gray-500 mb-2">{{ $quiz->description }}</div>
 
-    <div class="text-2xl sm:text-3xl font-bold text-gray-600">{{ $quiz->name }}</div>
+            <div class="flex  justify-around">
+                <div class="font-normal text-gray-600">
+                    <div class="text-center"> Start Time</div>
+                    <div class=" font-semibold text-center">
+                        {{ date('D, d M Y H:i:s', strtotime($quiz->valid_from)) }}
+                    </div>
+
+                </div>
+                <div class="font-normal text-gray-600">
+                    <div class="text-center"> End Time</div>
+                    <div class=" font-semibold text-center">
+                        {{ date('D, d M Y H:i:s', strtotime($quiz->valid_upto)) }}
+                    </div>
+
+                </div>
+                @if($quiz->is_published == 1)
+                    <div class="text-xl font-bold text-green-600">Published</div>
+                @else
+                    <div class="text-xl font-normal text-gray-600">Not Published</div>
+                @endif
+
+            </div>
 
 
-    <div class="text-xl font-normal text-gray-500">{{ $quiz->description }}</div>
+        </div>
+
+    </div>
 
 
     {{--    <div class="text-xl font-normal text-gray-500">Total Marks: {{ $quiz->total_marks }}</div>--}}
@@ -30,24 +61,56 @@
     {{--            <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ $quiz->duration }}</span>--}}
     {{--        </div>--}}
     {{--    </div>--}}
+    <h2 class="text-2xl leading-none font-bold text-gray-600 m-2">Quiz Attempts</h2>
+    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-    <div class="text-xl font-normal text-gray-500">
-        <span class="text-gray-600"> Start Time: </span>
-        {{ date('d-m-Y', strtotime($quiz->valid_from)) }}
+        <table class="min-w-max w-full table-auto">
+            <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-3 text-center">Student ID</th>
+                <th class="py-3 px-6 text-left">Name</th>
+                <th class="py-3 px-6 text-left">Score</th>
+                <th class="py-3 px-6 text-center">Attempt Time</th>
+            </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-medium">
+            @if (count($quizAttempts) != 0)
+                @foreach ($quizAttempts as $attempt)
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-3 text-center">
+                            {{ $attempt->student->student_id }}
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            <div class="flex items-center  ">
+                                <div class="mr-2">
+                                    {{-- <img class="w-6 h-6 rounded-full" src={{ $student->profile_photo_url }}/> --}}
+                                    {{-- TODO fix image --}}
+                                </div>
+                                <span class="">{{ $attempt->student->name }}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-3 text-center">
+                            {{ $attempt->score }}
+                        </td>
+                        <td class="py-3 px-3 text-center">
+                            {{ date('D, d M Y H:i:s', strtotime($attempt->created_at)) }}
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="py-3 px-3 text-center">
+                        No attempts found
+                    </td>
+                </tr>
+            @endif
+            </tbody>
+        </table>
+        <div class="p-5">
+            {{ $quizAttempts->links() }}
+        </div>
+
     </div>
-
-    <div class="text-xl font-normal text-gray-500">
-        <span class="text-gray-600"> End Time: </span>
-        {{ date('d-m-Y', strtotime($quiz->valid_upto)) }}
-    </div>
-
-
-    @if($quiz->is_published == 1)
-        <div class="text-xl font-bold text-green-600">Published</div>
-    @else
-        <div class="text-xl font-normal text-gray-600">Not Published</div>
-    @endif
-
 
     <div class="flex justify-between mt-5 ">
         <h3 class="text-2xl leading-none font-bold text-gray-600 mb-10">Questions</h3>
@@ -58,7 +121,7 @@
             </x-button>
         </div>
     </div>
-    <div class="mt-1">
+    <div class="mt-1 ml-4">
         @foreach ($formattedQuestions as $formattedQuestion)
             <div class="mt-2">
                 <h4 class="font-semibold text-xl text-gray-800 leading-tight">{{ $formattedQuestion['question'] }}</h4>
@@ -164,6 +227,26 @@
     {{--            </x-danger-button>--}}
     {{--        </x-slot>--}}
     {{--    </x-dialog-modal>--}}
+
+    <x-dialog-modal wire:model="confirmQuizDeletion">
+        <x-slot name="title">
+            {{ __('Delete Quiz') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you want to delete this quiz?') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$set('confirmQuizDeletion', false)" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-secondary-button>
+
+            <x-danger-button class="ml-3" wire:click="deleteQuiz()" wire:loading.attr="disabled">
+                {{ __('Delete Quiz') }}
+            </x-danger-button>
+        </x-slot>
+    </x-dialog-modal>
 
 </div>
 

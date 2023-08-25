@@ -109,9 +109,17 @@ class AddQuestion extends Component
 //            'media_url' => 'media url'
         ]);
 
-        $this->reset();
+        $this->resetExceptQuizId();
+
         $this->emit('closeAddQuestionModal');
         session()->flash('message', 'Question Added Successfully');
+    }
+
+    private function resetExceptQuizId()
+    {
+        $tempValue = $this->quizId;
+        $this->reset();
+        $this->quizId = $tempValue;
     }
 
     public function confirmQuestionAdd()
