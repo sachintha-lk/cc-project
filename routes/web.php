@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', [App\Http\Controllers\DevTestController::class, 'index']);
+Route::get('/test', [App\Http\Controllers\DevTestController::class, 'index'])->name('test');
+Route::get('/testview', [App\Http\Controllers\DevTestController::class, 'testView'])->name('test-view');
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -121,11 +122,17 @@ Route::middleware([
             // say hello world to student
             return 'Hello student';
         })->name('student');
+
+        // View quiz in student view
+        Route::get('module/{moduleId}/quiz/{quizSlug}/', [App\Http\Controllers\StudentQuizController::class, 'index'])->name('student-quiz-view');
+
+        // Attempt a quiz
+        Route::get('module/{moduleId}/quiz/{quizSlug}/attempt', [App\Http\Controllers\StudentQuizController::class, 'attempt'])->name('attempt-quiz');
     });
 });
 //
-//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
-//    return view('grade.index');
+//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index.blade.php', function () {
+//    return view('grade.index.blade.php');
 //})->name('grade');
 //
 

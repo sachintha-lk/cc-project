@@ -8,9 +8,14 @@ class DevTestController extends Controller
 {
     public function index()
     {
-        $quiz = Quiz::where('slug', 'charles-sanchez')->first();
-        dd($quiz);
 
+        dd(request()->all());
+//        $quiz = Quiz::where('slug', 'charles-sanchez')->first();
+//        dd($quiz);
+    }
 
+    public function testView()
+    {
+        return view('dev-test');
     }
 }
