@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class ManageQuizView extends Component
 {
-    protected $listeners = ['openAddQuestionModal' => 'openAddQuestionModal', 'refreshQuestions' => 'refreshQuestions'];
+    protected $listeners = ['openAddQuestionModal' => 'openAddQuestionModal', 'closeAddQuestionModal' => 'handleCloseAddQuestionModal'];
     public $quizSlug;
 
     public $quiz;
@@ -74,7 +74,6 @@ class ManageQuizView extends Component
 
             $formattedQuestions[] = $formattedQuestion;
         }
-
         return view('livewire.manage-quiz-view', ['quiz' => $quiz, 'formattedQuestions' => $formattedQuestions]);
     }
 
@@ -82,6 +81,7 @@ class ManageQuizView extends Component
     {
         // TODO add confirm modal later
         $this->publishQuiz();
+
     }
 
     public function confirmQuizUnpublish()
@@ -93,23 +93,26 @@ class ManageQuizView extends Component
     private function publishQuiz()
     {
         $this->quiz->is_published = true;
+        $this->quiz->save();
+
     }
 
     private function unpublishQuiz()
     {
         $this->quiz->is_published = false;
+        $this->quiz->save();
+
     }
 
     public function openAddQuestionModal()
     {
         $this->dispatchBrowserEvent('openAddQuestionModal');
 
-
         $this->confirmQuestionAdd = true;
 
     }
 
-    public function refreshQuestions()
+    public function handleCloseAddQuestionModal()
     {
         $this->render();
 

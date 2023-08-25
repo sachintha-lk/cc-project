@@ -1,8 +1,9 @@
 <div class="ml-10">
     <x-slot name="header">
-        {{ __($quiz->name) }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Manage Quiz') }}
+        </h2>
     </x-slot>
-
 
     <div class="text-2xl sm:text-3xl font-bold text-gray-600">{{ $quiz->name }}</div>
 
@@ -42,7 +43,7 @@
 
 
     @if($quiz->is_published == 1)
-        <div class="text-xl font-normal text-gray-600">Published</div>
+        <div class="text-xl font-bold text-green-600">Published</div>
     @else
         <div class="text-xl font-normal text-gray-600">Not Published</div>
     @endif

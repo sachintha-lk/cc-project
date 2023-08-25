@@ -110,6 +110,7 @@ class AddQuestion extends Component
         ]);
 
         $this->reset();
+        $this->emit('closeAddQuestionModal');
         session()->flash('message', 'Question Added Successfully');
     }
 
@@ -118,7 +119,7 @@ class AddQuestion extends Component
         $this->confirmQuestionAdd = true;
     }
 
-    public function cancelQuestionAdd()
+    public function cancelSaveQuestion()
     {
         // dispatch event to tell that modal closes
         $this->emit('closeAddQuestionModal');
@@ -128,7 +129,7 @@ class AddQuestion extends Component
 
     public function openAddQuestionModal()
     {
-        
+
         $this->confirmQuestionAdd = true;
 
     }
