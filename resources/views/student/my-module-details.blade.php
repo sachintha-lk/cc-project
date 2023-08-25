@@ -1,3 +1,3 @@
 <x-sidebar>
-    <livewire:my-module-details :assignment_id="$module_id"/>
+    <livewire:my-module-details :module_id="$module_id"/>
 </x-sidebar>

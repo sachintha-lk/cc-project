@@ -1,3 +1,3 @@
 <x-sidebar>
-    <livewire:assignment-submittion"/>
+    <livewire:assignment-submittion :assignment_id="$assignment_id"/>
 </x-sidebar>

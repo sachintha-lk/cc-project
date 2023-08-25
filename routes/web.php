@@ -126,6 +126,19 @@ Route::middleware([
             return 'Hello student';
         })->name('student');
     });
+
+    Route::get('/student/my-modules', function () {
+        return view('student.my-modules');
+    })->name('student-modules');
+
+    Route::get('/student/my-module-details/{module_id}', function ($module_id) {
+        return view('student.my-module-details', compact('module_id'));
+    })->name('student-module-details');
+
+
+    Route::get('/student/assignment-submittion/{assignment_id}', function ($assignment_id) {
+        return view('student.assignment-submittion', compact('assignment_id'));
+    })->name('assignment-submission');
 });
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
@@ -137,17 +150,3 @@ Route::middleware([
 //    return view('grade.class', compact('gradeId'));
 //})->name('class');
 
-Route::middleware('validateRole:student')->group(function () {
-    Route::get('/student/my-modules', function () {
-        return view('student.my-modules');
-    })->name('student-modules');
-
-    Route::get('/student/my-module-details/{module_id}', function ($module_id) {
-        return view('student.my-module-details', compact('module_id'));
-    })->name('student-module-details');
-
-
-    Route::get('student/assignment-submission/{assignment_id}', function ($assignment_id) {
-        return view('student.assignment-submission', compact('assignment_id'));
-    })->name('assignment-submission');
-});
