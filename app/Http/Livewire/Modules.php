@@ -92,7 +92,7 @@ class Modules extends Component
     }
 
    public function SaveModule(){
-    $this->validate();
+
     // dd($this->module['Module_name']);
 
     if(isset($this->module->id)){
