@@ -14,6 +14,9 @@ use App\Http\Middleware\VerifyTeacherModuleAccess;
 |
 */
 
+Route::get('/test', [App\Http\Controllers\DevTestController::class, 'index'])->name('test');
+Route::get('/testview', [App\Http\Controllers\DevTestController::class, 'testView'])->name('test-view');
+
 Route::get('/', function () {
     return redirect('/dashboard');
 });
@@ -116,6 +119,20 @@ Route::middleware([
 
     // Admin and Teacher only routes
     Route::middleware('validateRole:admin,teacher')->group(function () {
+
+        // create a new quiz
+        Route::get('module/{moduleId}/quiz/create', function ($moduleId) {
+            return view('quiz.create-form', compact('moduleId'));
+        })->name('create-quiz');
+
+        Route::get('module/{moduleId}/quiz/{quizId}/edit', function ($moduleId, $quizId) {
+            return view('quiz.create-form', compact('moduleId', 'quizId'));
+        })->name('edit-quiz');
+
+        // View quiz in manage view
+        Route::get('module/{moduleId}/quiz/{quizSlug}/manage', function ($moduleId, $quizSlug) {
+            return view('quiz.manage-quiz-view', compact('quizSlug'));
+        })->name('manage-quiz-view');
     });
 
     Route::get('teacher/{module_id}/assignment', function ($module_id) {
@@ -129,6 +146,15 @@ Route::middleware([
             // say hello world to student
             return 'Hello student';
         })->name('student');
+
+        // View quiz in student view
+        Route::get('module/{moduleId}/quiz/{quizSlug}/', [App\Http\Controllers\StudentQuizController::class, 'index'])->name('student-quiz-view');
+
+        // Attempt a quiz
+        Route::get('module/{moduleId}/quiz/{quizSlug}/attempt', [App\Http\Controllers\StudentQuizController::class, 'attempt'])->name('attempt-quiz');
+
+        // Submit a quiz
+        Route::post('module/{moduleId}/quiz/{quizSlug}/submit', [App\Http\Controllers\StudentQuizController::class, 'submit'])->name('submit-quiz');
     });
 
     Route::get('/student/my-modules', function () {
@@ -145,8 +171,8 @@ Route::middleware([
     })->name('assignment-submission');
 });
 //
-//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
-//    return view('grade.index');
+//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index.blade.php', function () {
+//    return view('grade.index.blade.php');
 //})->name('grade');
 //
 

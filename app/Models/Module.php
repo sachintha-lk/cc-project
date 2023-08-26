@@ -9,7 +9,7 @@ class Module extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Module_name', 'Module_code','iscommon', 'class_id','teacher_id'];
+    protected $fillable = ['Module_name', 'Module_code', 'iscommon', 'class_id', 'teacher_id'];
 
 
     // public function grade()
@@ -22,7 +22,8 @@ class Module extends Model
         return $this->belongsTo(\App\Models\GradeClasses::class, 'class_id', 'id');
     }
 
-    public function teacher(){
+    public function teacher()
+    {
         return $this->belongsTo(\App\Models\User::class, 'teacher_id', 'id');
     }
 
@@ -31,13 +32,14 @@ class Module extends Model
     }
 
     public function scopeActive($query){
+
         return $query->where('iscommon', 1);
     }
 
     public function setModuleNameAttribute($value)
     {
         $this->attributes['Module_name'] = ucfirst(strtolower($value));
-        
+
     }
 
     public function setModuleCodeAttribute($value)
@@ -45,8 +47,14 @@ class Module extends Model
         $this->attributes['Module_code'] = strtoupper($value);
     }
 
+    public function quizzes()
+    {
+        return $this->hasMany(\App\Models\Quiz::class, 'module_id', 'id');
+    }
+
     public function assignments()
     {
         return $this->hasMany(Assignment::class);
     }	
+
 }
