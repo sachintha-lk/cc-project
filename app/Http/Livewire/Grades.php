@@ -8,19 +8,18 @@ use Livewire\Component;
 class Grades extends Component
 {
     public $confirmGradeDeletion = false;
-    public $confirmGradeAdd=false;
+    public $confirmGradeAdd = false;
     public $grade;
 
     public $q;
 
     protected $rules = [
-        'grade.name'=>'required|string|min:4',
-
+        'grade.name' => 'required|string|min:4',
     ];
 
     public function render()
     {
-        return view('livewire.grades',['grades'=>Grade::all()]); // Pass the grades data to the view
+        return view('livewire.grades', ['grades' => Grade::all()]);
     }
 
     public function confirmGradeDeletion($id)
@@ -30,47 +29,42 @@ class Grades extends Component
 
     public function deleteGrade(Grade $grade)
     {
-       $grade->delete();
+        $grade->delete();
         $this->confirmGradeDeletion = false;
-        session()->flash('message','Grade Deleted Successfully');
-
+        session()->flash('message', 'Grade Deleted Successfully');
     }
 
     public function confirmGradeAdd()
     {
-        $this-> confirmGradeAdd = true;
-        $this->reset(['grade']);
-
+        $this->confirmGradeAdd = true;
+        $this->resetGrade();
     }
-    public function confirmGradeUpdate(grade $grade)
+
+    public function confirmGradeUpdate(Grade $grade)
     {
         $this->grade = $grade;
         $this->confirmGradeAdd = true;
     }
 
-
-
     public function saveGrade()
     {
         $this->validate();
-        if(isset($this->grade->id))
-        {
+        
+        if ($this->grade->id) {
             $this->grade->save();
-            session()->flash('message','Grade Updated Successfully');
-        }
-        else
-        {
+            session()->flash('message', 'Grade Updated Successfully');
+        } else {
             Grade::create([
-                'name'=>$this->grade['name'],
+                'name' => $this->grade['name'],
             ]);
-            session()->flash('message','Grade Added Successfully');
+            session()->flash('message', 'Grade Added Successfully');
         }
 
         $this->confirmGradeAdd = false;
     }
 
-
-
-
-
+    private function resetGrade()
+    {
+        $this->grade = new Grade();
+    }
 }

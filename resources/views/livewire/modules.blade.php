@@ -118,7 +118,7 @@
                                           </x-secondary-button>
                                       </div>
                                       <div class="mt-5 ml-2">
-                                          <a href={{}}>
+                                          <a href={{route('module-details',[$module->id]) }}>
                                               <x-secondary-button
                                                   class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
                                                   {{ __('View') }}

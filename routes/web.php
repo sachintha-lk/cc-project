@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\VerifyTeacherModuleAccess;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,15 +89,38 @@ Route::middleware([
     // Teacher Only routes
     Route::middleware('validateRole:teacher')->group(function () {
 
-        Route::get('/teacher', function () {
-            // say hello world to teacher
-            return 'Hello teacher';
-        })->name('teacher');
+        // Route::get('/teacher', function () {
+        //     // say hello world to teacher
+        //     return 'Hello teacher';
+        // })->name('teacher');
+
+        Route::get('/teacher/modules', function () {
+            return view('teacher.modules');
+        })->name('teacher-modules');
+
+        // routes/web.php
+
+        Route::get('/teacher/module-details/{module_id}', function ($module_id) {
+            return view('teacher.module-details',compact('module_id'));
+        })->name('module-details');
+
+        Route::get('/teacher/show-submission/{assignment_id}', function ($assignment_id) {
+            return view('teacher.show-submission',compact('assignment_id'));
+        })->name('show-submission');
+
+       
+
+
     });
+
 
     // Admin and Teacher only routes
     Route::middleware('validateRole:admin,teacher')->group(function () {
     });
+
+    Route::get('teacher/{module_id}/assignment', function ($module_id) {
+        return view('teacher.assignment', compact('module_id'));
+    })->name('assignments');
 
     // Student Only routes
     Route::middleware('validateRole:student')->group(function () {
@@ -106,6 +130,19 @@ Route::middleware([
             return 'Hello student';
         })->name('student');
     });
+
+    Route::get('/student/my-modules', function () {
+        return view('student.my-modules');
+    })->name('student-modules');
+
+    Route::get('/student/my-module-details/{module_id}', function ($module_id) {
+        return view('student.my-module-details', compact('module_id'));
+    })->name('student-module-details');
+
+
+    Route::get('/student/assignment-submittion/{assignment_id}', function ($assignment_id) {
+        return view('student.assignment-submittion', compact('assignment_id'));
+    })->name('assignment-submission');
 });
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
@@ -116,3 +153,4 @@ Route::middleware([
 //Route::middleware(['auth:sanctum', 'verified'])->get('grade/class/{gradeId}', function ($gradeId) {
 //    return view('grade.class', compact('gradeId'));
 //})->name('class');
+
