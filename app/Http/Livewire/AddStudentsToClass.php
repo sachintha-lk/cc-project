@@ -67,6 +67,7 @@ class AddStudentsToClass extends Component
 
         $this->associateStudentsWithClass($students);
         $this->clearSelectedStudents();
+        session()->flash('message', 'Students added to class successfully.');
     }
 
     // Helper methods

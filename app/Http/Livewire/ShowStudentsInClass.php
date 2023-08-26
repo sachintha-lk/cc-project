@@ -11,6 +11,7 @@ class ShowStudentsInClass extends Component
 {
 
     use WithPagination;
+
     public $class_id;
 
     public $showConfirmDeleteModal = false;
@@ -26,6 +27,7 @@ class ShowStudentsInClass extends Component
     {
         $this->class_id = $class_id;
     }
+
     public function render()
     {
         // TODO change this to get students in class
@@ -45,13 +47,14 @@ class ShowStudentsInClass extends Component
         return view('livewire.show-students-in-class', ['students' => $students]);
     }
 
-    public function removeStudent($student_id)
+    public function removeStudentFromClass($id)
     {
-        $student = User::find($student_id);
+        $student = User::where('role_id', 3)->findOrFail($id);
         $student->class_id = null;
         $student->save();
 
-        // call render to refresh the page
+        // call render to refresh the page with success msg
+        session()->flash('message', 'Student removed from class successfully.');
         $this->render();
     }
 }
