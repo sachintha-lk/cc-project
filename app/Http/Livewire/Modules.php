@@ -26,8 +26,9 @@ class Modules extends Component
 
     protected $rules = [
         'module.Module_name' => 'required|string|min:4',
-        'module.Module_code' => 'required|string|max:6|unique:modules,Module_code',
+        'module.Module_code' => 'required|string|min:2|max:20|unique:modules,Module_code',
         'module.teacher_id' => 'required',
+        'module.iscommon' => 'boolean',
     ];
     public function mount($classId)
     {
@@ -95,10 +96,15 @@ class Modules extends Component
     // dd($this->module['Module_name']);
 
     if(isset($this->module->id)){
+     // change the Moudule code rule in the rules array
+        $this->rules['module.Module_code'] = 'required|string|min:4|unique:modules,Module_code,' . $this->module->id;
+        $this->validate();
+        
         $this->module->save();
         session()->flash('message', 'Module Updated Successfully');
     }else{
-
+        $this->validate();
+        
         Module::create([
             'Module_name' => $this->module['Module_name'],
             'Module_code' => $this->module['Module_code'],
