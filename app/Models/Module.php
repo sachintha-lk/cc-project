@@ -27,8 +27,12 @@ class Module extends Model
         return $this->belongsTo(\App\Models\User::class, 'teacher_id', 'id');
     }
 
-    public function scopeActive($query)
-    {
+    public function student(){
+        return $this->belongsTo(\App\Models\User::class, 'student_id', 'id');
+    }
+
+    public function scopeActive($query){
+
         return $query->where('iscommon', 1);
     }
 
@@ -47,4 +51,10 @@ class Module extends Model
     {
         return $this->hasMany(\App\Models\Quiz::class, 'module_id', 'id');
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }	
+
 }
