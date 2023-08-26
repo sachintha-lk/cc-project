@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\VerifyTeacherModuleAccess;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/test', [App\Http\Controllers\DevTestController::class, 'index'])->name('test');
+Route::get('/testview', [App\Http\Controllers\DevTestController::class, 'testView'])->name('test-view');
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -88,15 +92,52 @@ Route::middleware([
     // Teacher Only routes
     Route::middleware('validateRole:teacher')->group(function () {
 
-        Route::get('/teacher', function () {
-            // say hello world to teacher
-            return 'Hello teacher';
-        })->name('teacher');
+        // Route::get('/teacher', function () {
+        //     // say hello world to teacher
+        //     return 'Hello teacher';
+        // })->name('teacher');
+
+        Route::get('/teacher/modules', function () {
+            return view('teacher.modules');
+        })->name('teacher-modules');
+
+        // routes/web.php
+
+        Route::get('/teacher/module-details/{module_id}', function ($module_id) {
+            return view('teacher.module-details',compact('module_id'));
+        })->name('module-details');
+
+        Route::get('/teacher/show-submission/{assignment_id}', function ($assignment_id) {
+            return view('teacher.show-submission',compact('assignment_id'));
+        })->name('show-submission');
+
+       
+
+
     });
+
 
     // Admin and Teacher only routes
     Route::middleware('validateRole:admin,teacher')->group(function () {
+
+        // create a new quiz
+        Route::get('module/{moduleId}/quiz/create', function ($moduleId) {
+            return view('quiz.create-form', compact('moduleId'));
+        })->name('create-quiz');
+
+        Route::get('module/{moduleId}/quiz/{quizId}/edit', function ($moduleId, $quizId) {
+            return view('quiz.create-form', compact('moduleId', 'quizId'));
+        })->name('edit-quiz');
+
+        // View quiz in manage view
+        Route::get('module/{moduleId}/quiz/{quizSlug}/manage', function ($moduleId, $quizSlug) {
+            return view('quiz.manage-quiz-view', compact('quizSlug'));
+        })->name('manage-quiz-view');
     });
+
+    Route::get('teacher/{module_id}/assignment', function ($module_id) {
+        return view('teacher.assignment', compact('module_id'));
+    })->name('assignments');
 
     // Student Only routes
     Route::middleware('validateRole:student')->group(function () {
@@ -105,14 +146,37 @@ Route::middleware([
             // say hello world to student
             return 'Hello student';
         })->name('student');
+
+        // View quiz in student view
+        Route::get('module/{moduleId}/quiz/{quizSlug}/', [App\Http\Controllers\StudentQuizController::class, 'index'])->name('student-quiz-view');
+
+        // Attempt a quiz
+        Route::get('module/{moduleId}/quiz/{quizSlug}/attempt', [App\Http\Controllers\StudentQuizController::class, 'attempt'])->name('attempt-quiz');
+
+        // Submit a quiz
+        Route::post('module/{moduleId}/quiz/{quizSlug}/submit', [App\Http\Controllers\StudentQuizController::class, 'submit'])->name('submit-quiz');
     });
+
+    Route::get('/student/my-modules', function () {
+        return view('student.my-modules');
+    })->name('student-modules');
+
+    Route::get('/student/my-module-details/{module_id}', function ($module_id) {
+        return view('student.my-module-details', compact('module_id'));
+    })->name('student-module-details');
+
+
+    Route::get('/student/assignment-submittion/{assignment_id}', function ($assignment_id) {
+        return view('student.assignment-submittion', compact('assignment_id'));
+    })->name('assignment-submission');
 });
 //
-//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index', function () {
-//    return view('grade.index');
+//Route::middleware(['auth:sanctum', 'verified'])->get('grade/index.blade.php', function () {
+//    return view('grade.index.blade.php');
 //})->name('grade');
 //
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('grade/class/{gradeId}', function ($gradeId) {
 //    return view('grade.class', compact('gradeId'));
 //})->name('class');
+

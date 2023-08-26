@@ -133,25 +133,25 @@
                 {{ __('Save') }}
             </x-danger-button>
         </x-slot>
-        </x-dialog-modal>
+    </x-dialog-modal>
+
+    <style>
+        /* Custom styles for the card container */
+        .grade-card {
+            margin: 5px; /* Add margin to create spacing from the sides */
+            position: relative; /* To position the links correctly within the card */
+        }
+    
+        /* Style for the links container */
+        .links-container {
+            position: absolute;
+            top: 10px; /* Adjust the top position to change the vertical spacing of the links */
+            right: 10px; /* Adjust the right position to change the horizontal spacing of the links */
+            display: flex;
+            gap: 15px; /* Adjust the gap value to control the spacing between the links */
+            flex-direction: column;
+        }
+    </style>
+    
 </div>
 
-<style>
-    /* Custom styles for the card container */
-    .grade-card {
-        margin: 5px; /* Add margin to create spacing from the sides */
-        position: relative; /* To position the links correctly within the card */
-    }
-
-    /* Style for the links container */
-    .links-container {
-        position: absolute;
-        top: 10px; /* Adjust the top position to change the vertical spacing of the links */
-        right: 10px; /* Adjust the right position to change the horizontal spacing of the links */
-        display: flex;
-        gap: 15px; /* Adjust the gap value to control the spacing between the links */
-        flex-direction: column;
-    }
-
-
-</style>
