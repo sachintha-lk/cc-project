@@ -104,6 +104,10 @@ Route::middleware([
             return view('teacher.module-details',compact('module_id'));
         })->name('module-details');
 
+        Route::get('/teacher/show-submission/{assignment_id}', function ($assignment_id) {
+            return view('teacher.show-submission',compact('assignment_id'));
+        })->name('show-submission');
+
        
 
 

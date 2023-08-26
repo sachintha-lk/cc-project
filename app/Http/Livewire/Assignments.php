@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Assignment;
 use App\Models\Module;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,8 +14,14 @@ class Assignments extends Component
 
     public $module_id;
     public $module;
-    public $assignment;
-
+    public $assignment = [
+        'assignment_name' => '',
+        'assignment_description' => '',
+        'assignment_file' => '',
+        'assignment_type' => '',
+        'start_date' => '',
+        'deadline' => '',
+    ];
 
     protected $rules = [
         'assignment.assignment_name' => 'required|string|min:4',
@@ -25,8 +32,6 @@ class Assignments extends Component
         'assignment.deadline' => 'required|date',
     ];
 
-    // 'rules' => 'file|mimes:png,jpg,pdf|max:102400
-    // https://laravel-livewire.com/docs/2.x/file-uploads
     public function mount($module_id)
     {
         $this->module_id = $module_id;
@@ -42,20 +47,8 @@ class Assignments extends Component
     {
         $this->validate();
 
-        // Generate a random number for the file name
-        $randomNumber = rand(1, 1000);
+        $fileName = $this->storeUploadedFile();
 
-        // Get the original file name and extension
-        $originalFileName = $this->assignment['assignment_file']->getClientOriginalName();
-        $extension = $this->assignment['assignment_file']->extension();
-
-        // Create a unique file name
-        $fileName = "{$originalFileName}_{$randomNumber}.{$extension}";
-
-        // Store the file in the 'assignments' folder
-        $this->assignment['assignment_file']->storeAs('assignments', $fileName, 'public');
-
-        // Create a new assignment record
         Assignment::create([
             'start_date' => $this->assignment['start_date'],
             'deadline' => $this->assignment['deadline'],
@@ -66,10 +59,27 @@ class Assignments extends Component
             'module_id' => $this->module_id,
         ]);
 
-        // Flash a success message to the session
+        $this->resetAssignmentData();
+
         session()->flash('message', 'Assignment Added Successfully');
 
-        // Reset the assignment data
+        return redirect()->to(route('module-details', ['module_id' => $this->module_id]));
+    }
+
+    private function storeUploadedFile()
+    {
+        $randomNumber = rand(1, 1000);
+        $originalFileName = $this->assignment['assignment_file']->getClientOriginalName();
+        $extension = $this->assignment['assignment_file']->extension();
+        $fileName = "{$originalFileName}_{$randomNumber}.{$extension}";
+
+        Storage::disk('public')->putFileAs('assignments', $this->assignment['assignment_file'], $fileName);
+
+        return $fileName;
+    }
+
+    private function resetAssignmentData()
+    {
         $this->assignment = [
             'assignment_name' => '',
             'assignment_description' => '',
@@ -78,10 +88,5 @@ class Assignments extends Component
             'start_date' => '',
             'deadline' => '',
         ];
-
-        // Redirect to the module details page
-        return redirect()->to(route('module-details', ['module_id' => $this->module_id]));
     }
-
-
 }
