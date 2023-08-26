@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'student1@school1.com',
             'password' => Hash::make('studentpassword'),
             'role_id' => 3,
+            'class_id' => 1, // This is the class id of '1 A
             'status' => true,
         ]);
 
@@ -81,6 +82,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'student2@school1.com',
             'password' => Hash::make('studentpassword'),
             'role_id' => 3,
+            'class_id' => 2,
             'status' => true,
         ]);
 

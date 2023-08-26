@@ -22,7 +22,8 @@
     <h2 class="font-bold text-xl p-4 ml-10 text-gray-800 leading-tight">
         {{ $module->Module_name }}
     </h2>
-    <div class="mt-10 ml-10">
+    <div class="mt-3 ml-10">
+        <h3 class="font-semibold text-lg mb-2 ml-4">Assignments</h3>
 
 
         <a href={{ route('assignments', [$module->id]) }}>
@@ -127,7 +128,107 @@
                 @endforeach
             @endif
         </tbody>
-    </table>  
+    </table>
+
+        <div class="mt-3 ml-10">
+            <h3 class="font-semibold text-lg mb-2 ml-4">Quizes</h3>
+
+            <a href={{ route('create-quiz', [$module->id]) }}>
+                <x-secondary-button
+                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                    {{ __('Add Quiz') }}
+                </x-secondary-button>
+            </a>
+            <table class="items-center w-full bg-transparent border-collapse">
+                <thead>
+
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Quiz Name</th>
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Valid From time</th>
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    Valid Upto time</th>
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    Publish status</th>
+
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Action</th>
+                </thead>
+
+                <tbody class="divide-y divide-gray-100">
+                    @if ($quizzes->count() == 0)
+                        <tr class="text-gray-500">
+                            <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
+                                No results found</td>
+                        </tr>
+                    @else
+                        @foreach ($quizzes as $quiz)
+                            <tr class="text-gray-500">
+                                <td
+                                    class="border-t-0 px-4 align-middle text-sm font-medium text-gray-900 whitespace-nowrap p-4 text-left">
+                                    {{ $quiz->name }}</td>
+                                <td
+                                    class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                                    {{
+
+                                           date('D, d M Y H:i:s', strtotime($quiz->valid_from))
+
+                                    }}
+                                </td>
+
+                                <td
+                                    class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                                    {{
+
+                                           date('D, d M Y H:i:s', strtotime($quiz->valid_upto))
+                                    }}
+                                </td>
+
+                                    @if ($quiz->is_published)
+                                    <td
+                                        class="text-green-600 border-t-0 px-4 align-middle text-xs font-semibold whitespace-nowrap p-4">
+                                        Published
+                                    </td>
+                                    @else
+                                    <td
+                                        class="text-red-500 border-t-0 px-4 align-middle text-xs font-semibold whitespace-nowrap p-4">
+                                        Not Published
+                                    </td>
+                                    @endif
+
+                                </td>
+
+
+                                <td
+                                    class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 flex">
+
+                                    <div class="mt-5 ml-2">
+
+                                            <a href={{ route('manage-quiz-view',[$module->id, $quiz->slug]) }}>
+                                            <x-secondary-button
+                                                class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                                {{ __('View') }}
+                                            </x-secondary-button>
+                                        </a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
     <x-dialog-modal wire:model="confirmingAssignmentDeletion">
         <x-slot name="title">
             {{ __('Delete Assignment') }}

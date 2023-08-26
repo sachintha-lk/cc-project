@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Module;
+use Harishdurga\LaravelQuiz\Models\Quiz;
 use Livewire\Component;
 
 class MyModuleDetails extends Component
@@ -13,11 +14,17 @@ class MyModuleDetails extends Component
 
     public $module_id;
 
+    public $quizzes;
+
     public function mount($module_id)
     {
         $this->module_id = $module_id;
         $this->module = Module::find($module_id);
         $this->assignments = $this->module->assignments;
+        $this->quizzes = Quiz::where('module_id', $this->module_id)
+            ->where('is_published', 1)
+            ->get();
+
     }
 
 
