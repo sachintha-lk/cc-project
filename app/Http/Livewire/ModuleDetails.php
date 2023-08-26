@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Assignment;
 use App\Models\Module;
 use Livewire\Component;
 
@@ -35,10 +36,11 @@ class ModuleDetails extends Component
         $this->confirmingAssignmentDeletion = $id;
     }
 
-    public function DeleteAssignment(Assignments $assignment)
+    public function DeleteAssignment(Assignment $assignment)
     {
         $assignment->delete();
         $this->confirmingAssignmentDeletion = false;
         $this->loadModuleAndAssignments();
+        session()->flash('message', 'Assignment Deleted Successfully');
     }
 }

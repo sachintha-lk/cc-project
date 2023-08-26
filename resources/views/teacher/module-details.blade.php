@@ -1,4 +1,4 @@
-<div>
+<x-sidebar>
     <livewire:module-details :module_id="$module_id"/>
 
-</div>
+</x-sidebar>
