@@ -46,13 +46,13 @@
         <hr>
         <h3 class="font-semibold text-lg mb-2 ml-4">Availability</h3>
         <div class="flex items-center">
-            <x-label for="name" class="ml-4" value="{{ __('Assignment Start Date') }}" />
-            <x-input id="name" type="date" class="mt-1 ml-4 block w-96" wire:model.defer="assignment.start_date" />
+            <x-label for="start-date" class="ml-4" value="{{ __('Assignment Start Date') }}" />
+            <x-input id="start-date" type="date" class="mt-1 ml-4 block w-96" wire:model.defer="assignment.start_date" />
             <x-input-error for="assignment.start_date" class="mt-2" />
         </div>
         <div class="flex items-center">
-            <x-label for="name" class="ml-4" value="{{ __('Assignment Deadline') }}" />
-            <x-input id="name" type="date" class="mt-1 ml-4 block w-96" wire:model.defer="assignment.deadline" />
+            <x-label for="deadline" class="ml-4" value="{{ __('Assignment Deadline') }}" />
+            <x-input id="deadline" type="date" class="mt-1 ml-4 block w-96" wire:model.defer="assignment.deadline" />
             <x-input-error for="assignment.deadline" class="mt-2" />
         </div>
         <hr>
@@ -62,9 +62,9 @@
             <x-input id="name" type="text" class="mt-1 ml-4 block w-96" wire:model.defer="assignment.assignment_type" />
             <x-input-error for="assignment.assignment_type" class="mt-2" />
         </div>
-        <x-button class="ml-4 mt-4" wire:click="saveAssignment()" wire:loading.attr="disabled">
+        <x-button id="save-assignment" class="ml-4 mt-4" wire:click="saveAssignment()" wire:loading.attr="disabled">
             {{ __('Save') }}
         </x-button>
     </div>
-    
+
 </div>
