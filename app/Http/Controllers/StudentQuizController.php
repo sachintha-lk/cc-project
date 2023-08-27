@@ -61,11 +61,13 @@ class StudentQuizController extends Controller
         $quiz = Quiz::where('slug', $quizSlug)->where('is_published', true)
             ->where('valid_from', '<=', Carbon::now())
             ->where('valid_to', '>=', Carbon::now())
-            ->with(['questions.question.options', 'module'])
+            ->with(['questions.question.options'])
             ->firstOrFail();
 
+        $module = Module::where('id', $moduleId)->firstOrFail();
+
         // check if student is enrolled in the module by checking if the module's class id and the student's class id match
-        $isStudentEnrolledInModule = auth()->user()->class_id === $quiz->module->class_id;
+        $isStudentEnrolledInModule = auth()->user()->class_id === $module->class_id;
         if (!$isStudentEnrolledInModule) {
             return redirect()->route('dashboard')->with('error', 'Unauthorized access');
         }
@@ -74,7 +76,7 @@ class StudentQuizController extends Controller
 
         $quizAttempt = QuizAttempt::where('quiz_id', $quiz->id)->where('participant_id', $user->id)->where('participant_type', 'student')->first();
         if ($quizAttempt) {
-            return redirect()->route('student-quiz-view', ['moduleId' => $quiz->module->id, 'quizSlug' => $quiz->slug])->with('error', 'You have already attempted this quiz');
+            return redirect()->route('student-quiz-view', ['moduleId' => $module->id, 'quizSlug' => $quiz->slug])->with('error', 'You have already attempted this quiz');
         }
 
 
@@ -100,8 +102,6 @@ class StudentQuizController extends Controller
             $formattedQuestions[] = $formattedQuestion;
         }
 
-        $module = $quiz->module;
-
 
         return view('quiz.student.attempt', compact('formattedQuestions', 'module', 'quiz'));
 
@@ -125,15 +125,15 @@ class StudentQuizController extends Controller
         $quiz = Quiz::where('slug', $quizSlug)->where('is_published', true)
             ->where('valid_from', '<=', Carbon::now())
             ->where('valid_to', '>=', Carbon::now())
-            ->with(['questions.question.options', 'module'])
+            ->with(['questions.question.options'])
             ->firstOrFail();
 
+        $module = Module::where('id', $request->moduleId)->firstOrFail();
+
         // check if student is enrolled in the module by checking if the module's class id and the student's class id match
-        $isStudentEnrolledInModule = auth()->user()->class_id === $quiz->module->class_id;
+        $isStudentEnrolledInModule = auth()->user()->class_id === $module->class_id;
 
         if (!$isStudentEnrolledInModule) {
-            dd('not enrolled');
-
             return redirect()->route('dashboard');
         }
 
@@ -175,7 +175,7 @@ class StudentQuizController extends Controller
         ]);
 
         // redirect to the quiz view page with the score
-        return redirect()->route('student-quiz-view', ['moduleId' => $quiz->module->id, 'quizSlug' => $quiz->slug])->with('success', 'Quiz submitted successfully. Your score is ' . $score);
+        return redirect()->route('student-quiz-view', ['moduleId' => $module->id, 'quizSlug' => $quiz->slug])->with('success', 'Quiz submitted successfully. Your score is ' . $score);
     }
 
 }
