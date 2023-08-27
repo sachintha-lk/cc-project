@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StudentQuizScore;
 use Carbon\Carbon;
 
 use App\Models\Module;
@@ -38,13 +39,19 @@ class StudentQuizController extends Controller
         $formattedEndTime = $carbonEndTime->format('d M Y H:i:s');
 
         // check if there is a quiz attempt for this quiz by this student
-        $quizAttempt = QuizAttempt::where('quiz_id', $quiz->id)
-            ->where('participant_id', auth()->user()->id)
-            ->where('participant_type', 'student')
+//        $quizAttempt = QuizAttempt::where('quiz_id', $quiz->id)
+//            ->where('participant_id', auth()->user()->id)
+//            ->where('participant_type', 'student')
+//            ->first();
+        $quizAttemptScore = StudentQuizScore::where('quiz_id', $quiz->id)
+            ->where('student_user_id', auth()->user()->id)
             ->first();
 
+        $score = $quizAttemptScore ? $quizAttemptScore->score : null;
 
-        return view('quiz.student.index', compact('quiz', 'quizAttempt', 'module', 'formattedStartTime', 'formattedEndTime'));
+
+
+        return view('quiz.student.index', compact('quiz', 'score', 'module', 'formattedStartTime', 'formattedEndTime'));
     }
 
     public function attempt($moduleId, $quizSlug)
