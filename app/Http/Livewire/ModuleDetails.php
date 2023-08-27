@@ -56,4 +56,5 @@ class ModuleDetails extends Component
         $this->loadModuleAndAssignments();
         session()->flash('message', 'Assignment Deleted Successfully');
     }
+    
 }

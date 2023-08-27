@@ -24,7 +24,7 @@ class CreateEditQuizForm extends Component
         'quiz.media_url' => 'nullable|string',
         'quiz.media_type' => 'nullable|string',
         'quiz.duration' => 'nullable|integer|min:0',
-        'quiz.valid_from' => 'nullable|date|after:now',
+        'quiz.valid_from' => 'nullable|date',
         'quiz.valid_upto' => 'nullable|date|after:quiz.valid_from',
         'quiz.time_between_attempts' => 'nullable|integer|min:0',
 
@@ -46,7 +46,7 @@ class CreateEditQuizForm extends Component
         if (isset($this->quiz['id'])) {
 //             if name changed, generate the slug
             if ($this->quiz->isDirty('name')) {
-                $this->quiz['slug'] = str::slug($this->quiz['name']);
+                $this->quiz['slug'] = str::slug($this->quiz['name']) . '-'.  Str::random(5);
             }
             $this->validate();
             $this->quiz->save();
@@ -58,7 +58,7 @@ class CreateEditQuizForm extends Component
 //
 //
 //            // generate the slug
-            $this->quiz['slug'] = str::slug($this->quiz['name']);
+            $this->quiz['slug'] = str::slug($this->quiz['name'] . '-'. Str::random(5));
 
             // add the module id to the quiz
             $this->quiz['module_id'] = $this->moduleId;

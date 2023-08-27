@@ -36,31 +36,10 @@
 
             </div>
 
-
         </div>
 
     </div>
 
-
-    {{--    <div class="text-xl font-normal text-gray-500">Total Marks: {{ $quiz->total_marks }}</div>--}}
-
-
-    {{--    <div class="text-xl font-normal text-gray-500">Pass Marks: {{ $quiz->pass_marks }}</div>--}}
-
-
-    {{--    <div class="text-xl font-normal text-gray-500">Max Attempts: {{ $quiz->max_attempts }}</div>--}}
-
-
-    {{--    <div class="text-xl font-normal text-gray-500">{{ $quiz->media_url }}</div>--}}
-
-
-    {{--    <div class="text-xl font-normal text-gray-500">{{ $quiz->media_type }}</div>--}}
-
-    {{--    <div class="flex items-center">--}}
-    {{--        <div class="flex-shrink-0">--}}
-    {{--            <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ $quiz->duration }}</span>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
     <h2 class="text-2xl leading-none font-bold text-gray-600 m-2">Quiz Attempts</h2>
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 

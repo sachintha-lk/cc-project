@@ -16,7 +16,7 @@ class AssignmentSubmittion extends Component
     public $fileToSubmit;
 
     protected $rules = [
-        'fileToSubmit' => 'required|file|max:1024',
+        'fileToSubmit' => 'required|file|max:100000',
     ];
 
     public function mount($assignment_id)
