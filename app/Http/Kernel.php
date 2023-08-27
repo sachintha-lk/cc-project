@@ -68,8 +68,10 @@ class Kernel extends HttpKernel
         // Custom middleware
         'validateRole' => \App\Http\Middleware\ValidateRole::class,
         'checkIfAccountIsActive' => \App\Http\Middleware\checkIfAccountIsActive::class,
+
         // 'verify.teacher.module.access' => \App\Http\Middleware\VerifyTeacherModuleAccess::class,
          'student.module.access' => \App\Http\Middleware\StudentModuleAccess::class,
+         'verify.teacher.module.access' => \App\Http\Middleware\VerifyTeacherModuleAccess::class,
 
     ];
 }

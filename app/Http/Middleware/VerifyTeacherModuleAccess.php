@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Livewire\TeacherModules;
+use App\Models\Module;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,16 +16,22 @@ class VerifyTeacherModuleAccess
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, $next)
     {
-    //     // Get the current authenticated teacher
-    //    $teacher = Auth::user();
-    //     $moduleId = $request->route('module_id');
+        $moduleId = $request->route('module_id');
 
-    //     // Check if the teacher has access to the module
-    //     if (!$teacher->modules->contains('id', $moduleId)) {
-    //         return abort(403, 'Unauthorized access to this module.');
-    //     }
-    //     return $next($request);
+
+        if (Auth::user()->role_id === 2) {
+            $teacherId = Auth::user()->id;
+
+            $hasAccess = Module::where('id', $moduleId)
+                ->where('teacher_id', $teacherId)
+                ->exists();
+
+            if (!$hasAccess) {
+                return redirect()->route('dashboard');
+            }
+        }
+        return $next($request);
     }
 }

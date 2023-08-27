@@ -103,14 +103,7 @@ Route::middleware([
 
         // routes/web.php
 
-        Route::get('/teacher/module-details/{module_id}', function ($module_id) {
-            return view('teacher.module-details',compact('module_id'));
-        })->name('module-details');
-
-        Route::get('/teacher/show-submission/{assignment_id}', function ($assignment_id) {
-            return view('teacher.show-submission',compact('assignment_id'));
-        })->name('show-submission');
-
+       
        
 
 
@@ -133,6 +126,21 @@ Route::middleware([
         Route::get('module/{moduleId}/quiz/{quizSlug}/manage', function ($moduleId, $quizSlug) {
             return view('quiz.manage-quiz-view', compact('quizSlug'));
         })->name('manage-quiz-view');
+
+        Route ::middleware('verify.teacher.module.access')->group(function () {
+
+            Route::get('/teacher/module-details/{module_id}', function ($module_id) {
+                return view('teacher.module-details',compact('module_id'));
+            })->name('module-details');
+    
+            Route::get('/teacher/show-submission/{assignment_id}', function ($assignment_id) {
+                return view('teacher.show-submission',compact('assignment_id'));
+            })->name('show-submission');
+    
+           
+        });
+
+       
     });
 
     Route::get('teacher/{module_id}/assignment', function ($module_id) {
