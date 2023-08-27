@@ -111,7 +111,7 @@ Route::middleware([
             return view('teacher.show-submission',compact('assignment_id'));
         })->name('show-submission');
 
-       
+
 
 
     });
@@ -159,23 +159,23 @@ Route::middleware([
         Route::get('/student/my-modules', function () {
             return view('student.my-modules');
         })->name('student-modules');
-    
-        
+
+
 
         Route::middleware('student.module.access')->group(function () {
 
             Route::get('/student/my-module-details/{module_id}', function ($module_id) {
                 return view('student.my-module-details', compact('module_id'));
             })->name('student-module-details');
-        
-            Route::get('/student/assignment-submittion/{assignment_id}', function ($assignment_id) {
+
+            Route::get('/student/my-module-details/{module_id}/assignment-submittion/{assignment_id}', function ($module_id, $assignment_id) {
                 return view('student.assignment-submittion', compact('assignment_id'));
             })->name('assignment-submission');
-           
+
         });
     });
 
-    
+
 });
 //
 //Route::middleware(['auth:sanctum', 'verified'])->get('grade/index.blade.php', function () {

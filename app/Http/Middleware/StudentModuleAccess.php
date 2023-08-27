@@ -19,16 +19,16 @@ class StudentModuleAccess
     {
         $moduleId = $request->route('module_id');
         $studentClassId = Auth::user()->class_id;
-    
+
         if (Auth::user()->role_id === 3) {
             $module = Module::find($moduleId);
-    
+
             if ($module && $module->class_id === $studentClassId) {
                 return $next($request);
             }
         }
-    
+
         return redirect()->route('dashboard')->with('error', 'You are not allowed to access this module.');
     }
-    
+
 }
