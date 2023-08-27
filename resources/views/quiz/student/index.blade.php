@@ -33,10 +33,10 @@
 
 
                 </div>
-                @if(isset($quizAttempt->score))
+                @if(isset($score))
                     <div
                         class="flex justify-center mt-3 bg-gradient-to-r from-green-200 to-green-200 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
-                        You have already attempted this quiz on and scored {{$quizAttempt->score->score}} marks
+                        You have already attempted this quiz and scored {{$score}} marks
                     </div>
                 @elseif ($quiz->valid_from > now())
                     <div
