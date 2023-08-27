@@ -44,25 +44,25 @@
 
                 <div class="m-2">
                     <label for="option_a" class="block text-sm font-medium text-gray-700">Option A</label>
-                    <input type="text" id="name" name="name" wire:model.defer="option_a"
+                    <input type="text" id="option_a" name="option_a" wire:model.defer="option_a"
                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                     <x-input-error for="option_a" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="option_b" class="block text-sm font-medium text-gray-700">Option B</label>
-                    <input type="text" id="name" name="name" wire:model.defer="option_b"
+                    <input type="text" id="option_b" name="option_b" wire:model.defer="option_b"
                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                     <x-input-error for="option_b" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="option_c" class="block text-sm font-medium text-gray-700">Option C</label>
-                    <input type="text" id="name" name="name" wire:model.defer="option_c"
+                    <input type="text" id="option_c" name="option_c" wire:model.defer="option_c"
                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                     <x-input-error for="option_c" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="option_d" class="block text-sm font-medium text-gray-700">Option D</label>
-                    <input type="text" id="name" name="name" wire:model.defer="option_d"
+                    <input type="text" id="option_d" name="option_d" wire:model.defer="option_d"
                            class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                     <x-input-error for="option_d" class="mt-2"/>
                 </div>

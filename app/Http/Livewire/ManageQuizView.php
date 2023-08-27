@@ -139,6 +139,6 @@ class ManageQuizView extends Component
     public function deleteQuiz()
     {
         $this->quiz->delete();
-        return redirect()->route('teacher');
+        return redirect()->route('dashboard');
     }
 }
