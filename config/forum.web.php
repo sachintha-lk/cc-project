@@ -29,8 +29,8 @@ return [
         'middleware' => [
             'web',
             // TODO FIX THIS TO CHECK FOR AUTH
-//            'checkIfAccountIsActive',
-//            'auth:sanctum',
+            'checkIfAccountIsActive',
+            'auth:sanctum',
 //            config('jetstream.auth_session'),
 //            'verified',
             ],

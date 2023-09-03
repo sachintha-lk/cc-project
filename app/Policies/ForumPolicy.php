@@ -8,21 +8,21 @@ class ForumPolicy extends Base
 {
     public function createCategories($user): bool
     {
-        return $user->name == 'DemoAdmin';
+        return $user->role->name == 'Admin';
     }
 
     public function moveCategories($user): bool
     {
-        return $user->name == 'DemoAdmin';
+        return $user->role->name == 'Admin';
     }
 
     public function renameCategories($user): bool
     {
-        return $user->name == 'DemoAdmin';
+        return $user->role->name == 'Admin';
     }
 
     public function viewTrashedThreads($user): bool
     {
-        return in_array($user->name, ['DemoModerator', 'DemoAdmin']);
+        return in_array($user->role->name, ['Teacher', 'Admin']);
     }
 }
