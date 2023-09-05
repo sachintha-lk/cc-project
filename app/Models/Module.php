@@ -55,6 +55,53 @@ class Module extends Model
     public function assignments()
     {
         return $this->hasMany(Assignment::class);
-    }	
+    }
+
+    public function forumCategory()
+    {
+        return $this->hasOne(\TeamTeaTime\Forum\Models\Category::class, 'module_id', 'id');
+    }
+
+    // created event
+    protected static function booted()
+    {
+        static::created(function ($module) {
+            // When a module is created, create forum category for it
+            $gradeName = $module->gradeclass->grade->name;
+            $className = $module->gradeclass->class_name;
+            $moduleName = $module->Module_name;
+            $moduleCode = $module->Module_code;
+
+            $module->forumCategory()->create([
+                'title' => "{$gradeName} {$className} {$moduleName} {$moduleCode}",
+                'is_for_module' => true,
+                'accepts_threads' => true,
+            ]);
+
+
+        });
+
+        // updated event
+        static::updated(function ($module) {
+            // When a module is updated, update forum category for it
+            $gradeName = $module->gradeclass->grade->name;
+            $className = $module->gradeclass->class_name;
+            $moduleName = $module->Module_name;
+            $moduleCode = $module->Module_code;
+
+            $module->forumCategory()->update([
+                'title' => "{$gradeName} {$className} {$moduleName} {$moduleCode}",
+                'is_for_module' => true,
+                'accepts_threads' => true,
+            ]);
+        });
+
+        // deleted event
+        static::deleted(function ($module) {
+            // When a module is deleted, delete forum category for it
+            $module->forumCategory()->delete();
+        });
+    }
+
 
 }
