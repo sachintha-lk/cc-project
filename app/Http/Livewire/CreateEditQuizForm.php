@@ -13,6 +13,8 @@ class CreateEditQuizForm extends Component
     public $moduleId;
     public $quiz;
 
+    private $isOpenAIKeySet = false;
+
     protected $rules = [
         'quiz.name' => 'required|string|min:5|max:255',
         'quiz.description' => 'nullable|string|min:5|max:255',
@@ -35,7 +37,17 @@ class CreateEditQuizForm extends Component
         if ($this->quizId) {
             $this->quiz = Quiz::findOrFail($this->quizId);
         }
-        return view('livewire.create-edit-quiz-form');
+
+
+        // check if OPENAI_API_KEY is set
+        if (env('OPENAI_API_KEY')) {
+            $this->isOpenAIKeySet = true;
+        } else {
+            $this->isOpenAIKeySet = false;
+        }
+        return view('livewire.create-edit-quiz-form', [
+            'isOpenAIKeySet' => $this->isOpenAIKeySet
+        ]);
     }
 
 
