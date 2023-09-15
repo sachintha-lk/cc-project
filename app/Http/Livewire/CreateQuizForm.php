@@ -7,7 +7,7 @@ use Livewire\Component;
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Illuminate\Support\Str;
 
-class CreateEditQuizForm extends Component
+class CreateQuizForm extends Component
 {
     public $quizId = null;
     public $moduleId;
@@ -45,7 +45,7 @@ class CreateEditQuizForm extends Component
         } else {
             $this->isOpenAIKeySet = false;
         }
-        return view('livewire.create-edit-quiz-form', [
+        return view('livewire.create-quiz-form', [
             'isOpenAIKeySet' => $this->isOpenAIKeySet
         ]);
     }

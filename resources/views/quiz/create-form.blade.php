@@ -3,6 +3,6 @@
         {{ __('Create Quiz') }}
     </x-slot>
 
-    <livewire:create-edit-quiz-form :moduleId="$moduleId"/>
-    
+    <livewire:create-quiz-form :moduleId="$moduleId"/>
+
 </x-sidebar>

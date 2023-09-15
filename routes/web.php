@@ -114,8 +114,8 @@ Route::middleware([
             return view('quiz.create-form', compact('moduleId'));
         })->name('create-quiz');
 
-        Route::get('module/{moduleId}/quiz/{quizId}/edit', function ($moduleId, $quizId) {
-            return view('quiz.create-form', compact('moduleId', 'quizId'));
+        Route::get('module/{moduleId}/quiz/{quizSlug}/edit', function ($moduleId, $quizSlug) {
+            return view('quiz.edit-form', compact('moduleId', 'quizSlug'));
         })->name('edit-quiz');
 
         // AI Quiz Generation
