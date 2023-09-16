@@ -11,7 +11,7 @@
 
     <div class="mt-4 flex">
         <span class="text-lg  underline-offset-2 ml-4 text-gray-900">Assignment Description:</span>
-        <textarea class="ml-4">{{ $assignment->assignment_description }}</textarea>
+        <div class="ml-4">{{ $assignment->assignment_description }}</div>
     </div>
 
     <div class="mt-4">
@@ -19,6 +19,40 @@
         <span class="ml-4">{{ $assignment->assignment_type }}</span>
     </div>
 
+
+
+    <div class="mt-4">
+        <span class="text-lg  underline-offset-2 ml-4 text-gray-900">Submission Status</span>
+
+        @if ($assignment->submissions)
+            <span class="text-sm font-semibold text-green-500 ml-2">Submitted</span>
+        @else
+            <span class="text-sm font-semibold text-red-500 ml-2">Not Submitted</span>
+        @endif
+
+    </div>
+    <div class="mt-4">
+        <span class="text-lg underline-offset-2 ml-4 text-gray-900">Grading Status</span>
+
+        @if ($assignment->submissions->first()->submissionGrade)
+            <span class="text-sm font-semibold text-green-500 ml-2">Graded</span>
+            <br/>
+            <span class="text-sm font-semibold text-black  ml-4">Grade: {{ $assignment->submissions->first()->submissionGrade->grade }}</span>
+            <br/>
+
+            <span class="text-sm font-semibold   ml-4"> Graded By: {{ $assignment->submissions->first()->submissionGrade->gradedBy->name }}</span>
+
+            <div class="text-sm font-bold ml-4 mt-3">
+                Comment
+               </div>
+                <span class="ml-4">
+                 {{ $assignment->submissions->first()->submissionGrade->comment }}
+                </span>
+        @else
+            <span class="text-sm font-semibold text-red-500 ml-4">Not Graded</span>
+        @endif
+
+    </div>
     <table class="items-center w-full bg-transparent border-collapse">
         <thead>
             <tr>
