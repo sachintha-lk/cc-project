@@ -9,6 +9,30 @@
             {{--            <h2 class="px-4 pt-2 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $module->Module_code }}--}}
             {{--                : {{ $module->Module_name }}</h2>--}}
             <h3 class="p-4 pt-1 text-2xl font-bold text-gray-800 mb-1">{{ $quiz->name }}</h3>
+            <button wire:click="editQuiz" class="px-4 py-1 mb-2 ml-4 text-sm font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
+            >
+                Edit Quiz
+            </button>
+
+            @if ($quiz->is_published == 1)
+                <button wire:click="confirmQuizUnpublish" class="px-4 py-1 mb-2 ml-4 text-sm font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
+                >
+                    Unpublish Quiz
+                </button>
+
+            @else
+                <button wire:click="confirmQuizPublish" class="px-4 py-1 mb-2 ml-4 text-sm font-semibold text-gray-800 bg-white border border-gray-400 rounded shadow hover:bg-gray-100"
+                >
+                    Publish Quiz
+                </button>
+            @endif
+
+            <button wire:click="confirmQuizDeletion" class="px-4 py-1 mb-2 ml-4 text-sm text-white font-semibold bg-red-600 rounded shadow hover:bg-red-700"
+            >
+                Delete Quiz
+            </button>
+
+
         </div>
         <div class="p-3">
             <div class="text-sm font-normal text-gray-500 mb-2">{{ $quiz->description }}</div>
@@ -37,7 +61,6 @@
             </div>
 
         </div>
-
     </div>
 
     <h2 class="text-2xl leading-none font-bold text-gray-600 m-2">Quiz Attempts</h2>
@@ -95,15 +118,22 @@
         <h3 class="text-2xl leading-none font-bold text-gray-600 mb-10">Questions</h3>
 
         <div class="mr-20">
-            <x-button wire:click="$emit('openAddQuestionModal')">
+            <x-button wire:click="$emit('openAddEditQuestionModal')">
                 {{ __('Add Question') }}
             </x-button>
         </div>
     </div>
-    <div class="mt-1 ml-4">
+    <div class="mt-1 ml-4 mb-4">
         @foreach ($formattedQuestions as $formattedQuestion)
             <div class="mt-2">
+
                 <h4 class="font-semibold text-xl text-gray-800 leading-tight">{{ $formattedQuestion['question'] }}</h4>
+                <div>
+
+                    <button wire:click="$emit('openAddEditQuestionModal', {{ $formattedQuestion['id'] }})" class="font-semibold px-3 py-1 bg-yellow-200 text-md text-gray-800 rounded leading-tight">Edit</button>
+
+                    <button wire:click="deleteQuestion({{ $formattedQuestion['id'] }})" class="font-semibold  px-3 py-1 text-md  bg-red-800  text-gray-200 rounded leading-tight">Delete</button>
+                </div>
                 <p class="font-medium text-sm text-gray-700">Marks: {{ $formattedQuestion['marks'] }}</p>
                 <ul>
                     @foreach ($formattedQuestion['options'] as $formattedOption)
@@ -117,34 +147,11 @@
             </div>
         @endforeach
     </div>
-    <div class="mt-8 text-2xl flex justify-between w-1/2">
 
-        @if ($quiz->is_published == 1)
-            <div class="mr-2">
-                <x-button wire:click="confirmQuizUnpublish">
-                    {{ __('Unpublish') }}
-                </x-button>
-            </div>
-        @else
-            <div class="mr-2">
-                <x-button wire:click="confirmQuizPublish">
-                    {{ __('Publish') }}
-                </x-button>
-            </div>
-        @endif
-        <div class="mr-2">
-            <x-button wire:click="confirmQuizUpdate">
-                {{ __('Edit') }}
-            </x-button>
-        </div>
-        <div class="mr-2">
-            <x-danger-button wire:click="confirmQuizDeletion">
-                {{ __('Delete Quiz') }}
-            </x-danger-button>
-        </div>
-    </div>
+    <livewire:add-edit-question :quizId="$quiz->id" wire:poll.750ms="refreshQuestions"/>
 
-    <livewire:add-question :quizId="$quiz->id" wire:poll.750ms="refreshQuestions"/>
+
+
 
     {{--    // show questions--}}
 
