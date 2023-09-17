@@ -1,4 +1,4 @@
-<x-dialog-modal wire:model="confirmQuestionAdd">
+<x-dialog-modal wire:model="confirmQuestionAddEdit">
     <x-slot name="title">
         {{ isset($this->question->id) ?'Update Question' : 'Add Question' }}
     </x-slot>
@@ -70,7 +70,7 @@
                     <label for="correct_answer" class="block text-sm font-medium text-gray-700">Correct Answer</label>
                     <select id="correct_answer" name="correct_answer" wire:model.defer="correct_answer"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                        <option value="" disabled>Select Correct Answer</option>
+                        <option value="" selected disabled>Select Correct Answer</option>
                         <option value="a">A</option>
                         <option value="b">B</option>
                         <option value="c">C</option>
