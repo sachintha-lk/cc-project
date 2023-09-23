@@ -16,6 +16,8 @@ class MyModuleDetails extends Component
 
     public $quizzes;
 
+    public $resources;
+
     public function mount($module_id)
     {
         $this->module_id = $module_id;
@@ -24,6 +26,9 @@ class MyModuleDetails extends Component
         $this->quizzes = Quiz::where('module_id', $this->module_id)
             ->where('is_published', 1)
             ->get();
+
+        $this->resources = $this->module->courseResources;
+
 
     }
 

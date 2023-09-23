@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Harishdurga\LaravelQuiz\Models\Quiz;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    use HasFactory;
+//    use HasFactory;
 
     protected $fillable = ['Module_name', 'Module_code', 'iscommon', 'class_id', 'teacher_id'];
 
@@ -49,7 +50,7 @@ class Module extends Model
 
     public function quizzes()
     {
-        return $this->hasMany(\App\Models\Quiz::class, 'module_id', 'id');
+        return $this->hasMany(Quiz::class, 'module_id', 'id');
     }
 
     public function assignments()
@@ -101,6 +102,11 @@ class Module extends Model
             // When a module is deleted, delete forum category for it
             $module->forumCategory()->delete();
         });
+    }
+
+    public function courseResources()
+    {
+        return $this->hasMany(CourseResource::class);
     }
 
 
