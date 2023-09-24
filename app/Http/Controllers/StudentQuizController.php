@@ -67,7 +67,7 @@ class StudentQuizController extends Controller
         // get the quiz with the slug and check if it is published, whether this is the right time to attempt the quiz
         $quiz = Quiz::where('slug', $quizSlug)->where('is_published', true)
             ->where('valid_from', '<=', Carbon::now())
-            ->where('valid_to', '>=', Carbon::now())
+            ->where('valid_upto', '>=', Carbon::now())
             ->with(['questions.question.options'])
             ->firstOrFail();
 
@@ -131,7 +131,7 @@ class StudentQuizController extends Controller
         // get the quiz with the slug and check if it is published, whether this is the right time to attempt the quiz
         $quiz = Quiz::where('slug', $quizSlug)->where('is_published', true)
             ->where('valid_from', '<=', Carbon::now())
-            ->where('valid_to', '>=', Carbon::now())
+            ->where('valid_upto', '>=', Carbon::now())
             ->with(['questions.question.options'])
             ->firstOrFail();
 
@@ -177,6 +177,7 @@ class StudentQuizController extends Controller
         $student_quiz_score = \App\Models\StudentQuizScore::create([
             'student_user_id' => $user->id,
             'quiz_id' => $quiz->id,
+            'module_id' => $module->id,
             'quiz_attempt_id' => $quiz_attempt->id,
             'score' => $score,
         ]);

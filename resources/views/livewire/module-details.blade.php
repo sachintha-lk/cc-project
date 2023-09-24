@@ -134,6 +134,49 @@
         </tbody>
     </table>
 
+    <div class=" mb-2 ml-8">
+    <h1 class="font-bold text-lg ">Quiz Leaderboard</h1>
+
+    @if(isset($leaderboardStudents))
+
+        <table class="table-auto">
+            <thead>
+            <tr>
+                <th class="px-4 py-2">Place</th>
+                <th class="px-4 py-2">Student Name</th>
+                <th class="px-4 py-2">Total Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($leaderboardStudents as  $student)
+                <tr>
+                    <td class="border px-4 py-2">
+                        {{ $loop->iteration }}
+                    </td>
+                    <td class="border px-4 py-2">
+                        {{ $student->student->name }}
+
+                        <div class="text-xl inline">
+                            @if($loop->iteration == 1)
+                                🥇
+                            @elseif($loop->iteration == 2)
+                                🥈
+                            @elseif($loop->iteration == 3)
+                                🥉
+                            @endif
+                        </div>
+
+                    </td>
+                    <td class="border px-4 py-2">{{ $student->total_score }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+
+    @else
+        <p>No students have taken any quizzes yet</p>
+    @endif
+    </div>
         <div class="mt-3 ml-10">
             <h3 class="font-semibold text-lg mb-2 ml-4">Quizes</h3>
 

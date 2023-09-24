@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Module;
+use App\Models\StudentQuizScore;
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Livewire\Component;
 
@@ -18,6 +19,8 @@ class MyModuleDetails extends Component
 
     public $resources;
 
+    public $leaderboardStudents;
+
     public function mount($module_id)
     {
         $this->module_id = $module_id;
@@ -29,6 +32,8 @@ class MyModuleDetails extends Component
 
         $this->resources = $this->module->courseResources;
 
+        $this->loadQuizLeaderBoards();
+
 
     }
 
@@ -37,5 +42,17 @@ class MyModuleDetails extends Component
     public function render()
     {
         return view('livewire.my-module-details');
+    }
+
+    private function loadQuizLeaderBoards() {
+
+        $studentQuizScores = StudentQuizScore::select('student_user_id', \DB::raw('SUM(score) as total_score'))
+            ->where('module_id', $this->module->id)
+            ->with('student')
+            ->groupBy('student_user_id')
+            ->orderBy('total_score', 'desc')
+            ->get();
+
+        $this->leaderboardStudents = $studentQuizScores;
     }
 }
