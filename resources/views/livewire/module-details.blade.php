@@ -1,5 +1,9 @@
 <div>
-    @if(session()->has('message'))
+    @php
+        use Illuminate\Support\Str;
+    @endphp
+
+@if(session()->has('message'))
     <div class="flex items-center rounded-lg mb-6 m-4 bg-green-500 text-white text-sm  font-bold px-4 py-3 relative" role="alert" x-data="{ show: true }" x-show="show">
        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/>
@@ -130,6 +134,49 @@
         </tbody>
     </table>
 
+    <div class=" mb-2 ml-8">
+    <h1 class="font-bold text-lg ">Quiz Leaderboard</h1>
+
+    @if(isset($leaderboardStudents))
+
+        <table class="table-auto">
+            <thead>
+            <tr>
+                <th class="px-4 py-2">Place</th>
+                <th class="px-4 py-2">Student Name</th>
+                <th class="px-4 py-2">Total Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($leaderboardStudents as  $student)
+                <tr>
+                    <td class="border px-4 py-2">
+                        {{ $loop->iteration }}
+                    </td>
+                    <td class="border px-4 py-2">
+                        {{ $student->student->name }}
+
+                        <div class="text-xl inline">
+                            @if($loop->iteration == 1)
+                                🥇
+                            @elseif($loop->iteration == 2)
+                                🥈
+                            @elseif($loop->iteration == 3)
+                                🥉
+                            @endif
+                        </div>
+
+                    </td>
+                    <td class="border px-4 py-2">{{ $student->total_score }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+
+    @else
+        <p>No students have taken any quizzes yet</p>
+    @endif
+    </div>
         <div class="mt-3 ml-10">
             <h3 class="font-semibold text-lg mb-2 ml-4">Quizes</h3>
 
@@ -221,6 +268,113 @@
                     @endif
                 </tbody>
             </table>
+
+        </div>
+
+        <div class= "mt-3 ml-10" >
+            <h3 class="font-semibold text-lg mb-2 ml-4">Resources</h3>
+
+            <a href={{ route('add-new-resources', [$module->id]) }}>
+                <x-secondary-button
+                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                    {{ __('Add Resource') }}
+                </x-secondary-button>
+            </a>
+            <table  class="items-center w-full bg-transparent border-collapse">
+                <thead>
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Resource Name</th>
+
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Resource</th>
+
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Resource Type</th>
+
+                <th
+                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    Action</th>
+
+                </thead>
+                <tbody class="divide-y divide-gray-100" >
+
+                @if ($resources->count() == 0)
+                    <tr class="text-gray-500">
+                        <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap  text-left">
+                            No results found</td>
+                    </tr>
+                @else
+                    @foreach ($resources as $resource)
+                        <tr class="text-gray-500">
+                            <td
+                                class="border-t-0 px-4 align-middle text-sm font-medium text-gray-900 whitespace-nowrap  text-left">
+                                 {{ Str::limit($resource->name, $limit = 20, $end = '...') }}
+                                </td>
+
+                            @if($resource->type == "file")
+                                <td
+                                    class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap ">
+                                    @if ($resource->resource)
+                                        <a href="{{ asset('storage/resources/' . $resource->resource) }}" target="_blank">
+                                            Download Resource File
+                                        </a>
+                                    @else
+                                        No File Attached
+                                    @endif
+                                </td>
+                            @elseif($resource->type == "link")
+
+                            <td
+                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap">
+                                <a href="{{ $resource->resource }}" target="_blank">
+                                    {{ $resource->resource }}
+                                </a>
+                            </td>
+                            @else
+                                <td
+                                    class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap">
+
+                                    {{ Str::limit($resource->resource, $limit = 20, $end = '...') }}
+
+                                </td>
+
+
+
+                            @endif
+
+                            <td
+                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                                {{ $resource->type }}
+                            </td>
+
+                            <td
+                                class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4 flex">
+
+                                <div class="mt-5 ml-2">
+                                    <div class=" mr-2 mt-5">
+                                        <x-danger-button wire:click="ConfirmResourceDeletion({{ $resource->id }})"
+                                                         wire:loading.attr="disabled">
+                                            {{ __('Delete') }}
+                                        </x-danger-button>
+                                    </div>
+
+                                    <a href={{ route('edit-resource',[$module->id, $resource->id]) }}>
+                                        <x-secondary-button
+                                            class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                            {{ __('Edit') }}
+                                        </x-secondary-button>
+                                    </a>
+                                </div>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                </tbody>
+            </table>
         </div>
 
 
@@ -246,5 +400,26 @@
             </x-danger-button>
         </x-slot>
 </x-dialog-modal>
+
+        <x-dialog-modal wire:model="confirmingResourceDeletion">
+            <x-slot name="title">
+                {{ __('Delete Resource') }}
+            </x-slot>
+
+            <x-slot name="content">
+                {{ __('Are you sure you want to delete the resource?') }}
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-secondary-button wire:click="$set('confirmingResourceDeletion', false)" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+
+                <x-danger-button class="ml-3" wire:click="DeleteResource({{$confirmingResourceDeletion}})" wire:loading.attr="disabled">
+                    {{ __('Delete Resource') }}
+                </x-danger-button>
+            </x-slot>
+        </x-dialog-modal>
+
 
 </div>

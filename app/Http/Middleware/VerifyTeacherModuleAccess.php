@@ -31,6 +31,10 @@ class VerifyTeacherModuleAccess
             if (!$hasAccess) {
                 return redirect()->route('dashboard');
             }
+        } else if (Auth::user()->role_id == 1) {
+            $hasAccess = true;
+        } else {
+            return redirect()->route('dashboard');
         }
         return $next($request);
     }

@@ -97,5 +97,32 @@
                 Cancel
             </button>
         </div>
+        <div class="p-4 m-4 text-3xl font-extrabold"> OR
+        </div>
+        <div class="font-semibold text-2xl">Generate Quiz With AI</div>
+        @if ($isOpenAIKeySet)
+            <span class="text-red-700">NOTE: Check for accuracy of the generated quiz after generation</span>
+        <div class="m-3"><a href="{{ route('create-quiz-with-ai', [ 'moduleId' => $moduleId,]) }}"
+                class="bg-yellow-800 border border-transparent hover:bg-yellow-600 focus:bg-yellow-700
+                text-white font-bold py-2 px-4 rounded">
+                Create Quiz With AI Generation
+            </a>
+
+        </div>
+        @else
+        <div>
+            The Open AI API key is not set in the ENV file. To enable the AI Quiz Generation feature please set the OPENAI_API_KEY in the .env file.
+
+            To get your API key, please visit <a href="https://platform.openai.com/" target="_blank">https://platform.openai.com/</a>
+            More details related to the laravel package used for this feature can be found at <a href="https://github.com/openai-php/laravel"> Github : openai-php/laravel </a>
+        </div>
+
+        @endif
+        <span>Note: The model used is GPT-3.5 turbo. Please refer to the OpenAI website for pricing</span>
+
+
+
     </div>
+
+
 </div>

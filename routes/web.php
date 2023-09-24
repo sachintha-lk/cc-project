@@ -114,9 +114,19 @@ Route::middleware([
             return view('quiz.create-form', compact('moduleId'));
         })->name('create-quiz');
 
-        Route::get('module/{moduleId}/quiz/{quizId}/edit', function ($moduleId, $quizId) {
-            return view('quiz.create-form', compact('moduleId', 'quizId'));
+
+        Route::get('module/{moduleId}/quiz/{quizSlug}/edit', function ($moduleId, $quizSlug) {
+            return view('quiz.edit-form', compact('moduleId', 'quizSlug'));
         })->name('edit-quiz');
+
+
+        // AI Quiz Generation
+        Route::get('module/{moduleId}/quiz/create-with-ai', [App\Http\Controllers\AIQuizGenerationController::class, 'index'])
+            ->name('create-quiz-with-ai');
+
+        // Post the prompt to the AI
+        Route::post('module/{moduleId}/quiz/create-with-ai', [App\Http\Controllers\AIQuizGenerationController::class, 'store'])
+            ->name('create-quiz-with-ai-send-prompt');
 
         // View quiz in manage view
         Route::get('module/{moduleId}/quiz/{quizSlug}/manage', function ($moduleId, $quizSlug) {
@@ -132,6 +142,14 @@ Route::middleware([
             Route::get('/teacher/module-details/{module_id}/show-submission/{assignment_id}', function ($assignment_id) {
                 return view('teacher.show-submission', compact('assignment_id'));
             })->name('show-submission');
+
+            Route::get('/teacher/module-details/{module_id}/add-resource', function ($module_id) {
+                return view('add-edit-resource', compact('module_id'));
+            })->name('add-new-resources');
+
+            Route::get('/teacher/module-details/{module_id}/edit-resource/{resource_id}', function ($module_id, $resource_id) {
+                return view('add-edit-resource', compact('module_id', 'resource_id'));
+            })->name('edit-resource');
         });
     });
 

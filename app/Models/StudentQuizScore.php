@@ -10,6 +10,7 @@ class StudentQuizScore extends Model
 {
     protected $fillable = [
         'student_user_id',
+        'module_id',
         'quiz_id',
         'quiz_attempt_id',
         'score',

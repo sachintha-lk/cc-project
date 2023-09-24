@@ -10,12 +10,14 @@ return new class extends Migration {
         Schema::create('student_quiz_scores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_user_id');
+            $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('quiz_id');
             $table->unsignedBigInteger('quiz_attempt_id');
             $table->float('score');
             $table->timestamps();
 
             $table->foreign('student_user_id')->references('id')->on('users');
+            $table->foreign('module_id')->references('id')->on('modules');
             $table->foreign('quiz_id')->references('id')->on('quizzes');
             $table->foreign('quiz_attempt_id')->references('id')->on('quiz_attempts');
 

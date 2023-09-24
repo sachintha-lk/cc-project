@@ -2,6 +2,34 @@
 
 Educate Lanka is a laravel based Learing Management System to help the Sri Lankan school education system.
 
+## Contents
+
+- [EducateLanka - group3-CC-project](#educatelanka---group3-cc-project)
+  - [Contents](#contents)
+  - [Features](#features)
+    - [AI Generated Quiz Feature](#ai-generated-quiz-feature)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+
+    
+## Features
+### AI Generated Quiz Feature
+The project uses the Open API to generate questions and answers for a given prompt.
+The package used for this is https://github.com/openai-php/laravel.
+
+The model used was the GPT-3.5 Turbo model.
+
+To use the API, obtain an API key by signing up at https://platform.openai.com/ and 
+create a new API key from here: https://platform.openai.com/account/api-keys
+
+Then add the API key to the .env file as follows:
+```env
+OPENAI_API_KEY=<your-api-key>
+```
+**Note:**
+Since this is a paid API, refer the OpenAI pricing page for more information about pricing for the GPT-3.5 turbo model: https://openai.com/pricing/
+
 ## Getting Started
 
 ### Prerequisites

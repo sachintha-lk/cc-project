@@ -24,4 +24,10 @@ class Submissions extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function submissionGrade() {
+        return $this->hasOne(SubmissionGrade::class, 'submission_id', 'id');
+    }
+
+
 }
