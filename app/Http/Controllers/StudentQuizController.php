@@ -9,7 +9,7 @@ use App\Models\Module;
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Harishdurga\LaravelQuiz\Models\QuizAttempt;
 use Harishdurga\LaravelQuiz\Models\QuizAttemptAnswer;
-use http\Client\Curl\User;
+
 use Illuminate\Http\Request;
 
 
@@ -30,7 +30,7 @@ class StudentQuizController extends Controller
         }
 
         $carbonStartTime = Carbon::parse($quiz->valid_from);
-        $carbonEndTime = Carbon::parse($quiz->valid_to);
+        $carbonEndTime = Carbon::parse($quiz->valid_upto);
 
         $now = Carbon::now();
 
@@ -67,7 +67,7 @@ class StudentQuizController extends Controller
         // get the quiz with the slug and check if it is published, whether this is the right time to attempt the quiz
         $quiz = Quiz::where('slug', $quizSlug)->where('is_published', true)
             ->where('valid_from', '<=', Carbon::now())
-            ->where('valid_to', '>=', Carbon::now())
+            ->where('valid_upto', '>=', Carbon::now())
             ->with(['questions.question.options'])
             ->firstOrFail();
 
@@ -131,7 +131,7 @@ class StudentQuizController extends Controller
         // get the quiz with the slug and check if it is published, whether this is the right time to attempt the quiz
         $quiz = Quiz::where('slug', $quizSlug)->where('is_published', true)
             ->where('valid_from', '<=', Carbon::now())
-            ->where('valid_to', '>=', Carbon::now())
+            ->where('valid_upto', '>=', Carbon::now())
             ->with(['questions.question.options'])
             ->firstOrFail();
 

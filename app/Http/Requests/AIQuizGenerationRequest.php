@@ -9,10 +9,10 @@ class AIQuizGenerationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'prompt' => 'required|string|min:5|max:100',
+            'prompt' => 'required|string|min:5|max:200',
             'name' => 'required|string|min:5|max:255',
             'description' => 'nullable|string|min:5|max:255',
-            'module_id' => 'required|integer|exists:modules,id',
+//            'module_id' => 'required|integer|exists:modules,id',
             'num_questions' => 'required|integer|min:1|max:10',
             'total_marks' => 'nullable|integer|min:0',
             'pass_marks' => 'nullable|integer|min:0|max:total_marks',

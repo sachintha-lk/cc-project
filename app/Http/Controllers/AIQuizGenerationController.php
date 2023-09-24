@@ -22,7 +22,7 @@ class AIQuizGenerationController extends Controller
         return view('quiz.create-quiz-with-ai', compact('moduleId'));
     }
 
-    public function store(Request $request, $moduleId )
+    public function store(AIQuizGenerationRequest $request, $moduleId )
     {
         $quizName = request('name');
         $quizDescription = request('description');
