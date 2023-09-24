@@ -55,8 +55,18 @@
         </div>
         @endif
 
-        <button wire:click="addResource" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {{ isset($resource_id) ? 'Save Resource' :'Add Resource'}}
-        </button>
+        <div class="w-9/12 mx-auto">
+            @if ($isUploadingFile)
+                <!-- Disabled Button During File Upload -->
+                <button class="bg-gray-400 text-white font-bold py-2 px-4 rounded cursor-not-allowed" disabled>
+                    Uploading File...
+                </button>
+            @else
+                <!-- Save Button -->
+                <button wire:click="addResource" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    {{ isset($resource_id) ? 'Save Resource' : 'Add Resource' }}
+                </button>
+            @endif
+        </div>
 
 </div>
