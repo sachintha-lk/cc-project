@@ -10,11 +10,13 @@ use Livewire\Component;
 
 class ManageQuizView extends Component
 {
-    protected $listeners = ['openAddQuestionModal' => 'openAddQuestionModal', 'closeAddQuestionModal' => 'handleCloseAddQuestionModal'];
+    protected $listeners = ['openAddEditQuestionModal' => 'openAddEditQuestionModal', 'closeAddEditQuestionModal' => 'handleCloseAddEditQuestionModal'];
     public $quizSlug;
 
     public $quiz;
     protected $questions;
+
+    public $moduleId;
 
     public $confirmQuizDeletion;
     public $questionsWithHighlightedOptions = [];
@@ -24,6 +26,8 @@ class ManageQuizView extends Component
         $this->quizSlug = $quizSlug;
 
         $this->quiz = Quiz::where('slug', $this->quizSlug)->first();
+
+        $this->moduleId = $this->quiz->module_id;
 //
 //        $this->quiz->load(['questions.question.options']);
 //        $this->quiz = Quiz::where('slug', 'charles-sanchez')->first();
@@ -112,15 +116,15 @@ class ManageQuizView extends Component
 
     }
 
-    public function openAddQuestionModal()
+    public function openAddEditQuestionModal()
     {
         $this->dispatchBrowserEvent('openAddQuestionModal');
 
-        $this->confirmQuestionAdd = true;
+        $this->confirmQuestionAddEdit = true;
 
     }
 
-    public function handleCloseAddQuestionModal()
+    public function handleCloseAddEditQuestionModal()
     {
         $this->render();
 
@@ -128,7 +132,7 @@ class ManageQuizView extends Component
 
     public function confirmQuestionAdd()
     {
-        $this->confirmQuestionAdd = true;
+        $this->confirmQuestionAddEdit = true;
     }
 
     public function confirmQuizDeletion()
@@ -141,4 +145,28 @@ class ManageQuizView extends Component
         $this->quiz->delete();
         return redirect()->route('dashboard');
     }
+
+    public function deleteQuestion($quizQuestionId)
+    {
+        $quizQuestion = QuizQuestion::findOrFail($quizQuestionId);
+        $question = $quizQuestion->question;
+
+        $question->delete();
+        $quizQuestion->delete();
+
+        return redirect()->with('success', 'Question deleted')->route('manage-quiz-view', [ 'moduleId'=> $this->moduleId, 'quizSlug' => $this->quizSlug]);
+    }
+
+    public function editQuiz()
+    {
+        return redirect()->route('edit-quiz', ['moduleId' => $this->moduleId ,'quizSlug' => $this->quizSlug]);
+    }
+
+    public function editQuestion($quizQuestionId)
+    {
+        // emit openAddQuestionModal with quiz question id
+        $this->dispatchBrowserEvent('openAddEditQuestionModal', ['quizQuestionId' => $quizQuestionId]);
+    }
+
+
 }

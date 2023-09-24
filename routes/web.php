@@ -114,9 +114,13 @@ Route::middleware([
             return view('quiz.create-form', compact('moduleId'));
         })->name('create-quiz');
 
-        Route::get('module/{moduleId}/quiz/{quizId}/edit', function ($moduleId, $quizId) {
-            return view('quiz.create-form', compact('moduleId', 'quizId'));
-        })->name('edit-quiz');
+        // AI Quiz Generation
+        Route::get('module/{moduleId}/quiz/create-with-ai', [App\Http\Controllers\AIQuizGenerationController::class, 'index'])
+            ->name('create-quiz-with-ai');
+
+        // Post the prompt to the AI
+        Route::post('module/{moduleId}/quiz/create-with-ai', [App\Http\Controllers\AIQuizGenerationController::class, 'store'])
+            ->name('create-quiz-with-ai-send-prompt');
 
         // View quiz in manage view
         Route::get('module/{moduleId}/quiz/{quizSlug}/manage', function ($moduleId, $quizSlug) {
