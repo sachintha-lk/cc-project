@@ -177,6 +177,7 @@ class StudentQuizController extends Controller
         $student_quiz_score = \App\Models\StudentQuizScore::create([
             'student_user_id' => $user->id,
             'quiz_id' => $quiz->id,
+            'module_id' => $module->id,
             'quiz_attempt_id' => $quiz_attempt->id,
             'score' => $score,
         ]);
