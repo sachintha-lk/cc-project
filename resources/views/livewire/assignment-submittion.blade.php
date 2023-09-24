@@ -24,7 +24,7 @@
     <div class="mt-4">
         <span class="text-lg  underline-offset-2 ml-4 text-gray-900">Submission Status</span>
 
-        @if ($assignment->submissions)
+        @if ($assignment->submissions->count() > 0)
             <span class="text-sm font-semibold text-green-500 ml-2">Submitted</span>
         @else
             <span class="text-sm font-semibold text-red-500 ml-2">Not Submitted</span>
@@ -32,7 +32,9 @@
 
     </div>
     <div class="mt-4">
+
         <span class="text-lg underline-offset-2 ml-4 text-gray-900">Grading Status</span>
+        @if ($assignment->submissions->count() > 0)
 
         @if ($assignment->submissions->first()->submissionGrade)
             <span class="text-sm font-semibold text-green-500 ml-2">Graded</span>
@@ -50,6 +52,7 @@
                 </span>
         @else
             <span class="text-sm font-semibold text-red-500 ml-4">Not Graded</span>
+        @endif
         @endif
 
     </div>

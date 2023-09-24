@@ -6,12 +6,12 @@
     <x-slot name="content">
         <div class="mb-4">
             <x-label for="grade" value="Grade" />
-            <x-input id="grade" class="block mt-1 w-full" type="number" wire:model="grade" max="100" min="0" />
+            <x-input id="grade" class="block mt-1 w-full" type="number" wire:model.defer="grade" />
             @error('grade') <span class="text-red-500">{{ $message }}</span>@enderror
         </div>
         <div class="mb-4">
             <x-label for="comment" value="Comment" />
-            <textarea id="comment" class="block mt-1 w-full" wire:model="comment"></textarea>
+            <textarea id="comment" class="block mt-1 w-full" wire:model.defer="comment"></textarea>
             @error('comment') <span class="text-red-500">{{ $message }}</span>@enderror
         </div>
     </x-slot>
