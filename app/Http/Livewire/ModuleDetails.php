@@ -27,19 +27,21 @@ class ModuleDetails extends Component
     public function mount($module_id)
     {
         $this->module_id = $module_id;
-        $this->loadModuleAndAssignments();
-        $this->loadModuleAndQuizes();
-        $this->loadCourseResources();
-        $this->loadQuizLeaderBoards();
+        $this->loadData();
     }
 
     public function render()
     {
+        $this->loadData();
+        return view('livewire.module-details');
+    }
+
+    private function loadData()
+    {
+        $this->loadModuleAndAssignments();
         $this->loadModuleAndQuizes();
         $this->loadCourseResources();
-        $this->loadModuleAndAssignments();
         $this->loadQuizLeaderBoards();
-        return view('livewire.module-details');
     }
 
     private function loadModuleAndAssignments()
@@ -52,7 +54,6 @@ class ModuleDetails extends Component
     {
         $this->quizzes = Quiz::where('module_id', $this->module_id)
             ->get();
-//        dd($this->quizes);
 
     }
 
@@ -69,7 +70,8 @@ class ModuleDetails extends Component
         session()->flash('message', 'Assignment Deleted Successfully');
     }
 
-    public function loadCourseResources() {
+    public function loadCourseResources()
+    {
         $this->resources = CourseResource::where('module_id', $this->module_id)
             ->get();
     }
@@ -87,7 +89,8 @@ class ModuleDetails extends Component
         session()->flash('message', 'Resource Deleted Successfully');
     }
 
-    private function loadQuizLeaderBoards() {
+    private function loadQuizLeaderBoards()
+    {
 
         $studentQuizScores = StudentQuizScore::select('student_user_id', \DB::raw('SUM(score) as total_score'))
             ->where('module_id', $this->module->id)

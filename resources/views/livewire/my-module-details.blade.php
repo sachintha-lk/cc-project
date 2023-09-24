@@ -107,7 +107,7 @@
         @if($resource->type == 'link')
 
             <div class="flex items-center mt-4">
-                <a href="{{ $resource->resource }}" class="text-amber-950 flex space- ">
+                <a href="{{ $resource->resource }}" target="_blank" class="text-amber-950 flex space- ">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.197 3.35462C16.8703 1.67483 19.4476 1.53865 20.9536 3.05046C22.4596 4.56228 22.3239 7.14956 20.6506 8.82935L18.2268 11.2626M10.0464 14C8.54044 12.4882 8.67609 9.90087 10.3494 8.22108L12.5 6.06212" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
                         <path d="M13.9536 10C15.4596 11.5118 15.3239 14.0991 13.6506 15.7789L11.2268 18.2121L8.80299 20.6454C7.12969 22.3252 4.55237 22.4613 3.0464 20.9495C1.54043 19.4377 1.67609 16.8504 3.34939 15.1706L5.77323 12.7373" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
@@ -121,7 +121,7 @@
                     <path d="M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M13 3H8.2C7.07989 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V13M13 3L19 9M19 9V13M3 13H21M6 19V17M10 21V17M14 21V17M18 19V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <script xmlns=""/></svg>
                 <div class="flex items-center mt-4">
-                    <a href="{{ asset('storage/course-resources/' . $resource->resource) }}" class="text-gray-900  ml-2">{{ $resource->name }}</a>
+                    <a href="{{ asset('storage/resources/' . $resource->resource) }}" target="_blank" class="text-gray-900  ml-2">{{ $resource->name }}</a>
                 </div>
             </div>
 

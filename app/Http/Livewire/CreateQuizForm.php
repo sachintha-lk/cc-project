@@ -67,8 +67,7 @@ class CreateQuizForm extends Component
         } else {
             // validate only the name
             $this->validateOnly('quiz.name');
-//
-//
+
 //            // generate the slug
             $this->quiz['slug'] = str::slug($this->quiz['name'] . '-'. Str::random(5));
 

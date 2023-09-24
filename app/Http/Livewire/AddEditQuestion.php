@@ -83,27 +83,17 @@ class AddEditQuestion extends Component
                 'marks' => $this->marks,
             ]);
 
-            // TODO refactor this later with a loop ( instead of a,b,c,d go with 0,1,2,3 from the begining)
-            $this->question->options[0]->update([
-                'name' => $this->option_a,
-                'is_correct' => $this->correct_answer == 'a',
-            ]);
+            // Array of option names and letters
+            $optionNames = [$this->option_a, $this->option_b, $this->option_c, $this->option_d];
+            $optionLetters = ['a', 'b', 'c', 'd'];
 
-            $this->question->options[1]->update([
-                'name' => $this->option_b,
-                'is_correct' => $this->correct_answer == 'b',
-            ]);
-
-            $this->question->options[2]->update([
-                'name' => $this->option_c,
-                'is_correct' => $this->correct_answer == 'c',
-            ]);
-
-            $this->question->options[3]->update([
-                'name' => $this->option_d,
-                'is_correct' => $this->correct_answer == 'd',
-            ]);
-
+            // Loop through the options and update them
+            for ($i = 0; $i < count($optionNames); $i++) {
+                $this->question->options[$i]->update([
+                    'name' => $optionNames[$i],
+                    'is_correct' => $this->correct_answer == $optionLetters[$i],
+                ]);
+            }
         }
         else {
 
@@ -111,8 +101,6 @@ class AddEditQuestion extends Component
             'name' => $this->question_name,
             'question_type_id' => 1,  // multiple choice single answer
             'is_active' => true,
-//            'media_url' => 'url',
-//            'media_type' => 'image'
         ]);
 
 
@@ -121,43 +109,28 @@ class AddEditQuestion extends Component
             'question_id' => $createdQuestion->id,
             'marks' => $this->marks,
             'order' => $this->numberOfQuestions + 1,
-//            'negative_marks' => 1,
             'is_optional' => false
         ]);
 
-        $question_option_a = QuestionOption::create([
-            'question_id' => $createdQuestion->id,
-            'name' => $this->option_a,
-            'is_correct' => $this->correct_answer == 'a',
-//            'media_type' => 'image',
-//            'media_url' => 'media url'
-        ]);
+            // Define an array of option names and corresponding letters
+        $optionData = [
+            ['name' => $this->option_a, 'letter' => 'a'],
+            ['name' => $this->option_b, 'letter' => 'b'],
+            ['name' => $this->option_c, 'letter' => 'c'],
+            ['name' => $this->option_d, 'letter' => 'd'],
+        ];
 
-        $question_option_b = QuestionOption::create([
-            'question_id' => $createdQuestion->id,
-            'name' => $this->option_b,
-            'is_correct' => $this->correct_answer == 'b',
-//            'media_type' => 'image',
-//            'media_url' => 'media url'
-        ]);
+        foreach ($optionData as $data) {
+            $isCorrect = $this->correct_answer == $data['letter'];
 
-        $question_option_c = QuestionOption::create([
-            'question_id' => $createdQuestion->id,
-            'name' => $this->option_c,
-            'is_correct' => $this->correct_answer == 'c',
-//            'media_type' => 'image',
-//            'media_url' => 'media url'
-        ]);
-
-        $question_option_d = QuestionOption::create([
-            'question_id' => $createdQuestion->id,
-            'name' => $this->option_d,
-            'is_correct' => $this->correct_answer == 'd',
-//            'media_type' => 'image',
-//            'media_url' => 'media url'
-        ]);
+            QuestionOption::create([
+                'question_id' => $createdQuestion->id,
+                'name' => $data['name'],
+                'is_correct' => $isCorrect,
+            ]);
         }
 
+        }
 
         $this->resetExceptQuizId();
 
