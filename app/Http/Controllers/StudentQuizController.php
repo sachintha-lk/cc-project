@@ -9,7 +9,7 @@ use App\Models\Module;
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Harishdurga\LaravelQuiz\Models\QuizAttempt;
 use Harishdurga\LaravelQuiz\Models\QuizAttemptAnswer;
-use http\Client\Curl\User;
+
 use Illuminate\Http\Request;
 
 
@@ -30,7 +30,7 @@ class StudentQuizController extends Controller
         }
 
         $carbonStartTime = Carbon::parse($quiz->valid_from);
-        $carbonEndTime = Carbon::parse($quiz->valid_to);
+        $carbonEndTime = Carbon::parse($quiz->valid_upto);
 
         $now = Carbon::now();
 

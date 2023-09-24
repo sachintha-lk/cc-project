@@ -7,11 +7,13 @@ use Livewire\Component;
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Illuminate\Support\Str;
 
-class CreateEditQuizForm extends Component
+class CreateQuizForm extends Component
 {
     public $quizId = null;
     public $moduleId;
     public $quiz;
+
+    private $isOpenAIKeySet = false;
 
     protected $rules = [
         'quiz.name' => 'required|string|min:5|max:255',
@@ -35,7 +37,17 @@ class CreateEditQuizForm extends Component
         if ($this->quizId) {
             $this->quiz = Quiz::findOrFail($this->quizId);
         }
-        return view('livewire.create-edit-quiz-form');
+
+
+        // check if OPENAI_API_KEY is set
+        if (env('OPENAI_API_KEY')) {
+            $this->isOpenAIKeySet = true;
+        } else {
+            $this->isOpenAIKeySet = false;
+        }
+        return view('livewire.create-quiz-form', [
+            'isOpenAIKeySet' => $this->isOpenAIKeySet
+        ]);
     }
 
 

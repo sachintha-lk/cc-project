@@ -3,7 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\Module;
+
 use App\Models\StudentQuizScore;
+
+use App\Models\Assignment;
+
 use Harishdurga\LaravelQuiz\Models\Quiz;
 use Livewire\Component;
 
@@ -25,7 +29,12 @@ class MyModuleDetails extends Component
     {
         $this->module_id = $module_id;
         $this->module = Module::find($module_id);
-        $this->assignments = $this->module->assignments;
+
+        $this->assignments = Assignment::with(['submissions.submissionGrade'])
+            ->where('module_id', $this->module_id)
+            ->get();
+
+
         $this->quizzes = Quiz::where('module_id', $this->module_id)
             ->where('is_published', 1)
             ->get();

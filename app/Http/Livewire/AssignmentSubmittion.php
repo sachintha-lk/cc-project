@@ -21,7 +21,7 @@ class AssignmentSubmittion extends Component
 
     public function mount($assignment_id)
     {
-        $this->assignment = Assignment::findOrFail($assignment_id);
+        $this->assignment = Assignment::with('submissions.submissionGrade.gradedBy')->findOrFail($assignment_id);
         $this->loadUserSubmission();
     }
 
