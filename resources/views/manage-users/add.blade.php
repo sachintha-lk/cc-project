@@ -1,4 +1,4 @@
-<x-sidebar>
+<x-sidebar >
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 
@@ -19,7 +19,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12" x-data="{ showConfirmation: false }">
+    <div class="py-12 bg-blue-300" x-data="{ showConfirmation: false }"  >
 
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
 
@@ -67,7 +67,7 @@
             </div>
 
             <div class="m-2">
-                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-yellow-700 border border-transparent rounded-md hover:bg-yellow-600 focus:outline-none">
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-900 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none">
 
                     @if($userType == 'student')
                         {{ __('Add Student') }}
@@ -85,7 +85,7 @@
             <div class="fixed inset-0 transition-opacity -z-10" aria-hidden="true">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
-            <div class="bg-white rounded-lg p-4 max-w-md mx-auto">
+            <div class="bg- rounded-lg p-4 max-w-md mx-auto">
                 <h2 class="text-xl font-semibold">Confirm Action</h2>
                 <p>Are you sure you want to submit this form?</p>
                 <div class="mt-4 flex justify-end space-x-4">
