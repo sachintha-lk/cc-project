@@ -32,44 +32,44 @@
                 <div class="m-2">
                     <label for="question_name" class="block text-sm font-medium text-gray-700">Question</label>
                     <input type="text" id="question_name" name="question_name" wire:model.defer="question_name"
-                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <x-input-error for="question_name" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="marks" class="block text-sm font-medium text-gray-700">Marks</label>
                     <input type="number" id="marks" name="marks" min="0" wire:model.defer="marks"
-                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <x-input-error for="marks" class="mt-2"/>
                 </div>
 
                 <div class="m-2">
                     <label for="option_a" class="block text-sm font-medium text-gray-700">Option A</label>
                     <input type="text" id="option_a" name="option_a" wire:model.defer="option_a"
-                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <x-input-error for="option_a" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="option_b" class="block text-sm font-medium text-gray-700">Option B</label>
                     <input type="text" id="option_b" name="option_b" wire:model.defer="option_b"
-                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <x-input-error for="option_b" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="option_c" class="block text-sm font-medium text-gray-700">Option C</label>
                     <input type="text" id="option_c" name="option_c" wire:model.defer="option_c"
-                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <x-input-error for="option_c" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="option_d" class="block text-sm font-medium text-gray-700">Option D</label>
                     <input type="text" id="option_d" name="option_d" wire:model.defer="option_d"
-                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                           class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <x-input-error for="option_d" class="mt-2"/>
                 </div>
                 <div class="m-2">
                     <label for="correct_answer" class="block text-sm font-medium text-gray-700">Correct Answer</label>
                     <select id="correct_answer" name="correct_answer" wire:model.defer="correct_answer"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         <option value="" selected disabled>Select Correct Answer</option>
                         <option value="a">A</option>
                         <option value="b">B</option>
@@ -84,7 +84,7 @@
     <x-slot name="footer">
 
         <div class="m-2">
-            <button wire:click="saveQuestion()" class="bg-yellow-800 border border-transparent hover:bg-yellow-600 focus:bg-yellow-700
+            <button wire:click="saveQuestion()" class="bg-blue-800 border border-transparent hover:bg-blue-600 focus:bg-blue-700
                 text-white font-bold py-2 px-4 rounded">
                 Save Question
             </button>
@@ -110,7 +110,7 @@
 {{--        --}}{{--        <div class="col-span-6 sm:col-span-4">--}}
 {{--        --}}{{--            <x-label for="question_type" value="{{ __('Question Type') }}"/>--}}
 {{--        --}}{{--            <select id="question_type" name="question_type" wire:model.defer="question.question_type"--}}
-{{--        --}}{{--                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
+{{--        --}}{{--                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">--}}
 {{--        --}}{{--                <option value="single-answer">Multiple Choice Single answer</option>--}}
 {{--        --}}{{--                <option value="multiple-answer">Multiple Choice Multiple answer</option>--}}
 {{--        --}}{{--                <option value="fill-in-the-blanks ">Fill in the blanks</option>--}}
@@ -132,7 +132,7 @@
 {{--        --}}{{--        <div class="col-span-6 sm:col-span-4">--}}
 {{--        --}}{{--            <x-label for="media_type" value="{{ __('Media Type') }}"/>--}}
 {{--        --}}{{--            <select id="media_type" name="media_type" wire:model.defer="question.media_type"--}}
-{{--        --}}{{--                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
+{{--        --}}{{--                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">--}}
 {{--        --}}{{--                <option value="image">Image</option>--}}
 {{--        --}}{{--                <option value="video">Video</option>--}}
 {{--        --}}{{--            </select>--}}

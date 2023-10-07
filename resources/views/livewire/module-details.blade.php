@@ -32,7 +32,7 @@
 
         <a href={{ route('assignments', [$module->id]) }}>
             <x-secondary-button
-                class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300  focus:ring-blue-500 ">
                 {{ __('Add Assignment') }}
             </x-secondary-button>
         </a>
@@ -114,14 +114,14 @@
                             <div class="mt-5">
                                 <x-secondary-button wire:click="confirmModuleUpdate({{ $assignment->id }})"
                                     wire:loading.attr="disabled"
-                                    class=" bg-amber-600  border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                    class=" bg-gray-50  border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500 ">
                                     {{ __('Update') }}
                                 </x-secondary-button>
                             </div>
                             <div class="mt-5 ml-2">
                                 <a href={{route('show-submission',[$module->id, $assignment->id]) }}>
                                     <x-secondary-button
-                                        class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                        class="  bg-gray-50 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500 ">
                                         {{ __('View') }}
                                     </x-secondary-button>
                                 </a>
@@ -182,7 +182,7 @@
 
             <a href={{ route('create-quiz', [$module->id]) }}>
                 <x-secondary-button
-                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300 focus:ring-blue-500 ">
                     {{ __('Add Quiz') }}
                 </x-secondary-button>
             </a>
@@ -256,7 +256,7 @@
 
                                             <a href={{ route('manage-quiz-view',[$module->id, $quiz->slug]) }}>
                                             <x-secondary-button
-                                                class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                                class=" bg-blue-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700  focus:ring-blue-500 ">
                                                 {{ __('View') }}
                                             </x-secondary-button>
                                         </a>
@@ -276,7 +276,7 @@
 
             <a href={{ route('add-new-resources', [$module->id]) }}>
                 <x-secondary-button
-                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300  focus:ring-blue-500 ">
                     {{ __('Add Resource') }}
                 </x-secondary-button>
             </a>
@@ -363,7 +363,7 @@
 
                                     <a href={{ route('edit-resource',[$module->id, $resource->id]) }}>
                                         <x-secondary-button
-                                            class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                            class=" bg-blue-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700  focus:ring-blue-500 ">
                                             {{ __('Edit') }}
                                         </x-secondary-button>
                                     </a>

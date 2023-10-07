@@ -145,7 +145,7 @@ class ResourceAddEdit extends Component
 //        dd($this->resource_file);
         // Generate a new unique filename
         $this->validate([
-            'resource_file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,rar|max:204800', // 200MB Max
+            'resource_file' => 'required|file|mimes:png,jpg,jpeg,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,rar|max:204800', // 200MB Max
         ]);
 
         $fileName = pathinfo($this->resource_file->getClientOriginalName(), PATHINFO_FILENAME) . '_' . time() . '.' . $this->resource_file->getClientOriginalExtension();

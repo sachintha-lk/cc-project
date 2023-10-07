@@ -28,9 +28,9 @@
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                      </svg>
                   </div>
-                  <input wire:model="q" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellow-500 focus:border-yellow-500 block w-full pl-10 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-yellow-500 dark:focus:border-yellow-500" placeholder="Search" required>
+                  <input wire:model="q" type="search" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" required>
                </div>
-               <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-yellow-700 rounded-lg border border-yellow-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:hover:bg-yellow-600 dark:focus:ring-yellow-800">
+               <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                   </svg>
@@ -48,9 +48,9 @@
                   {{ __('Add Modules') }}
               </x-button>
             </div>
- 
+
          </div>
- 
+
          <div class="block w-full overflow-x-auto mt-2">
             <div class ='flex justify-between'>
                 <div></div>
@@ -113,14 +113,14 @@
                                       <div class="mt-5">
                                           <x-secondary-button wire:click="confirmModuleUpdate({{ $module->id }})"
                                               wire:loading.attr="disabled"
-                                              class=" bg-amber-600  border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                              class=" bg-gray-50  border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500 ">
                                               {{ __('Update') }}
                                           </x-secondary-button>
                                       </div>
                                       <div class="mt-5 ml-2">
                                           <a href={{route('module-details',[$module->id]) }}>
                                               <x-secondary-button
-                                                  class=" bg-amber-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-amber-500 active:bg-amber-700  focus:ring-amber-500 ">
+                                                  class=" bg-gray-50 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500 ">
                                                   {{ __('View') }}
                                               </x-secondary-button>
                                           </a>
@@ -139,16 +139,16 @@
              <x-slot name="title">
                  {{ __('Delete Module') }}
              </x-slot>
- 
+
              <x-slot name="content">
                  {{ __('Are you sure you want to delete the Module?') }}
              </x-slot>
- 
+
              <x-slot name="footer">
                  <x-secondary-button wire:click="$set('ConfirmingModuleDeletion', false)" wire:loading.attr="disabled">
                      {{ __('Cancel') }}
                  </x-secondary-button>
- 
+
                  <x-danger-button class="ml-3" wire:click="DeleteModule({{$ConfirmingModuleDeletion}})" wire:loading.attr="disabled">
                      {{ __('Delete Module') }}
                  </x-danger-button>
@@ -188,7 +188,7 @@
                         <x-input-error for="module.iscommon" class="mt-3" />
                     </label>
                 </div>
-                
+
              </x-slot>
 
             <x-slot name="footer">
@@ -201,7 +201,6 @@
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>
-         
+
       </div>
  </div>
- 

@@ -1,7 +1,7 @@
 <x-sidebar>
     <div x-data="{ showQuizAttemptConfirmModal: false}">
         <div class="bg-white m-3 mx-6 rounded overflow-hidden shadow-lg">
-            <div class="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-700">
+            <div class="bg-gradient-to-r from-blue-200 via-blue-400 to-blue-700">
                 <h2 class="px-4 pt-2 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $module->Module_code }}
                     : {{ $module->Module_name }}</h2>
                 <h3 class="p-4 pt-1 text-2xl font-bold text-gray-800 mb-1">{{ $quiz->name }}</h3>
@@ -40,7 +40,7 @@
                     </div>
                 @elseif ($quiz->valid_from > now())
                     <div
-                        class="flex justify-center mt-3 bg-gradient-to-r from-yellow-200 to-yellow-200 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
+                        class="flex justify-center mt-3 bg-gradient-to-r from-blue-200 to-blue-200 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
                         Quiz Has Not Started Yet
                     </div>
 
