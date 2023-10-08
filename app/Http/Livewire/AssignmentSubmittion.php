@@ -16,12 +16,14 @@ class AssignmentSubmittion extends Component
     public $fileToSubmit;
 
     protected $rules = [
-        'fileToSubmit' => 'required|file|max:100000',
+        'fileToSubmit' => 'required|file|max:102400', // 100MB Max
     ];
 
     public function mount($assignment_id)
     {
         $this->assignment = Assignment::with('submissions.submissionGrade.gradedBy')->findOrFail($assignment_id);
+        $fileTypes = $this->assignment->assignment_type;
+        $this->rules['fileToSubmit'] .= "|mimes:{$fileTypes}";
         $this->loadUserSubmission();
     }
 
@@ -35,6 +37,32 @@ class AssignmentSubmittion extends Component
 
     public function submitFile()
     {
+
+        // check if the user has already submitted a file
+        if ($this->submissions) {
+
+            session()->flash('error', 'You have already submitted a file for this assignment');
+            return;
+
+        }
+
+        // check if state date is in the past
+        if ($this->assignment->start_date > now()) {
+
+            session()->flash('error', 'You cannot submit a file for this assignment yet');
+            return;
+        }
+
+        // check if deadline is in the past
+        if ($this->assignment->deadline < now()) {
+            session()->flash('error', 'You cannot submit a file for this assignment anymore');
+            return;
+        }
+
+
+        $fileTypes = $this->assignment->assignment_type;
+        $this->rules['fileToSubmit'] .= "|mimes:{$fileTypes}";
+
         $this->validate();
 
         $fileName = $this->storeSubmittedFile();

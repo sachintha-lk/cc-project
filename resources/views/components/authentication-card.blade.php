@@ -1,4 +1,4 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-blue-200">
      <div>
         {{ $logo }}
     </div>
@@ -17,11 +17,11 @@
                 <!-- Col -->
                 <div
                     class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-                    style="background-image: url('images/DrawKit - Beautiful 2D & 3D Illustrations and Icons.png')"
+                    style="background-image: url('images/web1.jpg')"
                 ></div>
                 <!-- Col -->
                 <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
-                    <h2 class="pt-4 text-4xl text-center font-bold" style="color:#6A543D; font-family:patua one">Welcome Back!</h2>
+                    <h2 class="pt-4 text-4xl text-center font-bold" style="color:#044F88; font-family:patua one">Welcome Back!</h2>
                     {{-- <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
                         <div class="mb-4">
                             <label class="block mb-2 text-sm font-bold text-gray-700" for="username">
@@ -78,7 +78,7 @@
                             </a>
                         </div>
                     </form> --}}
-                    <div class="w-full sm:max-w-md mt-20 px-6 py-4  ">
+                    <div class="w-full sm:max-w-md  px-6 py-4  ">
                         {{ $slot }}
                     </div>
                 </div>

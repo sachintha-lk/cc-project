@@ -32,9 +32,9 @@
                             <div class="font-medium">{{ $user->email }}</div>
                             <div class="mt-2 flex">
                                 <a href="{{ route('edit-user', ['user_id' => $user->id]) }}"
-                                   class="flex gap-1 hover:text-yellow-600 ">
+                                   class="flex gap-1 hover:text-blue-600 ">
                                     <span class="font-semibold ">Edit</span>
-                                    <div class="w-4 mr-2 mt-1 transform hover:text-yellow-500 hover:scale-110">
+                                    <div class="w-4 mr-2 mt-1 transform hover:text-blue-500 hover:scale-110">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                              stroke="currentColor">
@@ -198,7 +198,7 @@
                         <label for="reason" class="block text-sm font-medium text-gray-700">Reason for
                             deactivation</label>
                         <input type="text" id="reason" name="reason"
-                               class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                               class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         @error('reason') <span class="text-red-500">{{ $message }}</span>@enderror
                         <div class="mt-4 flex justify-end space-x-4">
                             <button type="reset" @click="showDeactivateConfirmation = false"
@@ -229,7 +229,7 @@
                         <label for="reason" class="block text-sm font-medium text-gray-700">Reason for
                             activation</label>
                         <input type="text" id="reason" name="reason"
-                               class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                               class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         @error('reason') <span class="text-red-500">{{ $message }}</span>@enderror
                         <div class="mt-4 flex justify-end space-x-4">
                             <button type="reset" @click="showActivateConfirmation = false"

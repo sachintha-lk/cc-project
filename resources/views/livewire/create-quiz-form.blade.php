@@ -43,15 +43,15 @@
         <div class="m-2">
             <label for="name" class="block text-sm font-medium text-gray-700">Quiz Name</label>
             <input type="text" id="name" name="name" wire:model.defer="quiz.name"
-                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <x-input-error for="quiz.name" class="mt-2"/>
 
         </div>
         <div class="m-2">
             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
             <textarea id="description" name="description" wire:model.defer="quiz.description"
-                      class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500
-                      focus:border-yellow-500 sm:text-sm">
+                      class=" block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500
+                      focus:border-blue-500 sm:text-sm">
             </textarea>
             <x-input-error for="quiz.description" class="mt-2"/>
 
@@ -59,7 +59,7 @@
         {{--        <div class="m-2">--}}
         {{--            <label for="total_marks" class="block text-sm font-medium text-gray-700">Total Marks</label>--}}
         {{--            <input type="number" id="total_marks" name="total_marks" wire:model.defer="quiz.total_marks"--}}
-        {{--                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
+        {{--                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">--}}
         {{--            <x-input-error for="quiz.total_marks" class="mt-2"/>--}}
 
         {{--        </div>--}}
@@ -67,14 +67,14 @@
         {{--        <div class="m-2">--}}
         {{--            <label for="pass_marks" class="block text-sm font-medium text-gray-700">Pass Marks</label>--}}
         {{--            <input type="number" id="pass_marks" name="pass_marks" wire:model.defer="quiz.pass_marks"--}}
-        {{--                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
+        {{--                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">--}}
         {{--            <x-input-error for="quiz.pass_marks" class="mt-2"/>--}}
         {{--        </div>--}}
 
         <div class="m-2">
             <label for="start_time" class="block text-sm font-medium text-gray-700">Start Time</label>
             <input type="datetime-local" id="start_time" name="start_time" wire:model.defer="quiz.valid_from"
-                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <x-input-error for="quiz.valid_from" class="mt-2"/>
         </div>
 
@@ -82,13 +82,13 @@
             <label for="end_time" class="block text-sm font-medium text-gray-700">End Time</label>
             <input type="datetime-local" id="end_time" name="end_time" wire:model.defer="quiz.valid_upto"
 
-                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500
-                   focus:border-yellow-500 sm:text-sm"/>
+                   class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500
+                   focus:border-blue-500 sm:text-sm"/>
             <x-input-error for="quiz.valid_upto" class="mt-2"/>
         </div>
 
         <div class="m-2">
-            <button wire:click="saveQuiz()" class="bg-yellow-800 border border-transparent hover:bg-yellow-600 focus:bg-yellow-700
+            <button wire:click="saveQuiz()" class="bg-blue-800 border border-transparent hover:bg-blue-600 focus:bg-blue-700
                 text-white font-bold py-2 px-4 rounded">
                 Save Quiz
             </button>
@@ -103,7 +103,7 @@
         @if ($isOpenAIKeySet)
             <span class="text-red-700">NOTE: Check for accuracy of the generated quiz after generation</span>
         <div class="m-3"><a href="{{ route('create-quiz-with-ai', [ 'moduleId' => $moduleId,]) }}"
-                class="bg-yellow-800 border border-transparent hover:bg-yellow-600 focus:bg-yellow-700
+                class="bg-blue-800 border border-transparent hover:bg-blue-600 focus:bg-blue-700
                 text-white font-bold py-2 px-4 rounded">
                 Create Quiz With AI Generation
             </a>

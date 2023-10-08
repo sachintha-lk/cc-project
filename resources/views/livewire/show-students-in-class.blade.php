@@ -20,7 +20,7 @@
                 <div class="ml-5">
                     <label>
                         <input wire:model="q" type="search" placeholder="Search" name="student_search"
-                               class="block w-full py-2.5 rounded focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400"
+                               class="block w-full py-2.5 rounded focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-400"
                                required>
                     </label>
                 </div>
@@ -132,7 +132,7 @@
         {{--                        <button wire:click="closeDeleteModal" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">--}}
         {{--                            Cancel--}}
         {{--                        </button>--}}
-        {{--                        <button @click="document.querySelector('#userForm').submit();" class="px-4 py-2 text-sm font-medium text-white bg-yellow-600 border border-transparent rounded-md hover:bg-yellow-700 focus:outline-none">--}}
+        {{--                        <button @click="document.querySelector('#userForm').submit();" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none">--}}
         {{--                            Confirm--}}
         {{--                        </button>--}}
         {{--                    </div>--}}

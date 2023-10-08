@@ -35,14 +35,14 @@
            @if ($userType == 'student')
            <div class="m-2">
                    <label for="student_id" class="block text-sm font-medium text-gray-700">Student ID</label>
-                   <input type="text" id="student_id" name="student_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" value="{{ $user->student_id}}">
+                   <input type="text" id="student_id" name="student_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $user->student_id}}">
                @error('student_id') <span class="text-red-500">{{ $message }}</span>@enderror
            </div>
 
            @elseif ($userType == 'teacher')
                <div class="m-2">
                        <label for="teacher_id" class="block text-sm font-medium text-gray-700">Teacher ID</label>
-                       <input type="text" id="teacher_id" name="teacher_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm"  value="{{ $user->teacher_id}}">
+                       <input type="text" id="teacher_id" name="teacher_id" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"  value="{{ $user->teacher_id}}">
                    @error('teacher_id') <span class="text-red-500">{{ $message }}</span>@enderror
                </div>
            @endif
@@ -50,20 +50,20 @@
 
             <div class="m-2">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" id="name" name="name" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" value="{{ $user->name}}">
+                <input type="text" id="name" name="name" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $user->name}}">
                 @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
             </div>
 
             <div class="m-2">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="text" id="email" name="email" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm" value="{{ $user->email}}">
+                <input type="text" id="email" name="email" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" value="{{ $user->email}}">
                 @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
             </div>
 
 
 
             <div class="m-2">
-                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-yellow-700 border border-transparent rounded-md hover:bg-yellow-600 focus:outline-none">
+                <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-700 border border-transparent rounded-md hover:bg-blue-600 focus:outline-none">
 
                     @if($userType == 'student')
                         {{ __('Edit Student') }}
@@ -87,7 +87,7 @@
                     <button @click="showConfirmation = false" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none">
                         Cancel
                     </button>
-                    <button @click="document.querySelector('#userForm').submit();" class="px-4 py-2 text-sm font-medium text-white bg-yellow-600 border border-transparent rounded-md hover:bg-yellow-700 focus:outline-none">
+                    <button @click="document.querySelector('#userForm').submit();" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none">
                         Confirm
                     </button>
                 </div>

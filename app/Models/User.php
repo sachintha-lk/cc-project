@@ -71,13 +71,14 @@ class User extends Authenticatable
 
     public function class()
     {
-        return $this->belongsTo(GradeClasses::class);
+        // for student
+        return $this->belongsTo(GradeClasses::class, 'class_id', 'id');
     }
 
     public function module(){
-        return $this->hasMany(\App\Models\Module::class);
+        return $this->hasMany(\App\Models\Module::class, 'teacher_id', 'id');
     }
 
-    
+
 
 }

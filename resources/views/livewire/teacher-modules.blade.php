@@ -4,17 +4,22 @@
             {{ __('Teacher Modules') }}
         </h2>
     </x-slot>
-    <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 px-5">
         @foreach($modules as $module)
         <a href= {{route('module-details',[$module->id]  )}}  class="block">
-            <div class="bg-amber-500 shadow rounded-lg grade-card h-24">
+            <div class="bg-blue-300 shadow rounded-lg grade-card h-24">
                 <!-- Content of the card -->
                 <div class="p-4 sm:p-6 xl:p-8">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
                             <span class="text-2xl sm:text-3xl leading-none font-bold text-gray-900">{{ $module->Module_name }}</span>
                         </div>
+
+
                     </div>
+                    <span class="">{{$module->gradeclass->grade->name}}</span> -
+
+                    <span class="">{{ $module->gradeclass->class_name }}</span>
                 </div>
             </div>
         </a>

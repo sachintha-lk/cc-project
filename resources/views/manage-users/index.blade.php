@@ -28,11 +28,11 @@
 
                             <div class="flex ml-5">
                                 <input type="text" placeholder="Search" name="student_search"
-                                       class="block w-full py-2.5 rounded-l focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400"
+                                       class="block w-full py-2.5 rounded-l focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-400"
                                        value={{ $studentSearch }}>
 
                                 <button
-                                    class="relative z-[2] flex items-center rounded-r bg-yellow-800 px-5 py-2 text-xs font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                                    class="relative z-[2] flex items-center rounded-r bg-blue-800 px-5 py-2 text-xs font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                                     type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 20 20"
@@ -52,7 +52,7 @@
 
 
                     <a href="{{ route('add-student')}}"
-                       class="bg-yellow-800 border border-transparent  hover:bg-yellow-600 focus:bg-yellow-700  text-white font-bold py-2 px-4 rounded">Add
+                       class="bg-blue-800 border border-transparent  hover:bg-blue-600 focus:bg-blue-700  text-white font-bold py-2 px-4 rounded">Add
                         New Student</a>
 
 
@@ -171,7 +171,7 @@
                             <div class="flex ml-5">
                                 <div class="relative flex w-full flex-nowrap items-stretch">
                                     <input type="text" placeholder="Search" name="teacher_search"
-                                           class="block w-full py-2.5 rounded-l focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm border-gray-400"
+                                           class="block w-full py-2.5 rounded-l focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-400"
                                            value={{$teacherSearch}}>
 
 
@@ -194,7 +194,7 @@
 
                                     <!--Search button-->
                                     <button
-                                        class="relative z-[2] flex items-center rounded-r bg-yellow-800 px-5 py-2 text-xs font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                                        class="relative z-[2] flex items-center rounded-r bg-blue-800 px-5 py-2 text-xs font-medium uppercase text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                                         type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                              viewBox="0 0 20 20"
@@ -212,7 +212,7 @@
                         </form>
                     </div>
                     <a href="{{ route('add-teacher')}}"
-                       class="bg-yellow-800 border border-transparent  hover:bg-yellow-600 focus:bg-yellow-700  text-white font-bold py-2 px-4 rounded">Add
+                       class="bg-blue-800 border border-transparent  hover:bg-blue-600 focus:bg-blue-700  text-white font-bold py-2 px-4 rounded">Add
                         New Teacher</a>
                 </div>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">

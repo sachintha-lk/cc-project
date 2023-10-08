@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="bg-white m-3 mx-1 rounded overflow-hidden shadow-lg">
-        <div class="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-700">
+        <div class="bg-gradient-to-r from-blue-200 via-blue-400 to-blue-700">
             {{--            <h2 class="px-4 pt-2 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $module->Module_code }}--}}
             {{--                : {{ $module->Module_name }}</h2>--}}
             <h3 class="p-4 pt-1 text-2xl font-bold text-gray-800 mb-1">{{ $quiz->name }}</h3>
@@ -130,7 +130,7 @@
                 <h4 class="font-semibold text-xl text-gray-800 leading-tight">{{ $formattedQuestion['question'] }}</h4>
                 <div>
 
-                    <button wire:click="$emit('openAddEditQuestionModal', {{ $formattedQuestion['id'] }})" class="font-semibold px-3 py-1 bg-yellow-200 text-md text-gray-800 rounded leading-tight">Edit</button>
+                    <button wire:click="$emit('openAddEditQuestionModal', {{ $formattedQuestion['id'] }})" class="font-semibold px-3 py-1 bg-blue-200 text-md text-gray-800 rounded leading-tight">Edit</button>
 
                     <button wire:click="deleteQuestion({{ $formattedQuestion['id'] }})" class="font-semibold  px-3 py-1 text-md  bg-red-800  text-gray-200 rounded leading-tight">Delete</button>
                 </div>
@@ -172,7 +172,7 @@
     {{--            <div class="col-span-6 sm:col-span-4">--}}
     {{--                <x-label for="question_type" value="{{ __('Question Type') }}" />--}}
     {{--                <select id="question_type" name="question_type" wire:model.defer="question.question_type"--}}
-    {{--                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
+    {{--                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">--}}
     {{--                    <option value="single">Single</option>--}}
     {{--                    <option value="multiple">Multiple</option>--}}
     {{--                </select>--}}
@@ -197,7 +197,7 @@
     {{--            <div class="col-span-6 sm:col-span-4">--}}
     {{--                <x-label for="media_type" value="{{ __('Media Type') }}" />--}}
     {{--                <select id="media_type" name="media_type" wire:model.defer="question.media_type"--}}
-    {{--                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">--}}
+    {{--                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">--}}
     {{--                    <option value="image">Image</option>--}}
     {{--                    <option value="video">Video</option>--}}
     {{--                </select>--}}
