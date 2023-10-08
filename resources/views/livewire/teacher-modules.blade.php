@@ -4,7 +4,7 @@
             {{ __('Teacher Modules') }}
         </h2>
     </x-slot>
-    <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 px-5">
         @foreach($modules as $module)
         <a href= {{route('module-details',[$module->id]  )}}  class="block">
             <div class="bg-blue-300 shadow rounded-lg grade-card h-24">

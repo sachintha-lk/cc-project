@@ -29,7 +29,7 @@
                                 {{ $post->author_name }}</td>
 
                             <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-                                {{ $post->updated_at }}
+                                {{ $post->updated_at->diffForHumans() }}
                             </td>
 
                             <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">

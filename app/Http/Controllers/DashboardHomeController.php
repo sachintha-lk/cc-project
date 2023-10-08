@@ -10,14 +10,16 @@ class DashboardHomeController extends Controller
     {
         // dd(auth()->user()->role->name);
         // TODO if admin return admin view, if student return student view, if teacher return teacher view
-        if (auth()->user()->role->name == 'Admin') 
+        if (auth()->user()->role->name == 'Admin')
         {
             $adminStatsController = new AdminDashboardStatsController();
             return $adminStatsController->index();
         } elseif (auth()->user()->role->name == 'Teacher') {
-            return view('dashboard.teacher');
+            $teacherStatsController = new TeacherDashboardStatsController();
+            return $teacherStatsController();
         } elseif (auth()->user()->role->name == 'Student') {
-            return view('dashboard.student');
+            $studentStatsController = new StudentDashboardStatsController();
+            return $studentStatsController();
         } else {
             return redirect('/login');
         }
