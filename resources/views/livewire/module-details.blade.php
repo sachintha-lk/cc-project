@@ -27,7 +27,7 @@
         {{ $module->Module_name }}
     </h2>
     <div class="mt-3 ml-10">
-        <h3 class="font-semibold text-lg mb-2 ml-4">Assignments</h3>
+        <h3 class="font-semibold text-lg mb-2">Assignments</h3>
 
 
         <a href={{ route('assignments', [$module->id]) }}>
@@ -38,30 +38,30 @@
         </a>
 
     </div>
-    <table class="items-center w-full bg-transparent border-collapse">
-        <thead>
-            <tr>
+    <table class="items-center ml-8 w-full  mt-5 rounded-xl bg-transparent border-collapse">
+        <thead class="rounded">
+            <tr class="rounded ">
                 {{-- <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Module ID</th> --}}
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Assignment Name</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Assignement Description</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                     Deadline</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                     Start Date</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                     Assignment File</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                     Submittion File Type</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200  text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                 </th>
             </tr>
         </thead>
@@ -73,7 +73,7 @@
                 </tr>
             @else
                 @foreach ($assignments as $assignment)
-                    <tr class="text-gray-500">
+                    <tr class="text-gray-500 bg-blue-200">
                         {{-- <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">{{  $module->id }}</td> --}}
                         <td
                             class="border-t-0 px-4 align-middle text-sm font-medium text-gray-900 whitespace-nowrap p-4 text-left">
@@ -133,23 +133,24 @@
             @endif
         </tbody>
     </table>
+   
 
-    <div class=" mb-2 ml-8">
-    <h1 class="font-bold text-lg ">Quiz Leaderboard</h1>
+    <div class=" mb-2 ml-8 mt-5">
+    <h1 class="font-semibold text-lg ml-2">Quiz Leaderboard</h1>
 
     @if(isset($leaderboardStudents))
 
-        <table class="table-auto">
+        <table class="table-auto  mt-5 ">
             <thead>
-            <tr>
-                <th class="px-4 py-2">Place</th>
-                <th class="px-4 py-2">Student Name</th>
-                <th class="px-4 py-2">Total Score</th>
+            <tr >
+                <th class="px-4 py-2  bg-gray-200  text-gray-700 align-middle  text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Place</th>
+                <th class="px-4 py-2  bg-gray-200  text-gray-700 align-middle  text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Student Name</th>
+                <th class="px-4 py-2  bg-gray-200  text-gray-700 align-middle  text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Total Score</th>
             </tr>
             </thead>
             <tbody>
             @foreach($leaderboardStudents as  $student)
-                <tr>
+                <tr class="text-gray-500 bg-blue-200">
                     <td class="border px-4 py-2">
                         {{ $loop->iteration }}
                     </td>
@@ -177,33 +178,33 @@
         <p>No students have taken any quizzes yet</p>
     @endif
     </div>
-        <div class="mt-3 ml-10">
+        <div class="mt-5 ml-6">
             <h3 class="font-semibold text-lg mb-2 ml-4">Quizes</h3>
 
             <a href={{ route('create-quiz', [$module->id]) }}>
                 <x-secondary-button
-                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300 focus:ring-blue-500 ">
+                    class=" border-2 rounded-md ml-4 font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300 focus:ring-blue-500 ">
                     {{ __('Add Quiz') }}
                 </x-secondary-button>
             </a>
-            <table class="items-center w-full bg-transparent border-collapse">
+            <table class="items-center w-full mt-5  ml-2 bg-transparent border-collapse">
                 <thead>
 
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Quiz Name</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Valid From time</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                     Valid Upto time</th>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
                     Publish status</th>
 
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Action</th>
                 </thead>
 
@@ -215,7 +216,7 @@
                         </tr>
                     @else
                         @foreach ($quizzes as $quiz)
-                            <tr class="text-gray-500">
+                            <tr class="text-gray-500  bg-blue-200">
                                 <td
                                     class="border-t-0 px-4 align-middle text-sm font-medium text-gray-900 whitespace-nowrap p-4 text-left">
                                     {{ $quiz->name }}</td>
@@ -271,31 +272,31 @@
 
         </div>
 
-        <div class= "mt-3 ml-10" >
+        <div class= "mt-3 ml-6" >
             <h3 class="font-semibold text-lg mb-2 ml-4">Resources</h3>
 
             <a href={{ route('add-new-resources', [$module->id]) }}>
                 <x-secondary-button
-                    class=" border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300  focus:ring-blue-500 ">
+                    class=" ml-5 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-200 active:bg-gray-300  focus:ring-blue-500 ">
                     {{ __('Add Resource') }}
                 </x-secondary-button>
             </a>
-            <table  class="items-center w-full bg-transparent border-collapse">
+            <table  class="items-center w-full mt-5 ml-2 bg-transparent border-collapse">
                 <thead>
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Resource Name</th>
 
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Resource</th>
 
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Resource Type</th>
 
                 <th
-                    class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
+                    class="px-4 bg-gray-200 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
                     Action</th>
 
                 </thead>
@@ -308,7 +309,7 @@
                     </tr>
                 @else
                     @foreach ($resources as $resource)
-                        <tr class="text-gray-500">
+                        <tr class="text-gray-500  bg-blue-200">
                             <td
                                 class="border-t-0 px-4 align-middle text-sm font-medium text-gray-900 whitespace-nowrap  text-left">
                                  {{ Str::limit($resource->name, $limit = 20, $end = '...') }}
@@ -363,7 +364,7 @@
 
                                     <a href={{ route('edit-resource',[$module->id, $resource->id]) }}>
                                         <x-secondary-button
-                                            class=" bg-blue-600 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700  focus:ring-blue-500 ">
+                                            class=" bg-gray-50 mt-1 border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500">
                                             {{ __('Edit') }}
                                         </x-secondary-button>
                                     </a>

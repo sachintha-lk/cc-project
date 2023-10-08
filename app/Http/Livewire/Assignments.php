@@ -38,7 +38,7 @@ class Assignments extends Component
         'assignment.assignment_name' => 'required|string|min:4',
         'assignment.assignment_description' => 'required|string|min:4',
         'assignment.assignment_file' => 'required|file|max:102400',
-        'assignment.assignment_type' => 'required|string|min:4',
+        'assignment.assignment_type' => 'required|string|min:3',
         'assignment.start_date' => 'required|date',
         'assignment.deadline' => 'required|date',
     ];
