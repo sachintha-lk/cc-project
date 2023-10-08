@@ -111,13 +111,13 @@
                                     {{ __('Delete') }}
                                 </x-danger-button>
                             </div>
-                            <div class="mt-5">
-                                <x-secondary-button wire:click="confirmModuleUpdate({{ $assignment->id }})"
-                                    wire:loading.attr="disabled"
-                                    class=" bg-gray-50  border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500 ">
-                                    {{ __('Update') }}
-                                </x-secondary-button>
-                            </div>
+{{--                            <div class="mt-5">--}}
+{{--                                <x-secondary-button wire:click="confirmModuleUpdate({{ $assignment->id }})"--}}
+{{--                                    wire:loading.attr="disabled"--}}
+{{--                                    class=" bg-gray-50  border-2 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-gray-100 active:bg-gray-200  focus:ring-blue-500 ">--}}
+{{--                                    {{ __('Update') }}--}}
+{{--                                </x-secondary-button>--}}
+{{--                            </div>--}}
                             <div class="mt-5 ml-2">
                                 <a href={{route('show-submission',[$module->id, $assignment->id]) }}>
                                     <x-secondary-button
@@ -133,7 +133,7 @@
             @endif
         </tbody>
     </table>
-   
+
 
     <div class=" mb-2 ml-8 mt-5">
     <h1 class="font-semibold text-lg ml-2">Quiz Leaderboard</h1>
