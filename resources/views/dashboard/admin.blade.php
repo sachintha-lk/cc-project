@@ -4,91 +4,55 @@
           {{ __('Dashboard') }}
       </h2>
   </x-slot>
-    <div class="pt-6 px-4 bg-white">
+    <div class="pt-6 px-4 bg-blue-100">
 
-        <div class="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
-           <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
-            <div>
-               <h3 class="text-xl font-bold text-gray-900 mb-2">Number Of Classes in Grades</h3>
-               {{-- <span class="text-base font-normal text-gray-500">This is a list of latest transactions</span> --}}
+        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+            <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">Latest Forums</h3>
+            <div class="block w-full overflow-x-auto">
+                <table class="items-center w-full bg-transparent border-collapse">
+                    <thead>
+                    <tr>
+                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Post</th>
+                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Author</th>
+                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Updated Time</th>
+
+                        <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Link</th>
+
+                    {{--                          <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap"></th>--}}
+
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                    @foreach($latestForumPosts as $post)
+                        <tr class="text-gray-500">
+                            <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">{{$post->content}}</th>
+                            <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                                {{ $post->author_name }}</td>
+
+                            <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+                                {{ $post->updated_at }}
+                            </td>
+
+                            <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
+
+                                <a href="{{ Forum::route('post.show', $post) }}" class="text-gray-500">{{ trans('forum::general.permalink') }}</a>
+                            </td>
+                            {{--                          <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">--}}
+                            {{--                             <div class="flex items-center">--}}
+
+                            {{--                                <div class="relative w-full">--}}
+                            {{--                                   <div class="w-full bg-gray-200 rounded-sm h-2">--}}
+                            {{--                                      <div class="bg-cyan-600 h-2 rounded-sm" style="width: 30%"></div>--}}
+                            {{--                                   </div>--}}
+                            {{--                                </div>--}}
+                            {{--                             </div>--}}
+                            {{--                          </td>--}}
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-            <div class="flex flex-col mt-8">
-               <div class="overflow-x-auto rounded-lg">
-                  <div class="align-middle inline-block min-w-full">
-                     <div class="shadow overflow-hidden sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                           <thead class="bg-gray-50">
-                              <tr>
-                                 <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Grade
-                                 </th>
-                                 <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Classes
-                                 </th>
-                                 
-                              </tr>
-                           </thead>
-                           <tbody class="bg-white">
-                              <tr>
-                                 <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                    Payment from <span class="font-semibold">Bonnie Green</span>
-                                 </td>
-                                 <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                    Apr 23 ,2021
-                                 </td>
-                                 
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-            </div>
-              {{-- <div id="main-chart"></div> --}}
-           </div>
-           <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-              <div class="mb-4 flex items-center justify-between">
-                 <div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Number of Modules in class</h3>
-                    {{-- <span class="text-base font-normal text-gray-500">This is a list of latest transactions</span> --}}
-                 </div>
-                 {{-- <div class="flex-shrink-0">
-                    <a href="#" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">View all</a>
-                 </div> --}}
-              </div>
-              <div class="flex flex-col mt-8">
-                 <div class="overflow-x-auto rounded-lg">
-                    <div class="align-middle inline-block min-w-full">
-                       <div class="shadow overflow-hidden sm:rounded-lg">
-                          <table class="min-w-full divide-y divide-gray-200">
-                             <thead class="bg-gray-50">
-                                <tr>
-                                   <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                      Class
-                                   </th>
-                                   <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                      Modules
-                                   </th>
-                                </tr>
-                             </thead>
-                             <tbody class="bg-white">
-                                <tr>
-                                   <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
-                                      Payment from <span class="font-semibold">Bonnie Green</span>
-                                   </td>
-                                   <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
-                                      Apr 23 ,2021
-                                   </td>
-                                   
-                                </tr>
-                             </tbody>
-                          </table>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-           </div>
         </div>
+
         <div class="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
            {{-- <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
               <div class="flex items-center">
@@ -242,36 +206,91 @@
 {{--              </div>--}}
 {{--           </div>--}}
 
-           <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-              <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">Latest Forums</h3>
-              <div class="block w-full overflow-x-auto">
-                 <table class="items-center w-full bg-transparent border-collapse">
-                    <thead>
-                       <tr>
-                          <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Top Channels</th>
-                          <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">Users</th>
-                          <th class="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap"></th>
-                          
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                       <tr class="text-gray-500">
-                          <th class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Organic Search</th>
-                          <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">5,649</td>
-                          <td class="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-                             <div class="flex items-center">
-                               
-                                <div class="relative w-full">
-                                   <div class="w-full bg-gray-200 rounded-sm h-2">
-                                      <div class="bg-cyan-600 h-2 rounded-sm" style="width: 30%"></div>
-                                   </div>
-                                </div>
-                             </div>
-                          </td>
-                       </tr>
-                    </tbody>
-                 </table>
-              </div>
-           </div>
-        </div>
+
      </div>
+
+    <div class="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
+        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2">
+            <div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Number Of Classes in Grades</h3>
+                {{-- <span class="text-base font-normal text-gray-500">This is a list of latest transactions</span> --}}
+            </div>
+            <div class="flex flex-col mt-8">
+                <div class="overflow-x-auto rounded-lg">
+                    <div class="align-middle inline-block min-w-full">
+                        <div class="shadow overflow-hidden sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Grade
+                                    </th>
+                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Classes
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                <tr>
+                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                        Payment from <span class="font-semibold">Bonnie Green</span>
+                                    </td>
+                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                        Apr 23 ,2021
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- <div id="main-chart"></div> --}}
+        </div>
+        <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
+            <div class="mb-4 flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Number of Modules in class</h3>
+                    {{-- <span class="text-base font-normal text-gray-500">This is a list of latest transactions</span> --}}
+                </div>
+                {{-- <div class="flex-shrink-0">
+                   <a href="#" class="text-sm font-medium text-cyan-600 hover:bg-gray-100 rounded-lg p-2">View all</a>
+                </div> --}}
+            </div>
+            <div class="flex flex-col mt-8">
+                <div class="overflow-x-auto rounded-lg">
+                    <div class="align-middle inline-block min-w-full">
+                        <div class="shadow overflow-hidden sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Class
+                                    </th>
+                                    <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Modules
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                <tr>
+                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-900">
+                                        Payment from <span class="font-semibold">Bonnie Green</span>
+                                    </td>
+                                    <td class="p-4 whitespace-nowrap text-sm font-normal text-gray-500">
+                                        Apr 23 ,2021
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </x-sidebar>
