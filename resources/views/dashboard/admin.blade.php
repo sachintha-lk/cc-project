@@ -4,7 +4,7 @@
           {{ __('Dashboard') }}
       </h2>
   </x-slot>
-    <div class="pt-6 px-4 bg-blue-100">
+    <div class="pt-6 px-4 bg-white">
 
         <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
             <h3 class="text-xl leading-none font-bold text-gray-900 mb-10">Latest Forums</h3>
