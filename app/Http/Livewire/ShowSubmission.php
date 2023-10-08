@@ -22,7 +22,7 @@ class ShowSubmission extends Component
     }
 
     public function loadSubmissions(){
-        $this->submissions = Submissions::with(['student:id,name','assignment', 'submissionGrade'])
+        $this->submissions = Submissions::with(['student:id,name','assignment', 'submissionGrade', 'submissionGrade.gradedBy:id,name'])
         ->where('assignment_id', $this->assignmentId)
         ->get();
     }
