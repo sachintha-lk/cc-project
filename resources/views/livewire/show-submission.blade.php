@@ -44,7 +44,7 @@
                             @if ($submission->submissionGrade->graded_by == auth()->user()->id)
                                 You
                             @else
-                                {{ $submission->submissionGrade->user->name }}
+                            {{ $submission->submissionGrade->gradedBy->name }}
                             @endif
                         @endif
                     </td>

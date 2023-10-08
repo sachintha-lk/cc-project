@@ -8,7 +8,7 @@
     <div class="mt-4  w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 px-5">
         @foreach($modules as $module)
         <a href= {{route('student-module-details',[$module->id]  )}}  class="block">
-            <div class="bg-blue-500 shadow rounded-lg grade-card h-24">
+            <div class="bg-blue-300 shadow rounded-lg grade-card h-24">
                 <!-- Content of the card -->
                 <div class="p-4 sm:p-6 xl:p-8">
                     <div class="flex items-center">

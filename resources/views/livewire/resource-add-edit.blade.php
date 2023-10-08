@@ -35,8 +35,8 @@
         </div>
 
             @if($resource_id && $type === 'file' && $resource)
-                <div>
-                    <span class="text-gray-500">Current File In System: </span>
+                <div >
+                    <span class="text-gray-500 ">Current File In System: </span>
                     <a class="underline" href="{{ asset('storage/resources/'.$resource) }}" >{{ $resource }}</a>
 
                 </div>
@@ -63,7 +63,7 @@
                 </button>
             @else
                 <!-- Save Button -->
-                <button wire:click="addResource" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <button wire:click="addResource" class="bg-blue-500 hover:bg-blue-700 text-white font-bold mb-52 mt-5  lg:ml-72 py-2 px-4 rounded">
                     {{ isset($resource_id) ? 'Save Resource' : 'Add Resource' }}
                 </button>
             @endif
