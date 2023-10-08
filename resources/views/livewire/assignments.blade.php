@@ -58,7 +58,11 @@
         <hr>
         <h3 class="font-semibold text-lg mb-2 ml-4">File Type</h3>
         <div class="flex items-center">
+        <div class="flex flex-col">
             <x-label for="name" class="ml-4" value="{{ __('Choose File Type For Submittion') }}" />
+            <span class="ml-4">eg: zip,pdf,docx</span>
+        </div>
+
             <x-input id="name" type="text" class="mt-1 ml-4 block w-96" wire:model.defer="assignment.assignment_type" />
             <x-input-error for="assignment.assignment_type" class="mt-2" />
         </div>

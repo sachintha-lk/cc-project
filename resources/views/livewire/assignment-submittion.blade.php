@@ -90,7 +90,7 @@
             <tr class="text-gray-500 bg-blue-100">
                 <td class="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
                     {{ $assignment->start_date }}<br/>
-                    {{ \Carbon\Carbon::parse($assignment->deadline)->diffForHumans() }}
+                    {{ \Carbon\Carbon::parse($assignment->start_date)->diffForHumans() }}
                 </td>
                 <td class="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
                     {{ $assignment->deadline }}<br/>

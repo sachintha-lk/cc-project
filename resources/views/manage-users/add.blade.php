@@ -19,7 +19,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 bg-blue-50" x-data="{ showConfirmation: false }"  >
+    <div class="py-12 bg-gray-50" x-data="{ showConfirmation: false }"  >
 
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
 
