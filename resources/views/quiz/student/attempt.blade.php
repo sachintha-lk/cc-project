@@ -5,10 +5,13 @@
             <h2 class="text-center px-4 pt-0 pb-0 mb-0 text-lg font-normal text-gray-800">{{ $module->Module_name }}
                 : {{ $module->Module_code }}</h2>
             <h3 class=" text-center p-4 pt-1 text-3xl font-bold text-gray-800 mb-1">{{ $quiz->name }}</h3>
+            <div class="text-center">
+                End Time:
+                <livewire:countdown-timer :time="$quiz->valid_upto" :key="$quiz->id"/>
+            </div>
         </div>
-        <div>
 
-        </div>
+
 
     </div>
 

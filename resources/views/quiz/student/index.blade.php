@@ -41,13 +41,13 @@
                 @elseif ($quiz->valid_from > now())
                     <div
                         class="flex justify-center mt-3 bg-gradient-to-r from-blue-200 to-blue-200 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
-                        Quiz Has Not Started Yet
+                        Quiz starts : <livewire:countdown-timer :time="$quiz->valid_from" :key="$quiz->id. 'start-time'"/>
                     </div>
 
                 @elseif ($quiz->valid_upto < now())
                     <div
                         class="flex justify-center mt-3 text-white bg-gradient-to-r from-red-400 to-red-600 w-fit p-3 border-r-3 rounded font-semibold mx-auto">
-                        Quiz Has Ended
+                        Quiz ended : <livewire:countdown-timer :time="$quiz->valid_upto" :key="$quiz->id. 'end-time'"/>
                     </div>
                 @else
                     <div class="flex justify-center mt-3">

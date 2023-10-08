@@ -38,6 +38,8 @@ class StudentQuizController extends Controller
         $formattedStartTime = $carbonStartTime->format('d M Y H:i:s');
         $formattedEndTime = $carbonEndTime->format('d M Y H:i:s');
 
+//        dd($formattedStartTime, $formattedEndTime, $now->format('d M Y H:i:s'));
+
         // check if there is a quiz attempt for this quiz by this student
 //        $quizAttempt = QuizAttempt::where('quiz_id', $quiz->id)
 //            ->where('participant_id', auth()->user()->id)

@@ -37,10 +37,11 @@ class Assignments extends Component
     protected $rules = [
         'assignment.assignment_name' => 'required|string|min:4',
         'assignment.assignment_description' => 'required|string|min:4',
-        'assignment.assignment_file' => 'required|file|max:102400',
-        'assignment.assignment_type' => 'required|string|min:3',
+        'assignment.assignment_file' => 'required|file|max:102400', // 100MB Max
+        // type shouldnt have the . in it, u can have multiple types separated by a comma
+        'assignment.assignment_type' => 'required|string|min:1|regex:/^[\w\s\-\,]+$/',  // regex works
         'assignment.start_date' => 'required|date',
-        'assignment.deadline' => 'required|date',
+        'assignment.deadline' => 'required|date|after:assignment.start_date',
     ];
 
     /**
