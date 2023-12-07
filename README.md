@@ -41,8 +41,8 @@ Then add the API key to the .env file as follows:
 ```env
 OPENAI_API_KEY=<your-api-key>
 ```
-[!NOTE]
-Since this is a paid API, refer the OpenAI pricing page for more information about pricing for the GPT-3.5 turbo model: https://openai.com/pricing/
+>[!NOTE]
+>Since this is a paid API, refer the OpenAI pricing page for more information about pricing for the GPT-3.5 turbo model: https://openai.com/pricing/
 
 ### LMS Functionalities
 <img src="readme-assets/grades.png">
